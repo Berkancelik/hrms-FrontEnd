@@ -25,6 +25,8 @@ export default function JobCandidateList() {
             <Table.HeaderCell>İsim</Table.HeaderCell>
             <Table.HeaderCell>Soyisim</Table.HeaderCell>
             <Table.HeaderCell>E-Mail Adres</Table.HeaderCell>   
+            <Table.HeaderCell>Detaylar</Table.HeaderCell>
+
        
           </Table.Row>
         </Table.Header>

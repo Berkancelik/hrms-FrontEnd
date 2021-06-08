@@ -25,7 +25,9 @@ export default function JobemployerList() {
             <Table.HeaderCell>Şirket İsmi</Table.HeaderCell>
             <Table.HeaderCell>Web Adresi</Table.HeaderCell>
             <Table.HeaderCell>Telefon Numarası</Table.HeaderCell>
-            <Table.HeaderCell>E-Mail Adres</Table.HeaderCell>            
+            <Table.HeaderCell>E-Mail Adres</Table.HeaderCell>
+            <Table.HeaderCell>Detaylar</Table.HeaderCell>
+            
        
           </Table.Row>
         </Table.Header>

@@ -25,6 +25,8 @@ export default function JobEmployeeList() {
             <Table.HeaderCell>isim</Table.HeaderCell>
             <Table.HeaderCell>Soy İsim</Table.HeaderCell>
             <Table.HeaderCell>E-Mail Adres</Table.HeaderCell>
+            <Table.HeaderCell>Detaylar</Table.HeaderCell>
+
        
           </Table.Row>
         </Table.Header>
