@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Table,Header, Icon } from "semantic-ui-react";
-import { Button } from 'antd';
 import JobEmployeeService from "../../services/EmployeeService";
 
 export default function JobEmployeeList() {
@@ -17,7 +16,7 @@ export default function JobEmployeeList() {
     <div>
       <Header as="h2">
         <Icon name="list ul" />
-        <Header.Content>İş İlanı Listesi</Header.Content>
+        <Header.Content>Sistem Kullanıcı Listesi</Header.Content>
       </Header>
       <Table color="blue" key="blue">
         <Table.Header>
@@ -39,7 +38,7 @@ export default function JobEmployeeList() {
               <Table.Cell>{employee.email}</Table.Cell>      
            
               <Table.Cell>
-              <Button>
+              {/* <Button>
               ReactDOM.render(
         <div className="site-button-ghost-wrapper">
           <Button type="primary" ghost>
@@ -47,7 +46,7 @@ export default function JobEmployeeList() {
           </Button>        
         </div>,
         mountNode, );     
-              </Button>         
+              </Button>          */}
               </Table.Cell>
             </Table.Row>
           ))}

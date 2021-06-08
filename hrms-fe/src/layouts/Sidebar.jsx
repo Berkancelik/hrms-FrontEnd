@@ -1,13 +1,5 @@
 import React from "react";
-import { Grid, GridColumn } from "semantic-ui-react";
-import EmployerList from "../pages/User/Employer/EmployerList";
-import JobseekerList from "../pages/User/Candidate/CandidateList";
-import JobAdvertList from "../pages/JobAdvertisements/JobAdvertisementsList";
-import JobPositionList from "../pages/JobAdvertisements/JobTitle/JobTitleList";
-
-
-import React from "react";
-import { Icon, Menu } from 'semantic-ui-react'
+import { Icon, Menu,Grid,GridColumn } from 'semantic-ui-react'
 
 export default function Section() {
   return (

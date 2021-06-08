@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Table,Header, Icon } from "semantic-ui-react";
-import { Button } from 'antd';
-import JobCandidateService from "../../services/JobCandidateService";
+import CandidateService from "../services/candidateService";
 
-export default function JobCandidateList() {
-  const [candidate, setCandidates] = useState([]);
+export default function CandidateList() {
+  const [candidates, setCandidates] = useState([]);
 
   useEffect(() => {
-    let jobCandidateService = new CandidateService();
-    JobCandidateService
-      .getCandidates()
+    let candidateService = new CandidateService();
+    candidateService
+      .getAllcandidates()
       .then((result) => setCandidates(result.data.data));
   }, []);
 
@@ -17,7 +16,7 @@ export default function JobCandidateList() {
     <div>
       <Header as="h2">
         <Icon name="list ul" />
-        <Header.Content>İş İlanı Listesi</Header.Content>
+        <Header.Content>Sistem Kullanıcıları</Header.Content>
       </Header>
       <Table color="blue" key="blue">
         <Table.Header>
@@ -39,7 +38,7 @@ export default function JobCandidateList() {
               <Table.Cell>{candidate.email}</Table.Cell>
            
               <Table.Cell>
-              <Button>
+              {/* <Button>
               ReactDOM.render(
         <div className="site-button-ghost-wrapper">
           <Button type="primary" ghost>
@@ -47,7 +46,7 @@ export default function JobCandidateList() {
           </Button>        
         </div>,
         mountNode, );     
-              </Button>         
+              </Button>          */}
               </Table.Cell>
             </Table.Row>
           ))}

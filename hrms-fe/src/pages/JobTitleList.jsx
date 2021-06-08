@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Table, Header, Icon } from "semantic-ui-react";
-import JobTitleService from "../../../services/jobTitleService";
+import JobTitleService from "../services/jobTitleService";
 
 export default function JobtitleList() {
     const [titles, setTitle] = useState([]);
@@ -9,9 +9,9 @@ export default function JobtitleList() {
 
       let jobTitleService = new JobTitleService();
       jobTitleService
-        .getJobtitle()
+        .getJobTitles()
 
-        .then((result) => settitle(result.data.data));
+        .then((result) => setTitle(result.data.data));
     }, []);
 
     return (

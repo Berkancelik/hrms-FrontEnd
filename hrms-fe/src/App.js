@@ -1,4 +1,9 @@
-import './App.css';
+import'./App.css'
+import 'semantic-ui-css/semantic.min.css'
+import { Container } from 'semantic-ui-react';
+import Dashboard from './layouts/Dashboard';  
+import Navi from './layouts/Navi';
+
 
 function App() {
   return (
@@ -6,8 +11,7 @@ function App() {
     <div className="App">
     <Navi/>
     <Container className="main">
-      <Dashboard/>
-      
+      <Dashboard/>      
     </Container>
   </div>
 

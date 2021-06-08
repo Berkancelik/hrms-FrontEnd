@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Table,Header, Icon } from "semantic-ui-react";
-import { Button } from 'antd';
-import JobEmployerService from "../../services/EmployerService";
 
-export default function JobemployerList() {
-  const [Employer, setEmployers] = useState([]);
+import EmployerService from "../services/employerService";
+
+export default function EmployerList() {
+  const [employers, setEmployers] = useState([]);
 
   useEffect(() => {
-    let jobEmployerService = new EmployerService();
-    JobEmployerService
-      .getEmployers()
+    let employerService = new EmployerService();
+    employerService
+      .getAllEmployers()
       .then((result) => setEmployers(result.data.data));
   }, []);
 
@@ -17,7 +17,7 @@ export default function JobemployerList() {
     <div>
       <Header as="h2">
         <Icon name="list ul" />
-        <Header.Content>İş İlanı Listesi</Header.Content>
+        <Header.Content>İş Veren Listesi</Header.Content>
       </Header>
       <Table color="blue" key="blue">
         <Table.Header>
@@ -42,7 +42,7 @@ export default function JobemployerList() {
        
            
               <Table.Cell>
-              <Button>
+              {/* <Button>
               ReactDOM.render(
         <div className="site-button-ghost-wrapper">
           <Button type="primary" ghost>
@@ -50,7 +50,7 @@ export default function JobemployerList() {
           </Button>        
         </div>,
         mountNode, );     
-              </Button>         
+              </Button>          */}
               </Table.Cell>
             </Table.Row>
           ))}

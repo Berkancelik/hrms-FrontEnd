@@ -1,9 +1,10 @@
 import React from "react";
 import { Grid, GridColumn } from "semantic-ui-react";
-import EmployerList from "../pages/User/Employer/EmployerList";
-import JobseekerList from "../pages/User/Candidate/CandidateList";
-import JobAdvertList from "../pages/JobAdvertisements/JobAdvertisementsList";
-import JobPositionList from "../pages/JobAdvertisements/JobTitle/JobTitleList";
+import JobtitleList from "../pages/JobTitleList";
+import EmployerList from "../pages/EmployerList";
+import JobAdvertisementList from "../pages/JobAdvertisementList";
+import CandidateList from "../pages/CandidateList";
+
 
 
 export default function Section() {
@@ -12,12 +13,12 @@ export default function Section() {
       <Grid>
       <Grid.Row>
           <GridColumn size={15}>
-            <JobAdvertisementsList />
+            <JobAdvertisementList/>
           </GridColumn>
         </Grid.Row>
         <Grid.Row>
           <GridColumn size={15}>
-            <JobTitleList />
+            <JobtitleList />
           </GridColumn>
         </Grid.Row>
         <Grid.Row>
