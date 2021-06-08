@@ -28,7 +28,9 @@ export default function JobAdvertisementList() {
             <Table.HeaderCell>Şehir</Table.HeaderCell>
             <Table.HeaderCell>Açık Pozisyon Sayısı</Table.HeaderCell>
             <Table.HeaderCell>Son Geçerlilik Tarihi</Table.HeaderCell>
-            <Table.HeaderCell>Açık</Table.HeaderCell>    
+            <Table.HeaderCell>Açık</Table.HeaderCell>  
+            <Table.HeaderCell>Detaylar</Table.HeaderCell>
+  
           </Table.Row>          
         </Table.Header>
 
