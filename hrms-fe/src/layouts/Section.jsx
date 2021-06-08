@@ -4,7 +4,7 @@ import JobtitleList from "../pages/JobTitleList";
 import EmployerList from "../pages/EmployerList";
 import JobAdvertisementList from "../pages/JobAdvertisementList";
 import CandidateList from "../pages/CandidateList";
-
+ 
 
 
 export default function Section() {
