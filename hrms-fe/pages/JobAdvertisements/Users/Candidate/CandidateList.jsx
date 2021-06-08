@@ -32,9 +32,9 @@ export default function JobCandidateList() {
         <Table.Body>
           {candidates.map((candidate) => (
             <Table.Row key={candidate.id}>
-              <Table.Cell>{candidate.jobTitle.jobTitle}</Table.Cell>
-              <Table.Cell>{candidate.employer.companyName}</Table.Cell>
-              <Table.Cell>{candidate.city.name}</Table.Cell>
+              <Table.Cell>{candidate.firstName}</Table.Cell>
+              <Table.Cell>{candidate.lastName}</Table.Cell>
+              <Table.Cell>{candidate.email}</Table.Cell>
            
               <Table.Cell>
               <Button>
