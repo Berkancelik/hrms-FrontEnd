@@ -14,8 +14,7 @@ export default function Dashboard(){
                 <Section/>
             </Grid.Column>
           </Grid.Row>
-        </Grid>
-   
-    </div>
+        </Grid>   
+        </div>
     );
 }
