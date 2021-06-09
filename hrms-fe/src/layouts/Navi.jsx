@@ -11,9 +11,9 @@ export default function Navi() {
             <Icon name="address card" size="large" />
             İnsan Kaynakları Yönetimi Sistemi
           </Menu.Item>
-          <Menu.Item name="Home" />
-          <Menu.Item name="Job Advertisements" />
-          <Menu.Item name="Companies" />
+          <Menu.Item name="Ana Sayfa" />
+          <Menu.Item name="İş İlanları" />
+          <Menu.Item name="Şirketler" />
           <Menu.Menu position="right">
             <Menu.Item>
               <Button.Group>
