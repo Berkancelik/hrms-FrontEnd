@@ -1,12 +1,7 @@
-.site-button-ghost-wrapper {
-  padding: 26px 16px 16px;
-  background: rgb(190, 200, 200);
-}
-
-.ui.main.container{
-  margin-top: 10em;
+.ui.main.container {
+  margin-top: 8em;
 }
 
 .ui.sidebar{
- margin-left: 2em;
-}
+  margin-left: 2em;
+ }

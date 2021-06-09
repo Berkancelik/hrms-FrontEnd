@@ -1,33 +1,36 @@
 import React from "react";
-import { Icon, Menu,Grid,GridColumn } from 'semantic-ui-react'
+import { Icon, Menu } from "semantic-ui-react";
 
 export default function Section() {
   return (
     <div>
-      <Menu inverted icon="labeled" vertical>
-        <Menu.Item
-          name="bullhorn"
-        >
-          <Icon name="bullhorn" />//
-          İş Başlıkları
-        </Menu.Item>
+    <Menu inverted icon="labeled" vertical color="violet">
+      <Menu.Item name="bullhorn">
+        <Icon name="bullhorn" />
+        İş İlanı
+      </Menu.Item>
 
-        <Menu.Item
-          name="user"
-        >
-        <Menu.Item
-          name="user"
-        >
-          <Icon name="user" />
-          İş Veren
-        </Menu.Item>
-          <Icon name="user" />//
-          iş Arayan
-        </Menu.Item>
+      <Menu.Item name="list alternate outline">
+        <Icon name="list alternate outline" />
+        İş Pozisyonu
+      </Menu.Item>
 
-       
-      </Menu>
-    </div>
+      <Menu.Item name="user">
+        <Icon name="user" />
+        İş Arayan
+      </Menu.Item>
+
+      <Menu.Item name="user">
+        <Icon name="user" />
+        İş Veren
+      </Menu.Item>
+
+      <Menu.Item name="user">
+        <Icon name="user" />
+        Sistem Kullanıcısı
+      </Menu.Item>
+    </Menu>
+  </div>
   );
 
   }

@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, Container, Menu } from "semantic-ui-react";
+import { Button, Icon, Menu } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 
 export default function Navi() {
   return (
@@ -8,7 +9,7 @@ export default function Navi() {
         <Container>
           <Menu.Item name="address card">
             <Icon name="address card" size="large" />
-            Human Resource Management System
+            İnsan Kaynakları Yönetimi Sistemi
           </Menu.Item>
           <Menu.Item name="Home" />
           <Menu.Item name="Job Advertisements" />
@@ -16,9 +17,9 @@ export default function Navi() {
           <Menu.Menu position="right">
             <Menu.Item>
               <Button.Group>
-                <Button primary>Sign Up</Button>
+                <Button primary>Kaydol</Button>
                 <Button.Or />
-                <Button positive>Sign In</Button>
+                <Button positive>Giriş Yap</Button>
               </Button.Group>
             </Menu.Item>
           </Menu.Menu>

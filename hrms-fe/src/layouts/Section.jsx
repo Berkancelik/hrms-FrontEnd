@@ -1,42 +1,49 @@
 import React from "react";
 import { Grid, GridColumn } from "semantic-ui-react";
-import JobtitleList from "../pages/JobTitleList";
 import EmployerList from "../pages/EmployerList";
 import JobAdvertisementList from "../pages/JobAdvertisementList";
 import CandidateList from "../pages/CandidateList";
- 
+import JobTitleList from "../pages/JobTitleList";
+import EmployeeList from "../pages/EmployeeList";
+
 
 
 export default function Section() {
   return (
     <div>
-    <Menu inverted icon="labeled" vertical color="violet">
-      <Menu.Item name="bullhorn">
-        <Icon name="bullhorn" />
-        İş İlanları
-      </Menu.Item>
+      <Grid>
+          
+        <Grid.Row>
+          <GridColumn size={15}>
+            <JobAdvertisementList />
+          </GridColumn>
+        </Grid.Row>
 
-      <Menu.Item name="list alternate outline">
-        <Icon name="list alternate outline" />
-        İş Pozisyonları
-      </Menu.Item>
+        <Grid.Row>
+          <GridColumn size={15}>
+            <JobTitleList/>
+          </GridColumn>
+        </Grid.Row>
 
-      <Menu.Item name="user">
-        <Icon name="user" />
-        İş Adayları
-      </Menu.Item>
+        <Grid.Row>
+          <GridColumn size={15}>
+            <CandidateList />
+          </GridColumn>
+        </Grid.Row>
 
-      <Menu.Item name="user">
-        <Icon name="user" />
-        İşverenler
-      </Menu.Item>
+        <Grid.Row>
+          <GridColumn size={15}>
+            <EmployerList />
+          </GridColumn>
+        </Grid.Row>
 
-      <Menu.Item name="user">
-        <Icon name="user" />
-        Sistem Kullanıcıları
-      </Menu.Item>
-    </Menu>
-  </div>
-  );
+        <Grid.Row>
+          <GridColumn size={15}>
+            <EmployeeList/>
+          </GridColumn>
+        </Grid.Row>
+      </Grid>
+    </div>
+  ); 
 
   }

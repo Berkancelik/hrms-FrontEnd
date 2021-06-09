@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { Table,Header, Icon } from "semantic-ui-react";
-import JobEmployeeService from "../../services/EmployeeService";
+import EmployeeService from "../services/employeeService";
 
-export default function JobEmployeeList() {
-  const [Employee, setEmployees] = useState([]);
+
+export default function EmployeeList() {
+  const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
-    let jobEmployeeService = new EmployeeService();
-    JobEmployeeService
+    let employeeService = new EmployeeService();
+    employeeService
       .getEmployees()
       .then((result) => setEmployees(result.data.data));
   }, []);
-
   return (
     <div>
-      <Header as="h2">
-        <Icon name="list ul" />
-        <Header.Content>Sistem Kullanıcıları</Header.Content>
-      </Header>
-      <Table color="blue" key="blue">
+    <Header as="h2">
+      <Icon name="list alternate outline" />
+      <Header.Content>Sistem Kullanıcıları</Header.Content>
+    </Header>
+    <Table color="violet" key="violet">
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>isim</Table.HeaderCell>
             <Table.HeaderCell>Soy İsim</Table.HeaderCell>
             <Table.HeaderCell>E-Mail Adres</Table.HeaderCell>
-            <Table.HeaderCell>Detaylar</Table.HeaderCell>
 
        
           </Table.Row>
@@ -39,7 +38,7 @@ export default function JobEmployeeList() {
            
             </Table.Row>
           ))}
-        </Table.Body>
+          </Table.Body>
       </Table>
     </div>
   );

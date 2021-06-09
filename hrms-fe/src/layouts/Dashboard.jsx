@@ -1,7 +1,8 @@
 import React from "react";
+import { Grid } from "semantic-ui-react";
 import Section from "./Section";
+import SideBar from "./SideBar";
 
-import { Grid, Sidebar } from "semantic-ui-react";
 
 export default function Dashboard(){
     return(
