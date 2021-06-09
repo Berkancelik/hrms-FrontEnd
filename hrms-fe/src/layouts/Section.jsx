@@ -10,30 +10,33 @@ import CandidateList from "../pages/CandidateList";
 export default function Section() {
   return (
     <div>
-      <Grid>
-      <Grid.Row>
-          <GridColumn size={15}>
-            <JobAdvertisementList/>
-          </GridColumn>
-        </Grid.Row>
-        <Grid.Row>
-          <GridColumn size={15}>
-            <JobtitleList />
-          </GridColumn>
-        </Grid.Row>
-        <Grid.Row>
-          <GridColumn size={15}>
-            <CandidateList />
-          </GridColumn>
-        </Grid.Row>
-        <Grid.Row>
-          <GridColumn size={15}>
-            <EmployerList />
-          </GridColumn>
-        </Grid.Row>
-        
-      </Grid>
-    </div>
+    <Menu inverted icon="labeled" vertical color="violet">
+      <Menu.Item name="bullhorn">
+        <Icon name="bullhorn" />
+        İş İlanları
+      </Menu.Item>
+
+      <Menu.Item name="list alternate outline">
+        <Icon name="list alternate outline" />
+        İş Pozisyonları
+      </Menu.Item>
+
+      <Menu.Item name="user">
+        <Icon name="user" />
+        İş Adayları
+      </Menu.Item>
+
+      <Menu.Item name="user">
+        <Icon name="user" />
+        İşverenler
+      </Menu.Item>
+
+      <Menu.Item name="user">
+        <Icon name="user" />
+        Sistem Kullanıcıları
+      </Menu.Item>
+    </Menu>
+  </div>
   );
 
   }

@@ -17,7 +17,7 @@ export default function EmployerList() {
     <div>
       <Header as="h2">
         <Icon name="list ul" />
-        <Header.Content>İş Veren Listesi</Header.Content>
+        <Header.Content>İş Verenler</Header.Content>
       </Header>
       <Table color="blue" key="blue">
         <Table.Header>
@@ -39,19 +39,8 @@ export default function EmployerList() {
               <Table.Cell>{employer.website}</Table.Cell>
               <Table.Cell>{employer.phoneNumber}</Table.Cell>
               <Table.Cell>{employer.email}</Table.Cell>
-       
-           
-              <Table.Cell>
-              {/* <Button>
-              ReactDOM.render(
-        <div className="site-button-ghost-wrapper">
-          <Button type="primary" ghost>
-           Görünüm
-          </Button>        
-        </div>,
-        mountNode, );     
-              </Button>          */}
-              </Table.Cell>
+    
+             
             </Table.Row>
           ))}
         </Table.Body>

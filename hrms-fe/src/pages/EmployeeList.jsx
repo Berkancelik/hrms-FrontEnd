@@ -16,7 +16,7 @@ export default function JobEmployeeList() {
     <div>
       <Header as="h2">
         <Icon name="list ul" />
-        <Header.Content>Sistem Kullanıcı Listesi</Header.Content>
+        <Header.Content>Sistem Kullanıcıları</Header.Content>
       </Header>
       <Table color="blue" key="blue">
         <Table.Header>
@@ -35,19 +35,8 @@ export default function JobEmployeeList() {
             <Table.Row key={employee.id}>
               <Table.Cell>{employee.firstName}</Table.Cell>
               <Table.Cell>{employee.lastname}</Table.Cell>
-              <Table.Cell>{employee.email}</Table.Cell>      
+              <Table.Cell>{employee.email}</Table.Cell>                 
            
-              <Table.Cell>
-              {/* <Button>
-              ReactDOM.render(
-        <div className="site-button-ghost-wrapper">
-          <Button type="primary" ghost>
-           Görünüm
-          </Button>        
-        </div>,
-        mountNode, );     
-              </Button>          */}
-              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

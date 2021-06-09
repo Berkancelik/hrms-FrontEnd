@@ -38,15 +38,7 @@ export default function CandidateList() {
               <Table.Cell>{candidate.email}</Table.Cell>
            
               <Table.Cell>
-              {/* <Button>
-              ReactDOM.render(
-        <div className="site-button-ghost-wrapper">
-          <Button type="primary" ghost>
-           Görünüm
-          </Button>        
-        </div>,
-        mountNode, );     
-              </Button>          */}
+                <Button color="violet">Göster</Button>
               </Table.Cell>
             </Table.Row>
           ))}

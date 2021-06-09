@@ -18,7 +18,7 @@ export default function JobtitleList() {
         <div>
           <Header as="h3">
             <Icon name="list ul" />
-            <Header.Content>İş Başlıkları Listesi</Header.Content>
+            <Header.Content>İş Başlıkları </Header.Content>
           </Header>
           <Table color="blue" key="blue">
             <Table.Header>

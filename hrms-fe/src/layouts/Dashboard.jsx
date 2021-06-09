@@ -5,17 +5,17 @@ import { Grid, Sidebar } from "semantic-ui-react";
 
 export default function Dashboard(){
     return(
-        <div>
-        <Grid>
-          <Grid.Row>
-            <Grid.Column width={5}>
-              <Sidebar/>
-            </Grid.Column>
-            <Grid.Column width={16}>
-                <Section/>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>   
-        </div>
+      <div>
+      <Grid>
+        <Grid.Row>
+          <Grid.Column width={2}>
+            <SideBar />
+          </Grid.Column>
+          <Grid.Column width={13}>
+            <Section />
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </div>
     );
 }

@@ -17,7 +17,7 @@ export default function JobAdvertisementList() {
     <div>
       <Header as="h2">
         <Icon name="list ul" />
-        <Header.Content>İş İlanı Listesi</Header.Content>
+        <Header.Content>İş İlanları</Header.Content>
       </Header>
       <Table color="blue" key="blue">
         <Table.Header>
@@ -45,15 +45,7 @@ export default function JobAdvertisementList() {
               <Table.Cell>{jobAdvertisement.description}</Table.Cell>
 
               <Table.Cell>
-                {/* <Button>
-                  ReactDOM.render(
-        <div className="site-button-ghost-wrapper">
-                    <Button type="primary" ghost>
-                      Görünüm
-          </Button>
-                  </div>
-        mountNode, );
-              </Button> */}
+                <Button color="violet">Show</Button>
               </Table.Cell>
             </Table.Row>
           ))}
