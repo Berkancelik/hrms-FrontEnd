@@ -13,7 +13,7 @@ export default function Section() {
     <div>
       <Grid>
           
-        <Grid.Row>
+        {/* <Grid.Row>
           <GridColumn size={15}>
             <JobAdvertisementList />
           </GridColumn>
@@ -41,7 +41,7 @@ export default function Section() {
           <GridColumn size={15}>
             <EmployeeList/>
           </GridColumn>
-        </Grid.Row>
+        </Grid.Row> */}
       </Grid>
     </div>
   ); 
