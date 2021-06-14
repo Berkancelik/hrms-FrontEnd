@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Table } from "semantic-ui-react";
-import jobAdvertisementService from "../../../services/jobAdvertisementService";
+import jobAdvertisementService from "../../services/jobAdvertisementService";
 import JobAdvert from "./JobAdvert";
 
 export default function JobPostList({ setCurrentJobAdvert }) {
