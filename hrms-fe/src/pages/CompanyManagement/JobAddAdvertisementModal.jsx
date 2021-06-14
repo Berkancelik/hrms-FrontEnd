@@ -13,7 +13,7 @@ import JobAdvertisementService from "../../services/jobAdvertisementService";
 export default function AddJobPostingModal({ triggerButton }) {
   let jobAdvertisementService = new JobAdvertisementService();
 
-  const [jobPositions, setJobPositions] = useState([]);
+  const [jobTitles, setjobTitles] = useState([]);
   const [cities, setCities] = useState([]);
   const [workingTypes, setWorkingTypes] = useState([]);
 
@@ -34,7 +34,7 @@ export default function AddJobPostingModal({ triggerButton }) {
     let jobTitleService = new JobTitleService();
     jobTitleService
       .getAll()
-      .then((result) => setJobPositions(result.data.data));
+      .then((result) => setjobTitles(result.data.data));
   };
 
   const fetchCities = () => {
@@ -42,10 +42,10 @@ export default function AddJobPostingModal({ triggerButton }) {
     cityService.getAll().then((result) => setCities(result.data.data));
   };
 
-  const jobPositionsOptions = jobPositions.map((jobPosition, index) => ({
+  const jobTitlesOptions = jobTitles.map((jobTitle, index) => ({
     key: index,
-    text: jobPosition.name,
-    value: jobPosition.id,
+    text: jobTitle.name,
+    value: jobTitle.id,
   }));
   const citiesOptions = cities.map((city, index) => ({
     key: index,
@@ -86,14 +86,14 @@ export default function AddJobPostingModal({ triggerButton }) {
       minSalary: "",
       maxSalary: "",
       openPositionCount: "",
-      applicationDeadline: "",
+      deadline: "",
       jobDescription: "",
       isRemote: false,
     },
     validationSchema: addJobPostingSchema,
     onSubmit: (values) => {
-      let jobPosting = {
-        jobPosition: {
+      let jobAdvertisement = {
+        jobTitle: {
           id: values.jobTitleId,
         },
         city: {
@@ -112,7 +112,7 @@ export default function AddJobPostingModal({ triggerButton }) {
         description: values.description,
         isRemote: values.isRemote,
       };
-      jobAdvertisementService.add(jobPosting).then((result) => console.log(result));
+      jobAdvertisementService.add(jobAdvertisement).then((result) => console.log(result));
     },
   });
 
@@ -167,7 +167,7 @@ export default function AddJobPostingModal({ triggerButton }) {
                   onBlur={formik.onBlur}
                   id="jobTitleId"
                   value={formik.values.jobTitleId}
-                  options={jobPositionsOptions}
+                  options={jobTitlesOptions}
                 />
               </div>
               <div style={{ marginBottom: "1rem" }}>
@@ -268,14 +268,14 @@ export default function AddJobPostingModal({ triggerButton }) {
                 </div>
                 <div className="display-inline-block" style={{ width: "46%" }}>
                   <SemanticDatepicker
-                    error={formik.errors.applicationDeadline ? true : false}
+                    error={formik.errors.deadline ? true : false}
                     onChange={(event, data) => {
-                      handleChangeSemantic(data.value, "applicationDeadline");
+                      handleChangeSemantic(data.value, "deadline");
                       handleFormErrorMessages();
                     }}
-                    value={formik.values.applicationDeadline}
+                    value={formik.values.deadline}
                     onBlur={formik.handleBlur}
-                    name="applicationDeadline"
+                    name="deadline"
                     placeholder="Son başvuru tarihi"
                   />
                 </div>
@@ -285,8 +285,8 @@ export default function AddJobPostingModal({ triggerButton }) {
                   placeholder="İş açıklaması (tüm detaylarıyla)"
                   className="width-100-percent"
                   style={{ minHeight: 100 }}
-                  value={formik.values.jobDescription}
-                  name="jobDescription"
+                  value={formik.values.description}
+                  name="description"
                   onChange={(e) => {
                     formik.handleChange(e);
                     handleFormErrorMessages();
