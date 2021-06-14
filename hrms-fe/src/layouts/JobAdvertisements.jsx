@@ -1,9 +1,7 @@
   
-import "./css/JobAdvert.css";
-
+import "./css/JobAdverts.css";
 import React, { useState } from "react";
 import JobAdvertisementList from "../pages/JobAdvertisements/JobAdvertisementList";
-
 import { Grid } from "semantic-ui-react";
 import JobAdvertisementDetails from "../pages/JobAdvertisements/JobAdvertisementDetails";
 

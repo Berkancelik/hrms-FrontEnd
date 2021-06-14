@@ -1,4 +1,4 @@
-import "./css/AddJobPosting.css";
+import "./css/JobAdvertAdd.css";
 
 import React, { useState, useEffect } from "react";
 import {Button,Checkbox,Dropdown,Input,Label, Message, Modal, TextArea,} from "semantic-ui-react";
@@ -15,19 +15,19 @@ export default function AddJobPostingModal({ triggerButton }) {
 
   const [jobPositions, setJobPositions] = useState([]);
   const [cities, setCities] = useState([]);
-  const [employmentTypes, setEmploymentTypes] = useState([]);
+  const [workingTypes, setWorkingTypes] = useState([]);
 
   useEffect(() => {
     fetchJobAdvertisements();
     fetchCities();
-    fetchEmploymentTypes();
+    fetchWorkingTypes();
   }, []);
 
-  const fetchEmploymentTypes = () => {
+  const fetchWorkingTypes = () => {
     let workingTypeService = new WorkingTypeService();
     workingTypeService
       .getAll()
-      .then((result) => setEmploymentTypes(result.data.data));
+      .then((result) => setWorkingTypes(result.data.data));
   };
 
   const fetchJobAdvertisements = () => {
@@ -53,18 +53,18 @@ export default function AddJobPostingModal({ triggerButton }) {
     value: city.id,
   }));
 
-  const employmentTypeOptions = employmentTypes.map(
-    (employmentType, index) => ({
+  const workingtypeOptions = WorkingTypes.map(
+    (workingtype, index) => ({
       key: index,
-      text: employmentType.name,
-      value: employmentType.id,
+      text: workingtype.name,
+      value: workingtype.id,
     })
   );
 
   const addJobPostingSchema = Yup.object().shape({
     jobTitleId: Yup.number().required("İş pozisyonu seçilmesi gerekiyor!"),
     cityId: Yup.number().required("Şehir seçilmesi gerekiyor!"),
-    employmentTypeId: Yup.number().required(
+    workingtypeId: Yup.number().required(
       "İstihdam türü seçilmesi gerekiyor!"
     ),
     minSalary: Yup.number().min(0, "En az maaş 0'dan küçük olamaz!"),
@@ -82,7 +82,7 @@ export default function AddJobPostingModal({ triggerButton }) {
     initialValues: {
       jobTitleId: "",
       cityId: "",
-      employmentTypeId: "",
+      workingtypeId: "",
       minSalary: "",
       maxSalary: "",
       openPositionCount: "",
@@ -99,17 +99,17 @@ export default function AddJobPostingModal({ triggerButton }) {
         city: {
           id: values.cityId,
         },
-        employmentType: {
-          id: values.employmentTypeId,
+        workingtype: {
+          id: values.workingtypeId,
         },
         employer: {
           id: 3, // fakeid
         },
         minSalary: values.minSalary,
         maxSalary: values.maxSalary,
-        openPositionCount: values.openPositionCount,
-        applicationDeadline: values.applicationDeadline,
-        jobDescription: values.jobDescription,
+        openPositionCount: values.openTitleCount,
+        deadline: values.deadline,
+        description: values.description,
         isRemote: values.isRemote,
       };
       jobAdvertisementService.add(jobPosting).then((result) => console.log(result));
@@ -192,18 +192,18 @@ export default function AddJobPostingModal({ triggerButton }) {
                 <Dropdown
                   className="width-100-percent"
                   item
-                  error={formik.errors.employmentTypeId ? true : false}
+                  error={formik.errors.workingtypeId ? true : false}
                   placeholder="İstihdam türü seçin"
                   search
                   selection
                   onChange={(event, data) => {
-                    handleChangeSemantic(data.value, "employmentTypeId");
+                    handleChangeSemantic(data.value, "workingtypeId");
                     handleFormErrorMessages();
                   }}
                   onBlur={formik.onBlur}
-                  id="employmentTypeId"
-                  value={formik.values.employmentTypeId}
-                  options={employmentTypeOptions}
+                  id="workingtypeId"
+                  value={formik.values.workingtypeId}
+                  options={workingtypeOptions}
                 />
               </div>
               <div style={{ marginBottom: "1rem" }}>

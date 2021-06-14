@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Button, Icon, Table } from "semantic-ui-react";
-import jobAdvertisementService from "../../services/jobAdvertisementService";
+import JobAdvertisementService from "../../services/jobAdvertisementService";
+import JobAddAdvertisementModal from "./JobAddAdvertisementModal";
 
 export default function CompanyJobPostList() {
   const [jobAdverts, setJobAdverts] = useState([]);
   const [fakeCompanyId, setFakeCompanyId] = useState(3);
   useEffect(() => {
-    let jobAdvertisementService = new jobAdvertisementService();
+    let jobAdvertisementService = new JobAdvertisementService();
     jobAdvertisementService
       .getOpenjobAdvertisements(fakeCompanyId)
       .then((result) => setJobAdverts(result.data.data));

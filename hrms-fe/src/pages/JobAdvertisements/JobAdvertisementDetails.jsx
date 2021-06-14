@@ -1,4 +1,4 @@
-import "./css/jobAdvertisementDetails.css";
+import "./css/JobAdvertDetails.css";
 
 import React from "react";
 import JobInformationCard from "./JobInformationCard";
