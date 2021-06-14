@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Button, Icon, Table } from "semantic-ui-react";
+import JobAdvertisements from "../../layouts/JobAdvertisements";
 import JobAdvertisementService from "../../services/jobAdvertisementService";
 import JobAddAdvertisementModal from "./JobAddAdvertisementModal";
 
 export default function CompanyJobPostList() {
-  const [jobAdverts, setJobAdverts] = useState([]);
+  const [jobAdvertisements, setJobAdvertisements] = useState([]);
   const [fakeCompanyId, setFakeCompanyId] = useState(3);
   useEffect(() => {
     let jobAdvertisementService = new JobAdvertisementService();
     jobAdvertisementService
-      .getOpenjobAdvertisements(fakeCompanyId)
-      .then((result) => setJobAdverts(result.data.data));
+      .getOpenJobAdvertisements(fakeCompanyId)
+      .then((result) => setJobAdvertisements(result.data.data));
   }, []);
 
   return (
@@ -50,7 +51,7 @@ export default function CompanyJobPostList() {
         </Table.Header>
 
         <Table.Body>
-          {jobPostings.map((jobAdvertisement, i) => (
+          {JobAdvertisements.map((jobAdvertisement, i) => (
             <Table.Row key={i}>
               <Table.Cell>
                 <Button.Group>

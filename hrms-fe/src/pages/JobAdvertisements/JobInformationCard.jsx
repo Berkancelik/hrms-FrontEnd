@@ -30,7 +30,7 @@ export default function JobInformationCard({ jobAdvert: jobAdvertisement }) {
       <div style={{ display: "flex" }}>
         <div class="job-informations">
           <div class="job-position">
-            <span>{jobPost.jobPosition.name}</span>
+            <span>{jobAdvertisement.jobTitle.name}</span>
           </div>
           <div class="company-informations">
             <span class="company-name">{jobAdvertisement.employer.companyName}</span>

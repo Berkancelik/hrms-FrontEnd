@@ -53,7 +53,7 @@ export default function AddJobPostingModal({ triggerButton }) {
     value: city.id,
   }));
 
-  const workingtypeOptions = WorkingTypes.map(
+  const workingtypeOptions = workingTypes.map(
     (workingtype, index) => ({
       key: index,
       text: workingtype.name,
@@ -61,7 +61,7 @@ export default function AddJobPostingModal({ triggerButton }) {
     })
   );
 
-  const addJobPostingSchema = Yup.object().shape({
+  const addJobAdvertisementSchema = Yup.object().shape({
     jobTitleId: Yup.number().required("İş pozisyonu seçilmesi gerekiyor!"),
     cityId: Yup.number().required("Şehir seçilmesi gerekiyor!"),
     workingtypeId: Yup.number().required(
@@ -90,7 +90,7 @@ export default function AddJobPostingModal({ triggerButton }) {
       jobDescription: "",
       isRemote: false,
     },
-    validationSchema: addJobPostingSchema,
+    validationSchema: addJobAdvertisementSchema,
     onSubmit: (values) => {
       let jobAdvertisement = {
         jobTitle: {

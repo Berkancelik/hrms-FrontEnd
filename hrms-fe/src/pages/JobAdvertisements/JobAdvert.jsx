@@ -1,7 +1,7 @@
 import "./css/JobAdvert.css";
 
 import React from "react";
-export default function JobPost({ jobAdvertisement, setCurrentJobAdvert }) {
+export default function JobAdvert({ jobAdvertisement, setCurrentJobAdvert }) {
   let defaultImage =
     "https://res.cloudinary.com/diq6d5egr/image/upload/v1623606849/krpjh03bdcqshsprhrua.jpg";
 
@@ -44,8 +44,8 @@ export default function JobPost({ jobAdvertisement, setCurrentJobAdvert }) {
             <span>{jobAdvertisement.city.name}</span>
           </div>
           <div>
-            <time datetime={jobPost.publishedAt} class="published-at">
-              {getHowLongAgo(jobPost.publishedAt)}
+            <time datetime={jobAdvertisement.publishedAt} class="published-at">
+              {getHowLongAgo(jobAdvertisement.publishedAt)}
             </time>
           </div>
         </div>
