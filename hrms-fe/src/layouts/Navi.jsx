@@ -35,13 +35,7 @@ export default function Navi() {
             </Button>
           </Menu.Item>
           <Menu.Item>
-            <Input
-              className="icon"
-              icon="search"
-              placeholder="Ara..."
-              style={{ minWidth: "20em" }}
-              size="large"
-            />
+            <Input className="icon" icon="search"  placeholder="Ara..." style={{ minWidth: "20em" }} size="large"  />
           </Menu.Item>
           <Menu.Menu position="right">
             <Menu.Item>
@@ -51,12 +45,7 @@ export default function Navi() {
               </Button>
             </Menu.Item>
             <Menu.Item>
-              <Button
-                icon
-                labelPosition="left"
-                as={NavLink}
-                to="/companymanagement"
-              >
+              <Button icon  labelPosition="left"    as={NavLink}     to="/companymanagement"  >
                 <Icon name="building outline" />
                 Şirket Yönetimi
               </Button>

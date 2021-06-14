@@ -5,14 +5,7 @@ export default function SignedIn({ signOut }) {
   return (
     <div>
       <Menu.Item>
-        <Dropdown
-          pointing="top left"
-          button
-          labeled
-          className="icon"
-          text="Profile"
-          icon="user"
-        >
+        <Dropdown pointing="top left" button labeled   className="icon"  text="Profile"   icon="user" >
           <Dropdown.Menu>
             <Dropdown.Item text="Bilgilerim" icon="info"></Dropdown.Item>
             <Dropdown.Item

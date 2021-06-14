@@ -1,22 +1,16 @@
 import React from "react";
-import { Grid } from "semantic-ui-react";
-import Section from "./Section";
-import SideBar from "./SideBar";
+import { Route } from "react-router";
+import AdminManagement from "./AdminManagement";
+import CompanyManagement from "./CompanyManagement";
+import JobAdverts from "./JobAdverts";
 
-
-export default function Dashboard(){
-    return(
-      <div>
-      <Grid>
-        <Grid.Row>
-          <Grid.Column width={2}>
-            <SideBar />
-          </Grid.Column>
-          <Grid.Column width={13}>
-            <Section />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+export default function Dashboard() {
+  return (
+    <div>
+      <Route exact path="/" component={JobAdverts} />
+      <Route exact path="/jobpostings" component={JobAdverts} />
+      <Route path="/companymanagement" component={CompanyManagement} />
+      <Route path="/admin" component={AdminManagement} />
     </div>
-    );
+  );
 }

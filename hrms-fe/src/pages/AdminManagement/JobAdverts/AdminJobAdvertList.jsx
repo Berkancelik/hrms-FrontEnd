@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import jobAdvertisementService from "../../../services/jobAdvertisementService";
 
 export default function AdminJobAdvertList() {
-    const [jobAdverts, setSobAdverts] = useState([]);
+    const [jobAdverts, setJobAdverts] = useState([]);
     useEffect(() => {
       let jobAdvertisementService = new JobAdvertisementService();
       jobAdvertisementService.getAll().then((result) => {
-        setSobAdverts(result.data.data);
+        setJobAdverts(result.data.data);
       });
     }, []);
 
     return(
-        < <section className="scroll-bar overflow-scroll scroll-height">
+         <section className="scroll-bar overflow-scroll scroll-height">
         <Table celled selectable structured>
           <Table.Header align="center">
             <Table.Row>
@@ -38,10 +38,10 @@ export default function AdminJobAdvertList() {
           </Table.Header>
   
           <Table.Body>
-            {jobPostings.map((jobPosting, i) => (
+            {jobPostings.map((jobAdvertisement, i) => (
               <Table.Row key={i}>
-                {jobPosting.jobPostingConfirmation ||
-                jobPosting.jobPostingConfirmation?.confirmed ? (
+                {jobAdvertisement.jobPostingConfirmation ||
+                jobAdvertisement.jobPostingConfirmation?.confirmed ? (
                   <Table.Cell>
                     <Button.Group>
                       <Button icon>
@@ -61,38 +61,38 @@ export default function AdminJobAdvertList() {
                           <Icon name="checkmark" />
                         </Button>
                       }
-                      jobPosting={jobPosting}
+                      jobAdvertisement={jobAdvertisement}
                     />
                   </Table.Cell>
                 )}
   
-                <Table.Cell>{jobPosting.jobPosition.name}</Table.Cell>
-                <Table.Cell>{jobPosting.city.name}</Table.Cell>
+                <Table.Cell>{jobAdvertisement.jobTitle.name}</Table.Cell>
+                <Table.Cell>{jobAdvertisement.city.name}</Table.Cell>
                 <Table.Cell singleLine>
-                  {jobPosting.jobDescription.substring(0, 20)}
+                  {jobAdvertisement.jobDescription.substring(0, 20)}
                 </Table.Cell>
-                <Table.Cell>{jobPosting.openPositionCount}</Table.Cell>
+                <Table.Cell>{jobAdvertisement.openTitleCount}</Table.Cell>
                 <Table.Cell>
-                  {jobPosting.minSalary} ₺ - {jobPosting.maxSalary} ₺
+                  {jobAdvertisement.minSalary} ₺ - {jobAdvertisement.maxSalary} ₺
                 </Table.Cell>
-                <Table.Cell>{jobPosting.publishedAt}</Table.Cell>
-                <Table.Cell>{jobPosting.applicationDeadline}</Table.Cell>
-                <Table.Cell>{jobPosting.employmentType?.name}</Table.Cell>
-                {jobPosting.isRemote ? (
+                <Table.Cell>{jobAdvertisement.publishedAt}</Table.Cell>
+                <Table.Cell>{jobAdvertisement.deadline}</Table.Cell>
+                <Table.Cell>{jobAdvertisement.workingType?.name}</Table.Cell>
+                {jobAdvertisement.isRemote ? (
                   <Table.Cell textAlign="center">
                     <Icon color="green" name="checkmark" size="large" />
                   </Table.Cell>
                 ) : (
                   <Table.Cell />
                 )}
-                {jobPosting.active ? (
+                {jobAdvertisement.active ? (
                   <Table.Cell textAlign="center">
                     <Icon color="green" name="checkmark" size="large" />
                   </Table.Cell>
                 ) : (
                   <Table.Cell />
                 )}
-                {jobPosting.jobPostingConfirmation?.confirmed ? (
+                {jobAdvertisement.jobAdverConfirm?.confirmed ? (
                   <Table.Cell textAlign="center">
                     <Icon color="green" name="checkmark" size="large" />
                   </Table.Cell>
@@ -104,4 +104,5 @@ export default function AdminJobAdvertList() {
           </Table.Body>
         </Table>
       </section>
+    );
 }
