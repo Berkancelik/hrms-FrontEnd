@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router";
 import AdminManagement from "./AdminManagement";
 import CompanyManagement from "./CompanyManagement";
-import JobAdverts from "./JobAdverts";
+import JobAdverts from "./JobAdvertisements";
 
 export default function Dashboard() {
   return (

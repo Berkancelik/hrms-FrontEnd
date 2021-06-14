@@ -2,12 +2,12 @@
 import "./css/JobAdvert.css";
 
 import React, { useState } from "react";
-import JobAdvertList from "../pages/JobAdvertings/JobAdvertList";
+import JobAdvertList from "../pages/JobAdvertisements/JobAdvertisementList";
 
 import { Grid } from "semantic-ui-react";
-import JobAdvertDetails from "../pages/JobAdvertings/JobAdvertDetails";
+import JobAdvertisementDetails from "../pages/JobAdvertisements/JobAdvertisementDetails";
 
-export default function JobAdvertings() {
+export default function JobAdvertisements() {
   const [jobAdvert, setJobAdvert] = useState(null);
 
   const setCurrentJobAdvert = (value) => {
@@ -22,7 +22,7 @@ export default function JobAdvertings() {
             <JobAdvertList setCurrentJobAdvert={setCurrentJobAdvert} />
           </Grid.Column>
           <Grid.Column width={8}>
-            <JobAdvertDetails jobAdvert={jobAdvert} />
+            <JobAdvertisementDetails jobAdvert={jobAdvert} />
           </Grid.Column>
         </Grid.Row>
       </Grid>
