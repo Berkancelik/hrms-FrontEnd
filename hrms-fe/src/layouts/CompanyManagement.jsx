@@ -1,7 +1,7 @@
   
 import React from "react";
 import { Grid } from "semantic-ui-react";
-import CompanyJobAdvertList from "../pages/CompanyManagement/CompanyJobAdvertList";
+import CompanyJobAdvertList from "../pages/CompanyManagement/CompanyJobAdvertisementList";
 import CompanyManagementMenu from "../pages/CompanyManagement/CompanyManagementMenu";
 
 export default function CompanyManagement() {

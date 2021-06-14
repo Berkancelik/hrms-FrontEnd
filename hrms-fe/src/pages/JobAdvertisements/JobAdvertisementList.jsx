@@ -1,19 +1,18 @@
 import "./css/JobAdvertList.css";
 import React, { useState, useEffect } from "react";
 import { Table } from "semantic-ui-react";
-import jobAdvertisementService from "../../services/jobAdvertisementService";
-export default function JobAdvertisementList(setCurrentJobAdvert) {
-  
-  
-  const[jobAdvertisements, setJobAdvertisements] =  useState([]); 
+import JobAdvertisementService from "../../services/jobAdvertisementService";
+import JobAdvert from "./JobAdvert";
 
+export default function JobAdvertisementList(setCurrentJobAdvertisement) {
 
-  useEffect(() => {
-    let jobAdvert = new jobAdvertisementService();
-    jobAdvert
-      .getjobAdvertisements()
-      .then((result) => setJobAdvertisements(result.data.data));
-  }, []);
+    const [jobAdvertisements, setjobAdvertisements] = useState([]);
+    useEffect(() => {
+      let jobAdvertisementService = new JobAdvertisementService();
+      jobAdvertisementService
+        .getAllByIsConfirmed(true)
+        .then((result) => setjobAdvertisements(result.data.data));
+    }, []);
 
   return (
     <section className="scroll-bar job-adverts">
@@ -22,8 +21,8 @@ export default function JobAdvertisementList(setCurrentJobAdvert) {
           {jobAdvertisements.map((jobAdvertisement, i) => (
             <Table.Row>
               <Table.Cell key={i}>
-                <JobPost
-                  setCurrentJobAdvert={setCurrentJobAdvert}
+                <JobAdvert
+                  setCurrentJobAdvertisement={setCurrentJobAdvertisement}
                   jobAdvert={jobAdvertisement}
                 />
               </Table.Cell>

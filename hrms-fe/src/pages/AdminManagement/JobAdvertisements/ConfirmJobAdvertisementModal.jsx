@@ -1,11 +1,11 @@
 import { useState } from "react";
-import jobAdvertConfirmService from "../../../services/jobAdvertisementConfirmService";
 import { Button, Header, Modal, Icon } from "semantic-ui-react";
+import JobAdvertConfirmService from "../../../services/jobAdvertisementConfirmService";
 
-export default function ConfirmJobAdvertModel({triggerButton, jobAdvertisement}) {
+export default function ConfirmJobAdvertisementModel({triggerButton, jobAdvertisement}) {
     const[fakeEmployeeId, setFakeEmployeeId] = useState(4);
 
-    const confirmJobAdvert = ()=>{
+    const confirmJobAdvertisement = ()=>{
         let jobAdvertConfirmService = new JobAdvertConfirmService();
         jobAdvertConfirmService.add({
             jobAdvertisement:{
@@ -34,7 +34,7 @@ export default function ConfirmJobAdvertModel({triggerButton, jobAdvertisement})
                     <Button basic color="red" inverted onClick={()=>setOpen(false)}>
                         <Icon name ="remove"/> Hayır
                     </Button>
-                    <Button color= "green" inverted onClick={() =>{setOpen(false); confirmJobAdvert();}}>
+                    <Button color= "green" inverted onClick={() =>{setOpen(false); confirmJobAdvertisement();}}>
                         <Icon name ="checkmark"/> Evet
                     </Button>
                 </Modal.Actions>

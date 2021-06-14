@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Icon, Table } from "semantic-ui-react";
 import jobAdvertisementService from "../../services/jobAdvertisementService";
-import AddJobPostingModal from "./AddJobPostingModal";
 
 export default function CompanyJobPostList() {
   const [jobAdverts, setJobAdverts] = useState([]);
@@ -19,7 +18,7 @@ export default function CompanyJobPostList() {
         <Table.Header align="center">
           <Table.Row>
             <Table.HeaderCell rowSpan="2">
-              <AddJobPostingModal
+              <JobAddAdvertisementModal
                 triggerButton={
                   <Button primary icon labelPosition="left">
                     <Icon name="add" />

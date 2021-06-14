@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Button, Icon, Table } from "semantic-ui-react";
 import JobAdvertisementService from "../../../services/jobAdvertisementService";
-import ConfirmJobPostModal from "./ConfirmJobPostModal";
+import ConfirmJobAdvertisementModal from "./ConfirmJobAdvertisementModal";
 
 export default function AdminJobPostList() {
-  const [jobAdverts, setJobAdverts] = useState([]);
+  const [jobAdverts, setJobAdvertisements] = useState([]);
   useEffect(() => {
     let jobAdvertisementService = new JobAdvertisementService();
     jobAdvertisementService.getAll().then((result) => {
-      setJobAdverts(result.data.data);
+      setJobAdvertisements(result.data.data);
     });
   }, []);
     return(
@@ -56,7 +56,7 @@ export default function AdminJobPostList() {
                   </Table.Cell>
                 ) : (
                   <Table.Cell textAlign="center">
-                    <ConfirmJobPostModal
+                    <ConfirmJobAdvertisementModal
                       triggerButton={
                         <Button icon color="green">
                           <Icon name="checkmark" />
