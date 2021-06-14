@@ -9,8 +9,8 @@ export default function CompanyJobPostList() {
   useEffect(() => {
     let jobAdvertisementService = new jobAdvertisementService();
     jobAdvertisementService
-      .getAllByEmployerId(fakeCompanyId)
-      .then((result) => setJobPostings(result.data.data));
+      .getOpenjobAdvertisements(fakeCompanyId)
+      .then((result) => setJobAdverts(result.data.data));
   }, []);
 
   return (
@@ -63,7 +63,7 @@ export default function CompanyJobPostList() {
                   </Button>
                 </Button.Group>
               </Table.Cell>
-              <Table.Cell>{jobAdvertisement.jobtitle.name}</Table.Cell>
+              <Table.Cell>{jobAdvertisement.jobTitle.name}</Table.Cell>
               <Table.Cell>{jobAdvertisement.city.name}</Table.Cell>
               <Table.Cell singleLine>
                 {jobAdvertisement.description.substring(0, 20)}
@@ -73,8 +73,8 @@ export default function CompanyJobPostList() {
                 {jobAdvertisement.minSalary} ₺ - {jobAdvertisement.maxSalary} ₺
               </Table.Cell>
               <Table.Cell>{jobAdvertisement.publishedAt}</Table.Cell>
-              <Table.Cell>{jobAdvertisement.applicationDeadline}</Table.Cell>
-              <Table.Cell>{jobAdvertisement.employmentType?.name}</Table.Cell>
+              <Table.Cell>{jobAdvertisement.deadline}</Table.Cell>
+              <Table.Cell>{jobAdvertisement.workingType?.typeName}</Table.Cell>
               {jobAdvertisement.isRemote ? (
                 <Table.Cell textAlign="center">
                   <Icon color="green" name="checkmark" size="large" />

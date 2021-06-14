@@ -1,12 +1,12 @@
 import "./css/JobAdvert.css";
 
 import React from "react";
-export default function JobPost({ jobAdvert, setCurrentJobAdvert }) {
+export default function JobPost({ jobAdvertisement, setCurrentJobAdvert }) {
   let defaultImage =
     "https://res.cloudinary.com/diq6d5egr/image/upload/v1623606849/krpjh03bdcqshsprhrua.jpg";
 
   function setJobDetails() {
-    setCurrentJobAdvert(jobAdvert);
+    setCurrentJobAdvert(jobAdvertisement);
   }
 
   function getHowLongAgo(publishedAt) {
@@ -34,14 +34,14 @@ export default function JobPost({ jobAdvert, setCurrentJobAdvert }) {
         <div class="job-informations">
           <div class="job-position">
             <div onClick={() => setJobDetails()}>
-              {jobAdvert.jobTitle.name}
+              {jobAdvertisement.jobTitle.name}
             </div>
           </div>
           <div class="company-name">
-            <div>{jobAdvert.employer.companyName}</div>
+            <div>{jobAdvertisement.employer.companyName}</div>
           </div>
           <div class="city-name">
-            <span>{jobAdvert.city.name}</span>
+            <span>{jobAdvertisement.city.name}</span>
           </div>
           <div>
             <time datetime={jobPost.publishedAt} class="published-at">

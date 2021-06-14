@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
-import jobAdvertisementService from "../../../services/jobAdvertisementService";
+import React, { useState, useEffect } from "react";
+import { Button, Icon, Table } from "semantic-ui-react";
+import JobAdvertisementService from "../../../services/jobAdvertisementService";
+import ConfirmJobPostModal from "./ConfirmJobPostModal";
 
-export default function AdminJobAdvertList() {
-    const [jobAdverts, setJobAdverts] = useState([]);
-    useEffect(() => {
-      let jobAdvertisementService = new JobAdvertisementService();
-      jobAdvertisementService.getAll().then((result) => {
-        setJobAdverts(result.data.data);
-      });
-    }, []);
-
+export default function AdminJobPostList() {
+  const [jobAdverts, setJobAdverts] = useState([]);
+  useEffect(() => {
+    let jobAdvertisementService = new JobAdvertisementService();
+    jobAdvertisementService.getAll().then((result) => {
+      setJobAdverts(result.data.data);
+    });
+  }, []);
     return(
          <section className="scroll-bar overflow-scroll scroll-height">
         <Table celled selectable structured>
@@ -38,10 +39,10 @@ export default function AdminJobAdvertList() {
           </Table.Header>
   
           <Table.Body>
-            {jobPostings.map((jobAdvertisement, i) => (
+            {jobAdverts.map((jobAdvertisement, i) => (
               <Table.Row key={i}>
-                {jobAdvertisement.jobPostingConfirmation ||
-                jobAdvertisement.jobPostingConfirmation?.confirmed ? (
+                {jobAdvertisement.jobAdvertConfirm ||
+                jobAdvertisement.jobAdvertConfirm?.confirmed ? (
                   <Table.Cell>
                     <Button.Group>
                       <Button icon>

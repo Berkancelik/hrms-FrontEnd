@@ -1,5 +1,5 @@
 import { useState } from "react";
-import jobAdvertConfirmService from "../../../services/jobAdvertConfirmService";
+import jobAdvertConfirmService from "../../../services/jobAdvertisementConfirmService";
 import { Button, Header, Modal, Icon } from "semantic-ui-react";
 
 export default function ConfirmJobAdvertModel({triggerButton, jobAdvertisement}) {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "semantic-ui-react";
 import AdminManagementMenu from "../pages/AdminManagement/AdminManagementMenu";
-import AdminJobAdvertList from "../pages/AdminManagement/JobAdverts/AdminJobAdvertList";
+import AdminJobAdvertList from "../pages/AdminManagement/JobAdvertisements/AdminJobAdvertisementList";
 
 export default function AdminManagement() {
   return (

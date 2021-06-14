@@ -3,7 +3,7 @@ import "./css/JobInformationCard.css";
 import React from "react";
 import { Button, Icon } from "semantic-ui-react";
 
-export default function JobInformationCard({ jobAdvert }) {
+export default function JobInformationCard({ jobAdvert: jobAdvertisement }) {
   let defaultImage ="https://res.cloudinary.com/diq6d5egr/image/upload/v1623606849/krpjh03bdcqshsprhrua.jpg"
   function getHowLongAgo(publishedAt) {
     let today = new Date();
@@ -33,13 +33,13 @@ export default function JobInformationCard({ jobAdvert }) {
             <span>{jobPost.jobPosition.name}</span>
           </div>
           <div class="company-informations">
-            <span class="company-name">{jobAdvert.employer.companyName}</span>
+            <span class="company-name">{jobAdvertisement.employer.companyName}</span>
             &nbsp; | &nbsp;
-            <span class="city-name">{jobAdvert.city.name}</span>
+            <span class="city-name">{jobAdvertisement.city.name}</span>
           </div>
           <div>
-            <time datetime={jobAdvert.publishedAt} class="published-at">
-              {getHowLongAgo(jobAdvert.publishedAt)} yayınlandı.
+            <time datetime={jobAdvertisement.publishedAt} class="published-at">
+              {getHowLongAgo(jobAdvertisement.publishedAt)} yayınlandı.
             </time>
           </div>
         </div>
