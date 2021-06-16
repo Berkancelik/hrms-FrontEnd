@@ -1,71 +1,28 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router";
-import { NavLink } from "react-router-dom";
-import { Menu, Button, Container, Input, Icon } from "semantic-ui-react";
-import SignedIn from "./SignedIn";
-import SignedOut from "./SignedOut";
+import React from "react";
+import { Link } from "react-router-dom";
+import { Container,Button, Menu, Icon } from 'semantic-ui-react';
+import "../App.css";
 
 export default function Navi() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const history = useHistory();
-
-  function handleSignOut() {
-    setIsAuthenticated(false);
-    history.push("/");
-  }
-
-  function handleSignIn() {
-    setIsAuthenticated(true);
-  }
-
   return (
     <div>
-      <Menu size="small" inverted fixed="top">
+      <Menu size="large" inverted stackable>
         <Container>
-          <Menu.Item>
-            <Button icon labelPosition="left">
-              <Icon name="home" />
-              Ana Sayfa
+          <Menu.Item name="Ana Sayfa" as={Link} to={"/"}>
+          <Icon name="home" />Ana Sayfa
+          </Menu.Item>
+          <Menu.Item name="İş ilanları" as={Link} to={"/jobads"} />
+          <Menu.Item name="Cvler" as={Link} to={"/cvs"} />
+
+          <Menu.Menu position="right" style={{ margin: '0.5em' }}>
+            <Button primary as={Link} to={"/jobAdCreate"}>
+              İlan Ekle
             </Button>
-          </Menu.Item>
-          <Menu.Item>
-            <Button icon labelPosition="left">
-              <Icon name="list" />
-              İş İlanları
-            </Button>
-          </Menu.Item>
-          <Menu.Item>
-            <Input
-              className="icon"
-              icon="search"
-              placeholder="Ara..."
-              style={{ minWidth: "20em" }}
-              size="large"
-            />
-          </Menu.Item>
-          <Menu.Menu position="right">
-            <Menu.Item>
-              <Button icon labelPosition="left" as={NavLink} to="/admin">
-                <Icon name="briefcase" />
-                Site Yönetimi
-              </Button>
-            </Menu.Item>
-            <Menu.Item>
-              <Button
-                icon
-                labelPosition="left"
-                as={NavLink}
-                to="/companymanagement"
-              >
-                <Icon name="building outline" />
-                Şirket Yönetimi
-              </Button>
-            </Menu.Item>
-            {isAuthenticated ? (
-              <SignedIn signOut={handleSignOut} />
-            ) : (
-              <SignedOut signIn={handleSignIn} />
-            )}
+            <Button.Group>
+              <Button as={Link} to={"/login"}>Giriş yap</Button>
+              <Button.Or />
+              <Button positive as={Link} to={"/register"}>Kaydol</Button>
+            </Button.Group>
           </Menu.Menu>
         </Container>
       </Menu>

@@ -1,24 +1,28 @@
 import axios from "axios"
 
 export default class JobAdvertisementService{
-    getAll(){
-        return axios.get("http://localhost:8080/api/jobAdvertisements/getAll")
-    }
-    getOpenjobAdvertisements(){
-        return axios.get("http://localhost:8080/api/jobAdvertisementsisements/getAllOpenJobAdversitementsByEmployer")
-    }
-    getJobAdvertisementsOrderByPublishedAt(){
-        return axios.get("http://localhost:8080/api/jobAdvertisements/findAllByOrderByPublishedAtDesc")
-    }
+  getAll() {
+    return axios.get("http://localhost:8080/api/jobadvertisements/getall");
+  }
 
-    add(jobAdvertisement) {
-        return axios.post("http://localhost:8080/api/jobAdvertisements/add", jobAdvertisement);
-      }
+  getAllApprovedStatus() {
+    return axios.get(
+      "http://localhost:8080/api/jobadvertisements/getallapprovedstatus"
+    );
+  }
 
-      getAllByIsConfirmed(isConfirmed) {
-        return axios.get(
-          "http://localhost:8080/api/jobAdvertisements/getallbyisconfirmed?isConfirmed=" +
-            isConfirmed
-        );
-      }
+  getById(id) {
+    return axios.get("http://localhost:8080/api/jobadvertisements/getbyid?id=" + id);
+  }
+
+  getAllByEmployerId(employerId) {
+    return axios.get(
+      "http://localhost:8080/api/jobadvertisements/getallbyemployerid?employerId=" +
+        employerId
+    );
+  }
+
+  add(jobPosting) {
+    return axios.post("http://localhost:8080/api/jobadvertisements/add", jobPosting);
+  }
 }
