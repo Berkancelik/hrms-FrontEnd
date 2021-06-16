@@ -1,28 +1,24 @@
 import axios from "axios"
 
-export default class JobAdvertisementService{
-  getAll() {
-    return axios.get("http://localhost:8080/api/jobadvertisements/getall");
-  }
+export default class jobAdvertisementService{
+    getAll(){
+        return axios.get("http://localhost:8080/api/jobAdvertisements/getAll")
+    }
+    getOpenjobAdvertisements(){
+        return axios.get("http://localhost:8080/api/jobAdvertisementsisements/getAllOpenJobAdversitementsByEmployer")
+    }
+    getjobAdvertisementsOrderByPublishedAt(){
+        return axios.get("http://localhost:8080/api/jobAdvertisements/findAllByOrderByPublishedAtDesc")
+    }
 
-  getAllApprovedStatus() {
-    return axios.get(
-      "http://localhost:8080/api/jobadvertisements/getallapprovedstatus"
-    );
-  }
+    add(jobAdvertisement) {
+        return axios.post("http://localhost:8080/api/jobAdvertisements/add", jobAdvertisement);
+      }
 
-  getById(id) {
-    return axios.get("http://localhost:8080/api/jobadvertisements/getbyid?id=" + id);
-  }
-
-  getAllByEmployerId(employerId) {
-    return axios.get(
-      "http://localhost:8080/api/jobadvertisements/getallbyemployerid?employerId=" +
-        employerId
-    );
-  }
-
-  add(jobPosting) {
-    return axios.post("http://localhost:8080/api/jobadvertisements/add", jobPosting);
-  }
+      getAllByIsConfirmed(isConfirmed) {
+        return axios.get(
+          "http://localhost:8080/api/jobAdvertisements/getallbyisconfirmed?isConfirmed=" +
+            isConfirmed
+        );
+      }
 }
