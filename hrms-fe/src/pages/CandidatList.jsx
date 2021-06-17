@@ -2,7 +2,7 @@ import React , { useEffect, useState }from 'react'
 import { Link } from 'react-router-dom'
 import CandidateService from '../services/candidateService'
 import {  Table, Header ,Button,Image} from "semantic-ui-react";
-export default function JobSeeker() {
+export default function Candidate() {
    
    const [candidates, setCandidates] = useState([])
    

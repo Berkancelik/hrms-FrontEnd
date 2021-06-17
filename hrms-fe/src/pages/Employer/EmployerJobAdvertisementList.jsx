@@ -41,19 +41,19 @@ let changeIsOpenByEmployer = (id)=> {
         </Table.Header>
 
         <Table.Body>
-          {jobAdvertisemets.map((jobAdvertisemet, key) => (
+          {jobAdvertisemets.map((jobAdvertisement, key) => (
             <Table.Row key={key}>
-              <Table.Cell>{jobAdvertisemet.city.name}</Table.Cell>
-              <Table.Cell>{jobAdvertisemet.jobTitle.jobTitle}</Table.Cell>
-              <Table.Cell>{jobAdvertisemet.openTitleCount}</Table.Cell>
-              <Table.Cell>{jobAdvertisemet.workType.workType}</Table.Cell>
-              <Table.Cell>{jobAdvertisemet.workHour.workHour}</Table.Cell>
+              <Table.Cell>{jobAdvertisement.city.name}</Table.Cell>
+              <Table.Cell>{jobAdvertisement.jobTitle.jobTitle}</Table.Cell>
+              <Table.Cell>{jobAdvertisement.openTitleCount}</Table.Cell>
+              <Table.Cell>{jobAdvertisement.workType.workType}</Table.Cell>
+              <Table.Cell>{jobAdvertisement.workHour.workHour}</Table.Cell>
               <Table.Cell>
-                {jobAdvejobAdvertisemetrt.salaryMin} ₺ - {jobAdvertisemet.salaryMax} ₺
+                {jobAdvertisement.salaryMin} ₺ - {jobAdvertisement.salaryMax} ₺
               </Table.Cell>
-              <Table.Cell>{jobAdvertisemet.deadline}</Table.Cell>
-              <Table.Cell>{jobAdvertisemet.description}</Table.Cell>
-              {jobAdvert.open ? (
+              <Table.Cell>{jobAdvertisement.deadline}</Table.Cell>
+              <Table.Cell>{jobAdvertisement.description}</Table.Cell>
+              {jobAdvertisement.open ? (
                 <Table.Cell>
                   <Label color="green" style={{ width: "100%" }}>
                     İş ilanı Açık!
@@ -66,7 +66,7 @@ let changeIsOpenByEmployer = (id)=> {
                   </Label>
                 </Table.Cell>
               )}
-              {jobAdvert.active ? (
+              {jobAdvertisement.active ? (
                 <Table.Cell>
                   <Label color="green" style={{ width: "100%" }}>
                     Admin tarafından onaylı!
@@ -81,7 +81,7 @@ let changeIsOpenByEmployer = (id)=> {
               )}
               <Table.Cell collapsing>
                 <Button
-                  onClick={() => changeIsOpenByEmployer(jobAdvert.id)}
+                  onClick={() => changeIsOpenByEmployer(jobAdvertisement.id)}
                   color="green"
                   icon
                   labelPosition="left"

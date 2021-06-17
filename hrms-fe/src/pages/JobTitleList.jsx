@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import JobTitleService from "../services/jobTitleService";
 import {  Table, Header ,Button} from "semantic-ui-react";
-export default function JobPositionList() {
+export default function JobTitleList() {
   const [jobTitles, setJobtitles] = useState([]);
 
   useEffect(() => {

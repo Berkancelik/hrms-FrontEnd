@@ -4,7 +4,7 @@ import React,{useState,useEffect} from 'react'
 import { Table, Label, Icon, Button } from "semantic-ui-react";
 import JobAdvertisementService from '../../../services/jobAdvertisementService'
 
-export default function AdminJobAdvertList() {
+export default function AdminJobAdvertisementList() {
 
 const [jobAdvertisements, setJobAdvertisements] = useState([])
 
@@ -52,7 +52,7 @@ let changeIsActiveByEmployee = (id)=> {
               <Table.Cell>{jobAdvertisement.openPositionCount}</Table.Cell>
               <Table.Cell>{jobAdvertisement.workType.workType}</Table.Cell>
               <Table.Cell>{jobAdvertisement.workHour.workHour}</Table.Cell>
-              <Table.Cell>{jobAdvertisement.salaryMin}-{jobAdvert.salaryMax}</Table.Cell>
+              <Table.Cell>{jobAdvertisement.salaryMin}-{jobAdvertisement.salaryMax}</Table.Cell>
               <Table.Cell>{jobAdvertisement.deadline}</Table.Cell>
               <Table.Cell>{jobAdvertisement.description}</Table.Cell>
             {jobAdvertisement.active ? (
@@ -71,7 +71,7 @@ let changeIsActiveByEmployee = (id)=> {
 
 <Table.Cell collapsing>
                 <Button
-                  onClick={() => changeIsActiveByEmployee(jobAdvert.id)}
+                  onClick={() => changeIsActiveByEmployee(jobAdvertisement.id)}
                   color="green"
                   icon
                   labelPosition="left"

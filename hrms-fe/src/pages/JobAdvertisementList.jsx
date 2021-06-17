@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import JobAdvertisementService from "../services/jobAdvertisementService";
 import { Table, Header ,Button} from "semantic-ui-react";
-export default function JobAdvertList() {
+export default function JobAdvertisementList() {
   
   const [jobAdvertisements, setJobAdvertisements] = useState([]);
 
@@ -37,7 +37,7 @@ export default function JobAdvertList() {
         <Table.Body>
           {jobAdvertisements.map((jobAdvertisements) => (
             <Table.Row key={jobAdvertisements.id}>
-              <Table.Cell>{jobAdvertisements.jobPosition.jobTitle}</Table.Cell>
+              <Table.Cell>{jobAdvertisements.jobTitle.jobTitle}</Table.Cell>
               <Table.Cell>{jobAdvertisements.description}</Table.Cell>
               <Table.Cell>{jobAdvertisements.city.name}</Table.Cell>
               <Table.Cell>

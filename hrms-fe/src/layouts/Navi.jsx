@@ -1,28 +1,46 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Container,Button, Menu, Icon } from 'semantic-ui-react';
-import "../App.css";
+import React ,{useState}from "react";
+import { Container, Menu ,Image} from "semantic-ui-react";
+import SignOut from "./SignOut";
+import SignedIn from "./SignedIn";
+import AdvertisementButton from "./AdvertisementButton";
 
+import { useHistory } from "react-router";
 export default function Navi() {
-  return (
-    <div>
-      <Menu size="large" inverted stackable>
-        <Container>
-          <Menu.Item name="Ana Sayfa" as={Link} to={"/"}>
-          <Icon name="home" />Ana Sayfa
-          </Menu.Item>
-          <Menu.Item name="İş ilanları" as={Link} to={"/jobads"} />
-          <Menu.Item name="Cvler" as={Link} to={"/cvs"} />
+  const [isAuthenticated, setIsAuthenticated] = useState(true)
 
-          <Menu.Menu position="right" style={{ margin: '0.5em' }}>
-            <Button primary as={Link} to={"/jobAdCreate"}>
-              İlan Ekle
-            </Button>
-            <Button.Group>
-              <Button as={Link} to={"/login"}>Giriş yap</Button>
-              <Button.Or />
-              <Button positive as={Link} to={"/register"}>Kaydol</Button>
-            </Button.Group>
+  const history= useHistory()
+
+
+function handleSignOut(){
+  setIsAuthenticated(false)
+  history.push("/")
+
+}
+
+function handleSıgnIn(){
+  setIsAuthenticated(true)
+}
+  return (
+
+  
+
+
+    <div>
+       <Menu inverted fixed="top" size="large">
+        <Container>
+          <Menu.Item name="building outline">
+          <Image size='mini' circular src={"../assets/hrmslogo.jpg"} style={{ marginRight: '1.5em' }} />
+            Hrms
+          </Menu.Item>
+          <Menu.Item name="Home" />
+          <Menu.Item name="Job Advert" />
+          <Menu.Item name="Companies" />
+          <Menu.Item name="Cities" />
+          <Menu.Menu position="right">
+     <AdvertisementButton/>
+
+          {isAuthenticated ? <SignedIn signOut={handleSignOut} />:<SignOut SignedIn={handleSıgnIn}/>}
+           
           </Menu.Menu>
         </Container>
       </Menu>

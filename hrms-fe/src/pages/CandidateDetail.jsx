@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from 'react'
 import { useParams } from "react-router";
 import { Button, Card, Image } from "semantic-ui-react";
-import CandidateService from '../services/CandidateService';
-export default function JobSeekerDetail() {
+import CandidateService from '../services/candidateService';
+export default function CandidateDetail() {
    
    let {id} =useParams();// parametreleri obje olarak veriyor useParams
 
