@@ -2,10 +2,7 @@ import axios from "axios"
 
 
 export default class jobTitleService{
-    getWorkTypes(){
-        return axios.get("http://localhost:8080/api/worktypes/getall")
-    }
-    add(values){
-        return axios.post("http://localhost:8080/api/worktypes/add",values)
-    }
+    getJobTitles(){
+        return axios.get("http://localhost:8080/api/jobtitles/getall")
+}
 }
