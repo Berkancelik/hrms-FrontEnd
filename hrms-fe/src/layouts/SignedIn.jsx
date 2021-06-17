@@ -5,8 +5,8 @@ export default function SignedIn({ signOut }) {
   return (
     <div>
       <Menu.Item>
-        <Image avatar spaced="right" src={"assets/candidate.jpg"} />
-        <Dropdown pointing="top left" text="Emirhan">
+        <Image avatar spaced="right" src={"https://avatars.githubusercontent.com/u/79005929?v=4"} />
+        <Dropdown pointing="top left" text="Berkan Çelik">
           <Dropdown.Menu>
             <Dropdown.Item text="Bilgilerim" icon="info" />
         <Dropdown.Item as={NavLink} to="/adminjobadvertrismentlist" text="Sisteme düşen iş ilanları" icon="info" /> 
