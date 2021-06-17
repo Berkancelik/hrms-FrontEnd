@@ -59,7 +59,7 @@ export default function JobAdvertisementAdd({triggerButton}) {
   const [workTypes, setWorkTypes] = useState([]);
 
   useEffect(() => {
-  let jobTitleService = new jobTitleService();
+  let jobTitleService = new JobTitleService();
   let cityService = new CityService();
   let workHourService = new WorkHourService();
   let workTypeService = new WorkTypeService();

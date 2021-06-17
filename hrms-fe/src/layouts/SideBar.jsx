@@ -9,25 +9,25 @@ export default function SideBar() {
     <Link to="/">
     <Menu.Item as="a">
           <Icon name="home" />
-          Home
+          Ana Sayfa
         </Menu.Item>
         </Link>
     <Link to="/jobtitles">
     <Menu.Item as="a">
           <Icon name="briefcase" />
-          Job Positions
+          İş Pozisyonları
         </Menu.Item>
         </Link>
         <Link to="/candidates">
         <Menu.Item as="a">
           <Icon name="user circle" />
-          JobSeeker
+          İş Adayları
         </Menu.Item>
         </Link>
         <Link to="/employers">
         <Menu.Item as="a">
           <Icon name="user circle" />
-          Employeer
+          İşveren
         </Menu.Item>
         </Link>
         <Link to="/jobadvertisements">

@@ -20,9 +20,7 @@ function handleSignOut(){
 function handleSıgnIn(){
   setIsAuthenticated(true)
 }
-  return (
-
-  
+  return ( 
 
 
     <div>
