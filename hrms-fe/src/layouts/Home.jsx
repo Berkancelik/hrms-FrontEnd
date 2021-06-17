@@ -9,7 +9,6 @@ export default function Home() {
           
         <Header.Content style={{ fontSize: "50px" }}>
           HAYALİNDEKİ İŞİ BUL
-
         </Header.Content>
       </Header>
       <Header inverted color="red" as="h2" icon textAlign="left">
