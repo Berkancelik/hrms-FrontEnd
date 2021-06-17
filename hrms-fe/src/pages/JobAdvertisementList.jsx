@@ -1,35 +1,42 @@
-import "./css/JobAdvertList.css";
-import React, { useState, useEffect } from "react";
-import { Table } from "semantic-ui-react";
-import JobAdvertisementService from "../../services/jobAdvertisementService";
-import JobAdvert from "./JobAdvert";
+import React,{useState,useEffect}from 'react'
+import EmployerService from "../services/employerService"
+import { Table, Header ,Button} from "semantic-ui-react";
+export default function EmployerList() {
 
-export default function JobAdvertisementList(setCurrentJobAdvertisement) {
+    const [employers, setEmployers] = useState([])
 
-    const [jobAdvertisements, setjobAdvertisements] = useState([]);
-    useEffect(() => {
-      let jobAdvertisementService = new JobAdvertisementService();
-      jobAdvertisementService
-        .getAllByIsConfirmed(true)
-        .then((result) => setjobAdvertisements(result.data.data));
-    }, []);
+    useEffect(()=>{
+        let employerService = new EmployerService();
+        employerService.getEmployers().then(result=>setEmployers(result.data.data))
+    },[])
 
-  return (
-    <section className="scroll-bar job-adverts">
-      <Table className="job-adverts-table">
+    return (
+        <div>
+            <Header as="h2">
+        Companies
+        <Header.Subheader>
+          Sistemde mevcut olan şirketler.
+        </Header.Subheader>
+      </Header>
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Şirket Adı</Table.HeaderCell>
+            <Table.HeaderCell></Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+
         <Table.Body>
-          {jobAdvertisements.map((jobAdvertisement, i) => (
-            <Table.Row>
-              <Table.Cell key={i}>
-                <JobAdvert
-                  setCurrentJobAdvertisement={setCurrentJobAdvertisement}
-                  jobAdvert={jobAdvertisement}
-                />
-              </Table.Cell>
+          {employers.map((employer) => (
+            <Table.Row key={employer.id}>
+              <Table.Cell>{employer.companyName}</Table.Cell>
+              <Table.Cell> <Button color='grey'>Details</Button></Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
+
+        <Table.Footer></Table.Footer>
       </Table>
-    </section>
-  );
+        </div>
+    )
 }
