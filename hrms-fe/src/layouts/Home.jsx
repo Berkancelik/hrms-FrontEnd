@@ -8,19 +8,11 @@ export default function Home() {
       <Header inverted color="red" as="h1" icon textAlign="left">
           
         <Header.Content style={{ fontSize: "50px" }}>
-          HAYALİNDEKİ İŞİ BUL
+          HOME
         </Header.Content>
       </Header>
-      <Header inverted color="red" as="h2" icon textAlign="left">
-        <Header.Content style={{ fontSize: "50px" }}>
-          Binlerce İş İlanı Arasında 
-          Kendine Uygun işi Hemen Bul!
-        </Header.Content>
-      </Header>
-      <Button as={NavLink} to="/jobAdvertisements" color="green" size="huge">
-        İŞ ARA
-        <Icon name="right arrow" />
-      </Button>
+    
+     
     </div>
   );
 }
