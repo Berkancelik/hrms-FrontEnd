@@ -13,6 +13,7 @@ import CandidateDetail from "../pages/CandidateDetail";
 import EmployerList from "../pages/EmployerList";
 import AdminJobAdvertisementList from "../pages/Admin/JobAdvertisements/AdminJobAdvertisementList";
 import JobAdvertisementAdd from "../pages/JobAdvertisementAdd";
+import JobAdvertisementList from "../pages/JobAdvertisementList";
 
 export default function Dashboard() {
   return (
@@ -26,7 +27,7 @@ export default function Dashboard() {
             <Route exact path="/" component={Home} />
             <Route exact path="/candidates" component={Candidate} />
             <Route path="/candidates/:id" component={CandidateDetail}/>
-            <Route exact path="/jobadvertisement" component={AdminJobAdvertList} />
+            <Route exact path="/jobadvertisements" component={JobAdvertisementList} />
             <Route exact path="/jobtitles" component={JobTitleList} />
             <Route path ="/employers" component={EmployerList}/>
             <Route path="/jobadvertisementadd" component ={JobAdvertisementAdd}/>

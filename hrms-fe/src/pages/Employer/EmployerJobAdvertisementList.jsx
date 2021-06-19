@@ -7,7 +7,7 @@ export default function EmployerJobAdvertisementList() {
 
 useEffect (()=>{
     let jobAdvertisementService = new JobAdvertisementService();
-    jobAdvertisementService.getAllByEmployerId(2)
+    jobAdvertisementService.getAllByEmployerId(25)
     .then((result)=>setJobAdvertisements(result.data.data))
 },[])
 

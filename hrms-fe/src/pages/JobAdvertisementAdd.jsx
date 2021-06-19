@@ -9,6 +9,8 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 export default function JobAdvertisementAdd({triggerButton}) {
 
+  let jobAdvertisementService = new JobAdvertisementService()
+
 
   const JobPostingAddSchema = Yup.object().shape({
     deadLine: Yup.date().nullable().required("Bu alanın doldurulması zorunludur"),
@@ -40,7 +42,8 @@ export default function JobAdvertisementAdd({triggerButton}) {
 
 
     onSubmit: (values) => {
-      values.employerId = 14; 
+      values.employerId = 25;
+      jobAdvertisementService.add(values) 
 
    console.log(values)
     }
@@ -51,7 +54,6 @@ export default function JobAdvertisementAdd({triggerButton}) {
 
 
   
-  let jobAdvertisementService = new JobAdvertisementService();
   
   const [cities, setCities] = useState([]);
   const [jobTitles, setJobTitles] = useState([]);
@@ -66,7 +68,7 @@ export default function JobAdvertisementAdd({triggerButton}) {
     jobTitleService
       .getJobTitles()
       .then((result) => setJobTitles(result.data.data));
-    cityService.getCities().then((result) => setCities(result.data.data));
+    cityService.getAll().then((result) => setCities(result.data.data));
     workHourService
       .getWorkHours()
       .then((result) => setWorkHours(result.data.data));

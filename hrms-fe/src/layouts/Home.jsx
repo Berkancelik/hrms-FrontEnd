@@ -8,7 +8,7 @@ export default function Home() {
       <Header inverted color="red" as="h1" icon textAlign="left">
           
         <Header.Content style={{ fontSize: "50px" }}>
-          HOME
+          HAYALİNDEKİ İŞİ BUL
         </Header.Content>
       </Header>
     
