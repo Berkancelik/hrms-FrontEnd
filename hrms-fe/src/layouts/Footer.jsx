@@ -1,76 +1,93 @@
 import React from "react";
-
 import {
-  Image,
-  Container,
-  Divider,
-  Grid,
-  Header,
   List,
+  Header,
+  Grid,
   Segment,
-  Button,
+  Container,
+  Icon,
+  Divider,
+  Image,
 } from "semantic-ui-react";
+import logo from "../images/logo.png";
 
-import "./Footer.css";
 export default function Footer() {
   return (
-    <div >
-      <Segment
-        inverted
-        vertical
-        style={{ marginBottom:"10em",marginTop:"10em", padding: "5em 0em" }}
-      >
-        <Container textAlign="center">
+    <div>
+      <Segment inverted color="red" vertical style={{ padding: "5em 0em" }}>
+        <Container>
           <Grid divided inverted stackable>
-            <Grid.Column width={5}>
-              <Header inverted as="h4" content="" />
-
-              <Image
-                src={"../assets/hrmsfooter.png"}
-                size="medium"
-              
-                margin="109x"
-              />
-              <br />
-            </Grid.Column>
-            <Grid.Column width={5}>
-              <Header style={{marginTop:"4em"}} inverted as="h4" content="Sosyal Medya" />
-              <br />
-              <br />
-              <Button circular color="facebook" icon="facebook" />
-
-              <Button circular color="twitter" icon="twitter" />
-
-              <Button circular color="linkedin" icon="linkedin" />
-
-              <Button circular color="google plus" icon="google plus" />
-            </Grid.Column>
-
-            <Grid.Column width={6}>
-              <Header style={{marginTop:"4em"}} inverted as="h4" content="Berkan Çelik" />
-              <br />
-              <br />
-              <p>İş Arayanlar ve İş verenler için buluşma noktası</p>
-            </Grid.Column>
+            <Grid.Row>
+              <Grid.Column width={3}>
+                <Header inverted as="h4" content="HAKKIMIZDA" />
+                <List link inverted>
+                  <List.Item as="a">Hakkımızda</List.Item>
+                  <List.Item as="a">İletişim</List.Item>
+                </List>
+              </Grid.Column>
+              <Grid.Column width={3}>
+                <Header inverted as="h4" content="YARDIM" />
+                <List link inverted>
+                  <List.Item as="a">Sorum var</List.Item>
+                  <List.Item as="a">Önerim var</List.Item>
+                  <List.Item as="a">Sık SorulanSorular</List.Item>
+                </List>
+              </Grid.Column>
+              <Grid.Column width={3}>
+                <Header inverted as="h4" content="SOSYAL MEDYA" />
+                <List link inverted>
+                  <List.Item
+                    href="https://www.youtube.com/channel/UCRRk9hQbw1Ix2zH6mvTlQfw"
+                    target="_blank"
+                    as="a"
+                  >
+                    <Icon name="youtube" />
+                    YouTube
+                  </List.Item>
+                  <List.Item
+                    href="https://www.instagram.com/baris_aslan201/"
+                    target="_blank"
+                    as="a"
+                  >
+                    <Icon name="instagram" />
+                    Instagram
+                  </List.Item>
+                  <List.Item
+                    href="https://twitter.com/Berkancelik01"
+                    target="_blank"
+                    as="a"
+                  >
+                    <Icon name="twitter" />
+                    Twitter
+                  </List.Item>
+                </List>
+              </Grid.Column>
+              <Grid.Column width={7}>
+                <Header as="h4" inverted>
+                  Arabul.com
+                </Header>
+                <p>Aradığın işi bulduğun site</p>
+              </Grid.Column>
+            </Grid.Row>
           </Grid>
-
           <Divider inverted section />
-
-          <Image centered size="mini" src={"../assets/hrmslogo.jpg"} circular />
-          <List horizontal inverted divided link size="small">
-            <List.Item as="a" href="#">
-              Site Map
-            </List.Item>
-            <List.Item as="a" href="#">
-              Contact Us
-            </List.Item>
-            <List.Item as="a" href="#">
-              Terms and Conditions
-            </List.Item>
-            <List.Item as="a" href="#">
-              Privacy Policy
-            </List.Item>
-          </List>
+          <Container textAlign="center">
+            <Image src={logo} centered size="tiny" />
+            <List horizontal inverted divided link size="small">
+              <List.Item as="a" href="#">
+                Copyright © Barış Aslan
+              </List.Item>
+              <List.Item as="a" href="#">
+                İletişime Geçin
+              </List.Item>
+              <List.Item as="a" href="#">
+                Şartlar ve Koşullar
+              </List.Item>
+              <List.Item as="a" href="#">
+                Gizlilik Politikası
+              </List.Item>
+            </List>
+          </Container>
         </Container>
       </Segment>
     </div>
