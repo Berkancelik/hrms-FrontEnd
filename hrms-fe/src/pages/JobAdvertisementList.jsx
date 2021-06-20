@@ -14,45 +14,29 @@ export default function JobAdvertisementList() {
 
   return (
     <div>
-      <Header as="h2">
-        İş İlanları
-        <Header.Subheader>
-        Aşağıda sistemimizde olan iş ilanlarını görmektesiniz
-        </Header.Subheader>
+      <Header className="app" as="h2" icon textAlign="center">
+        <WorkIcon></WorkIcon>
+        <Header.Content>İŞ İLANLARI</Header.Content>
       </Header>
-      <Table>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>İş Başlığı</Table.HeaderCell>
-            <Table.HeaderCell>İş Tanımı</Table.HeaderCell>
-            <Table.HeaderCell>Lokasyon</Table.HeaderCell>
-            <Table.HeaderCell>Maaş Skalası</Table.HeaderCell>
-            <Table.HeaderCell>Yayınlanma Tarihi</Table.HeaderCell>
-
-            <Table.HeaderCell>İş Veren Firma</Table.HeaderCell>
-            <Table.HeaderCell></Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-
-        <Table.Body>
-          {jobAdvertisements.map((jobAdvertisements) => (
-            <Table.Row key={jobAdvertisements.id}>
-              <Table.Cell>{jobAdvertisements.jobTitle.jobTitle}</Table.Cell>
-              <Table.Cell>{jobAdvertisements.description}</Table.Cell>
-              <Table.Cell>{jobAdvertisements.city.name}</Table.Cell>
-              <Table.Cell>
-                {jobAdvertisements.salaryMin}-{jobAdvertisements.salaryMax}
-              </Table.Cell>
-              <Table.Cell>{jobAdvertisements.publishedAt}</Table.Cell>
-
-              <Table.Cell>{jobAdvertisements.employer.companyName}</Table.Cell>
-              <Table.Cell> <Button color='grey'>Details</Button></Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-
-        <Table.Footer></Table.Footer>
-      </Table>
+      <Card.Group>
+        {jobAdvertisements.map((jobAdvertisement) => (
+          <Card
+            fluid
+            as={NavLink}
+            to={`/jobAdvertisements/${jobAdvertisement.id}`}
+          >
+            <Card.Content>
+              <BusinessIcon></BusinessIcon>
+              <Card.Header>{jobAdvertisement.jobTitle.jobTitle}</Card.Header>
+              <Card.Meta>{jobAdvertisement.employer.companyName}</Card.Meta>
+              <Card.Description>
+                <Icon name="map marker alternate" />
+                {jobAdvertisement.city.name}
+              </Card.Description>
+            </Card.Content>
+          </Card>
+        ))}
+      </Card.Group>
     </div>
   );
 }
