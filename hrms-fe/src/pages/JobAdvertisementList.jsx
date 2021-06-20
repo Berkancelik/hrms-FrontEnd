@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import JobAdvertisementService from "../services/jobAdvertisementService";
-import { Table, Header ,Button} from "semantic-ui-react";
+import { Card, Header,Icon } from "semantic-ui-react";
 export default function JobAdvertisementList() {
-  
+import BusinessIcon from "@material-ui/icons/Business";
+import WorkIcon from "@material-ui/icons/Work";
   const [jobAdvertisements, setJobAdvertisements] = useState([]);
 
   useEffect(() => {

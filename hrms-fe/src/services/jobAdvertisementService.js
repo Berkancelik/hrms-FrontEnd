@@ -10,6 +10,11 @@ add(values) {
   return axios.post("http://localhost:8080/api/jobadvertisements/add", values);
 }
 
+getByJobAdvertismentId(id){
+  return axios.get("http://localhost:8080/api/jobadvertisements/getbyid?id="+id)
+}
+
+
 
 getAllOpenJobAdvertisementList(){
   return axios.get("http://localhost:8080/api/jobadvertisements/getAllOpenJobAdvertisementList")
