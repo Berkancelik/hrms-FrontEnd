@@ -1,26 +1,26 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Button, Card, Header ,Icon} from "semantic-ui-react";
-import jobAdvertisementService from "../services/JobAdvertisementService";
+import JobAdvertisementService from "../services/jobAdvertisementService";
 import HourglassFullRoundedIcon from "@material-ui/icons/HourglassFullRounded";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import BusinessIcon from "@material-ui/icons/Business";
 
-export default function ConfirmjobA() {
-  let jobAService = new jobAService();
+export default function ConfirmjobAdvertisements() {
+  let jobAdvertisementService = new jobAdvertisementService();
 
-  const [jobAs, setjobAs] = useState([]);
+  const [jobAdvertisements, setjobAdvertisements] = useState([]);
 
   useEffect(() => {
     let jobAdvertisementService = new JobAdvertisementService();
     jobAdvertisementService
       .getByConfirmFalse()
-      .then((result) => setjobAs(result.data.data));
+      .then((result) => setjobAdvertisements(result.data.data));
   }, []);
 
   const confirm = (jobAId) => {
-    jobAService
+    jobAdvertisementService
       .confirm(jobAId)
       .then(toast.success("İLAN ONAYLANDI"),window.location.reload());
   };
@@ -32,21 +32,21 @@ export default function ConfirmjobA() {
         <Header.Content>ONAY BEKLEYEN İŞ İLANLARI</Header.Content>
       </Header>
       <Card.Group>
-        {jobAs.map((jobA) => (
+        {jobAdvertisements.map((jobAdvertisement) => (
           <Card fluid>
             <Card.Content>
               <BusinessIcon></BusinessIcon>
-              <Card.Header>{jobA.jobPosition.positionName}</Card.Header>
-              <Card.Meta>{jobA.employer.companyName}</Card.Meta>
+              <Card.Header>{jobAdvertisement.jobTitle.jobTitle}</Card.Header>
+              <Card.Meta>{jobAdvertisement.employer.companyName}</Card.Meta>
               <Card.Description>
                 <Icon name="map marker alternate" />
-                {jobA.city.name}
+                {jobAdvertisement.city.name}
               </Card.Description>
             </Card.Content>
             <Card.Content extra>
               <div className="ui two buttons">
                 <Button
-                  onClick={() => confirm(jobA.id)}
+                  onClick={() => confirm(jobAdvertisement.id)}
                   inverted
                   color="green"
                 >
@@ -54,7 +54,7 @@ export default function ConfirmjobA() {
                 </Button>
                 <Button
                   as={NavLink}
-                  to={`/examinejobA/${jobA.id}`}
+                  to={`/examinejobAdvertisement/${jobAdvertisement.id}`}
                   inverted
                   color="blue"
                 >
