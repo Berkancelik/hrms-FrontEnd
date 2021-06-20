@@ -32,7 +32,7 @@ export default function HomePage() {
                   Kendine Uygun İşi Hemen Bul!
                 </Header.Content>
               </Header>
-              <Button as={NavLink} to="/jobpostings" color="green" size="huge">
+              <Button as={NavLink} to="/jobadvertisements" color="green" size="huge">
                 İŞ ARA
                 <Icon name="right arrow" />
               </Button>

@@ -7,21 +7,21 @@ import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import BusinessIcon from "@material-ui/icons/Business";
 
-export default function ConfirmjobAdvertisements() {
+export default function ConfirmJobAdvertisements() {
   let jobAdvertisementService = new jobAdvertisementService();
 
-  const [jobAdvertisements, setjobAdvertisements] = useState([]);
+  const [jobAdvertisements, setJobAdvertisements] = useState([]);
 
   useEffect(() => {
     let jobAdvertisementService = new JobAdvertisementService();
     jobAdvertisementService
       .getByConfirmFalse()
-      .then((result) => setjobAdvertisements(result.data.data));
+      .then((result) => setJobAdvertisements(result.data.data));
   }, []);
 
-  const confirm = (jobAId) => {
+  const confirm = (jobAdvertsiementId) => {
     jobAdvertisementService
-      .confirm(jobAId)
+      .confirm(jobAdvertsiementId)
       .then(toast.success("İLAN ONAYLANDI"),window.location.reload());
   };
 

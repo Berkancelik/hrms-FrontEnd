@@ -14,10 +14,10 @@ export default function Navi({signIn}) {
           <Menu.Item as={NavLink} to="/home">
             Ana Sayfa
           </Menu.Item>
-          <Menu.Item as={NavLink} to="/jobpostings">
+          <Menu.Item as={NavLink} to="/jobadvertisements">
             İş İlanları
           </Menu.Item>
-          <Menu.Item as={NavLink} to="/confirmjobposting">
+          <Menu.Item as={NavLink} to="/confirmjobadvertisement">
             Bildirimler
           </Menu.Item>
 
@@ -25,7 +25,7 @@ export default function Navi({signIn}) {
             <Menu.Item>
               <Button
                 as={NavLink}
-                to="/registerjobseeker"
+                to="/registercandidate"
                 inverted
                 color="black"
                 style={{ marginRight: "0.5em" }}
@@ -54,7 +54,7 @@ export default function Navi({signIn}) {
               <Button
                 color="green"
                 as={NavLink}
-                to="/jobpostings/add"
+                to="/jobadvertisements/add"
               >
                 İLAN YAYINLA
               </Button>
