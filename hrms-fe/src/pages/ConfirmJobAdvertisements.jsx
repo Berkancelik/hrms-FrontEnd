@@ -7,8 +7,8 @@ import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import BusinessIcon from "@material-ui/icons/Business";
 
-export default function ConfirmJobAdvertisements() {
-  let jobAdvertisementService = new jobAdvertisementService();
+export default function ConfirmjobAdvertisement() {
+  let jobAdvertisementService = new JobAdvertisementService();
 
   const [jobAdvertisements, setJobAdvertisements] = useState([]);
 
@@ -19,9 +19,9 @@ export default function ConfirmJobAdvertisements() {
       .then((result) => setJobAdvertisements(result.data.data));
   }, []);
 
-  const confirm = (jobAdvertsiementId) => {
+  const confirm = (id) => {
     jobAdvertisementService
-      .confirm(jobAdvertsiementId)
+      .confirm(id)
       .then(toast.success("İLAN ONAYLANDI"),window.location.reload());
   };
 

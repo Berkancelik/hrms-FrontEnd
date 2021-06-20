@@ -1,14 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Image,
-  Message,
-  Segment,
-} from "semantic-ui-react";
+import {Button,Form,Grid,Header,Image,Message,Segment,}
+from "semantic-ui-react";
 import logo from "../images/logo.png";
 
 export default function RegisterEmployer() {
