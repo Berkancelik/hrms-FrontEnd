@@ -88,27 +88,27 @@ export default function AddJobPosting() {
   });
 
   const jobTitleOptions = jobTitles.map((jobTitle) => ({
-    key: jobTitle.jobTitleId,
+    key: jobTitle.id,
     text: jobTitle.jobTitle,
-    value: jobTitle.jobTitleId,
+    value: jobTitle.id,
   }));
 
   const cityOptions = cities.map((city) => ({
-    key: city.cityId,
+    key: city.id,
     text: city.name,
-    value: city.cityId,
+    value: city.id,
   }));
 
   const workTypeOptions = workTypes.map((workType) => ({
-    key: workType.workTypeId,
+    key: workType.id,
     text: workType.workType,
-    value: workType.workTypeId,
+    value: workType.id,
   }));
 
   const workHourOptions = workHours.map((workHour) => ({
-    key: workHour.workHourId,
-    text: workHour.workTime,
-    value: workHour.workHourId,
+    key: workHour.id,
+    text: workHour.workHour,
+    value: workHour.id,
   }));
 
   return (
@@ -124,21 +124,21 @@ export default function AddJobPosting() {
         <Form onSubmit={handleSubmit}>
           <Form.Group widths="equal">
             <Form.Select
-              id="jobTitleId"
+              id="id"
               onChange={(fieldName, data) =>
-                setFieldValue("jobTitleId", data.value)
+                setFieldValue("id", data.value)
               }
               onBlur={onBlur}
-              value={values.jobTitleId}
+              value={values.id}
               options={jobTitleOptions}
               label="Pozisyon"
               placeholder="Pozisyon Seçiniz"
               search
               selection
               error={
-                errors.jobTitleId &&
-                touched.jobTitleId &&
-                errors.jobTitleId
+                errors.id &&
+                touched.id &&
+                errors.id
               }
             ></Form.Select>
             <Form.Select
@@ -198,19 +198,19 @@ export default function AddJobPosting() {
           </Form.Group>
           <Form.Group widths="equal">
             <Form.Select
-              id="workTypeId"
+              id="id"
               onChange={(fieldName, data) =>
-                setFieldValue("workTypeId", data.value)
+                setFieldValue("id", data.value)
               }
               onBlur={onBlur}
-              value={values.workTypeId}
+              value={values.id}
               options={workTypeOptions}
               label="Çalışma Türü"
               placeholder="Çalışma Türü Seçiniz"
               search
               selection
               error={
-                errors.workTypeId && touched.workTypeId && errors.workTypeId
+                errors.id && touched.id && errors.id
               }
             ></Form.Select>
             <Form.Select
@@ -226,7 +226,7 @@ export default function AddJobPosting() {
               search
               selection
               error={
-                errors.workHourId && touched.workHourId && errors.workHourId
+                errors.id && touched.id && errors.id
               }
             ></Form.Select>
           </Form.Group>

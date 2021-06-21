@@ -5,10 +5,10 @@ import { NavLink } from "react-router-dom";
 export default function Navi({signIn}) {
   return (
     <div>
-      <Menu color="red" inverted fixed="top" size="large">
+      <Menu color="blue" inverted fixed="top" size="large">
         <Container className="app">
           <Menu.Item>
-            <Image src="https://www.ketmedya.com/wp-content/uploads/2021/01/ankara-ozel-yazilim.png"size="tiny" />
+            <Image src="https://techyhood.com/wp-content/uploads/2012/11/HRMS.png"size="tiny" />
           </Menu.Item>
           <Menu.Item as={NavLink} to="/home">
             Ana Sayfa
