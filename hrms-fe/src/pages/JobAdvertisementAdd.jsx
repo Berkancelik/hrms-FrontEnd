@@ -7,10 +7,10 @@ import WorkHourService from "../services/workHourService";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import JobAdvertisementService from "../services/jobAdvertisementService";
-import { Form, Button, Card, Segment, Header, Image } from "semantic-ui-react";
+import { Form, Button, Segment, Header, Image } from "semantic-ui-react";
 import { toast } from "react-toastify";
 
-export default function AddJobPosting() {
+export default function JobAdvertisementAdd() {
   let jobAdvertisementService = new JobAdvertisementService();
 
   const [jobTitles, setJobTitles] = useState([]);

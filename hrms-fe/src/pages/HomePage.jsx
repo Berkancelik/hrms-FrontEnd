@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Button, Header, Icon, Grid ,Image} from "semantic-ui-react";
+import { Button, Header, Icon, Grid } from "semantic-ui-react";
 
 export default function HomePage() {
   return (
