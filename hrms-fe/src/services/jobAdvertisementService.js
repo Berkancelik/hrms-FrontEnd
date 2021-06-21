@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export default class JobAdvertisementService{
-  getByConfirmAndActiveTrue(){
+    getAllOpenJobAdvertisementList(){
     return axios.get("http://localhost:8080/api/jobadvertisements/getbyisconfirmandisactive?isActive=true&isConfirm=true")
 }
 
@@ -9,7 +9,7 @@ getByConfirmFalse(){
     return axios.get("http://localhost:8080/api/jobadvertisements/getbyisconfirm?isConfirm=false")
 }
 
-getByJobPostingIdAndConfirmFalse(id){
+getByJobAdvertisementIdAndConfirmFalse(id){
     return axios.get("http://localhost:8080/api/jobadvertisements/getbyisconfirm?isConfirm=false&id="+id)
 }
 

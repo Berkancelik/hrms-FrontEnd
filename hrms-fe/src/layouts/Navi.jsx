@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, Container, Dropdown, Menu, Image } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
-import logo from "../images/logo.png";
 
 export default function Navi({signIn}) {
   return (
@@ -9,7 +8,7 @@ export default function Navi({signIn}) {
       <Menu color="red" inverted fixed="top" size="large">
         <Container className="app">
           <Menu.Item>
-            <Image src={logo} size="tiny" />
+            <Image src="https://www.ketmedya.com/wp-content/uploads/2021/01/ankara-ozel-yazilim.png"size="tiny" />
           </Menu.Item>
           <Menu.Item as={NavLink} to="/home">
             Ana Sayfa

@@ -1,7 +1,31 @@
-.App {
-    text-align: center;
-  }
-  
-  .ui.main.container{
-    margin-top: 6em;
-  }
+.app {
+  text-align: left;
+  font-family: "Montserrat", sans-serif;
+}
+
+.ui.main.container {
+  margin-top: 6em;
+  margin-bottom: 5em;
+}
+
+.form {
+  width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card {
+  text-align: left;
+  width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.homeImage {
+  background-image: url("https://techyhood.com/wp-content/uploads/2012/11/HRMS.png");
+  width: 1600px;
+  height: 500px;
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: top left;
+}

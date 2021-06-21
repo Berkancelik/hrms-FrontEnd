@@ -9,7 +9,6 @@ import * as Yup from "yup";
 import JobAdvertisementService from "../services/jobAdvertisementService";
 import { Form, Button, Card, Segment, Header, Image } from "semantic-ui-react";
 import { toast } from "react-toastify";
-import logo from "../images/logo-kırmızı.png";
 
 export default function AddJobPosting() {
   let jobAdvertisementService = new JobAdvertisementService();
@@ -79,7 +78,7 @@ export default function AddJobPosting() {
     onSubmit: (values) => {
       values.employerId = 10;
       console.log(values);
-      jobPostingService
+      jobAdvertisementService
         .add(values)
         .then(
           (result) => console.log(result.data.data),
@@ -116,7 +115,7 @@ export default function AddJobPosting() {
     <div className="form">
       <Header as="h2" inverted color="red" textAlign="center">
         <Header.Content>
-          <Image src={logo} size="tiny" />
+          <Image src="https://techyhood.com/wp-content/uploads/2012/11/HRMS.png"size="tiny" />
         </Header.Content>
         <Header.Content>İŞ İLANI YAYINLAMA</Header.Content>
       </Header>

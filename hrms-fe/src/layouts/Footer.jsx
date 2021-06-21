@@ -9,7 +9,6 @@ import {
   Divider,
   Image,
 } from "semantic-ui-react";
-import logo from "../images/logo.png";
 
 export default function Footer() {
   return (
@@ -45,7 +44,7 @@ export default function Footer() {
                     YouTube
                   </List.Item>
                   <List.Item
-                    href="https://www.instagram.com/baris_aslan201/"
+                    href="https://www.instagram.com/berkancelik0/"
                     target="_blank"
                     as="a"
                   >
@@ -72,10 +71,10 @@ export default function Footer() {
           </Grid>
           <Divider inverted section />
           <Container textAlign="center">
-            <Image src={logo} centered size="tiny" />
+            <Image src="https://techyhood.com/wp-content/uploads/2012/11/HRMS.png" centered size="tiny" />
             <List horizontal inverted divided link size="small">
               <List.Item as="a" href="#">
-                Copyright © Barış Aslan
+                Copyright © Berkan Çelik
               </List.Item>
               <List.Item as="a" href="#">
                 İletişime Geçin

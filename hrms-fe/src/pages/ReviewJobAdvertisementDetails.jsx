@@ -1,85 +1,58 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import JobAdvertisementService from "../services/jobAdvertisementService";
-import { Table, Message,Image, Button, Icon,Segment } from "semantic-ui-react";
+import { Button, Table, Header, Icon } from "semantic-ui-react";
+import BusinessIcon from "@material-ui/icons/Business";
+import DetailsIcon from "@material-ui/icons/Details";
+import { toast } from "react-toastify";
 
+export default function ReviewJobAdvertisementDetails() {
+  let jobAdvertisementService = new JobAdvertisementService();
 
-export default function JobAdvertisementsDetail() {
-  let { jobAvertisementId } = useParams();
+  let { id } = useParams();
 
-  const [jobAdvertisements, setJobAdvertisements] = useState([]);
+  const [jobAdvertisements, setjobAdvertisements] = useState([]);
+
+  const history = useHistory();
 
   useEffect(() => {
     let jobAdvertisementService = new JobAdvertisementService();
     jobAdvertisementService
-      .getByJobAdvertismentId(jobAvertisementId)
-      .then((result) => setJobAdvertisements([result.data.data]));
+      .getByjobAdvertisementIdAndConfirmFalse(id)
+      .then((result) => setjobAdvertisements([result.data.data]));
   }, []);
+
+  const confirm = (id) => {
+    jobAdvertisementService
+      .confirm(id)
+      .then(toast.success("İLAN ONAYLANDI"),history.push("/confirmjobAdvertisement"));
+  };
 
   return (
     <div className="card">
+      <Header as="h2" icon textAlign="center">
+        <Header.Content>İŞ İLANI DETAYI</Header.Content>
+        <DetailsIcon></DetailsIcon>
+      </Header>
       {jobAdvertisements.map((jobAdvertisement) => (
         <div>
-          <Segment color="green" textAlign="center">
-            İLAN DETAYI
-          </Segment>
           <Table color="red" celled striped>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell colSpan="2">
-                  {!jobAdvertisement.employer.image ? (
-                    <Image
-                      circular
-                      floated="left"
-                      size="mini"
-                      src="https://avatars.githubusercontent.com/u/79005929?v=4"
-                    ></Image>
-                  ) : (
-                    <Image
-                      circular
-                      floated="left"
-                      size="mini"
-                      src={jobAdvertisement.employer.image.imageUrl}
-                    ></Image>
-                  )}{" "}
-                  ŞİRKET
-                  <br />
-                  BİLGİLERİ
-                </Table.HeaderCell>
+                <Table.HeaderCell colSpan="2">ŞİRKET</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
               <Table.Row>
                 <Table.Cell>
-                  <Icon name="warehouse" /> Şirket
+                  <BusinessIcon /> Şirket
                 </Table.Cell>
                 <Table.Cell>{jobAdvertisement.employer.companyName}</Table.Cell>
               </Table.Row>
-              <Table.Row>
-                <Table.Cell>
-                  <Icon name="world" />
-                  Web Sitesi
-                </Table.Cell>
-                <Table.Cell>
-                  <a
-                    target="_blank"
-                    href={"https://" + jobAdvertisement.employer.webAddress}
-                  >
-                    {jobAdvertisement.employer.webAddress}
-                  </a>
-                </Table.Cell>
-              </Table.Row>
+
               <Table.Row>
                 <Table.Cell collapsing>
-                  <Icon name="phone" />
-                  Telefon Numarası
-                </Table.Cell>
-                <Table.Cell>{jobAdvertisement.employer.phoneNumber}</Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>
-                  <Icon name="map marker alternate" />
-                  Şehir
+                  <Icon name="map marker alternate" /> Şehir
                 </Table.Cell>
                 <Table.Cell>{jobAdvertisement.city.name}</Table.Cell>
               </Table.Row>
@@ -100,9 +73,10 @@ export default function JobAdvertisementsDetail() {
                 <Table.Cell>{jobAdvertisement.jobTitle.jobTitle}</Table.Cell>
               </Table.Row>
               <Table.Row>
-                <Table.Cell collapsing>Açık Pozisyon Sayısı</Table.Cell>
-                <Table.Cell>{jobAdvertisement.opetTitleCount}</Table.Cell>
+                <Table.Cell>Açık Pozisyon Sayısı</Table.Cell>
+                <Table.Cell>{jobAdvertisement.openTitleCount}</Table.Cell>
               </Table.Row>
+
               <Table.Row>
                 <Table.Cell>Çalışma Türü</Table.Cell>
                 <Table.Cell>{jobAdvertisement.workType.workType}</Table.Cell>
@@ -125,9 +99,9 @@ export default function JobAdvertisementsDetail() {
             <Table.Body>
               <Table.Row>
                 <Table.Cell>Minimum Maaş Skalası</Table.Cell>
-                <Table.Cell positive>{jobAdvertisement.minSalary} TL</Table.Cell>
+                <Table.Cell>{jobAdvertisement.minSalary} TL</Table.Cell>
                 <Table.Cell>Maksimum Maaş Skalası</Table.Cell>
-                <Table.Cell positive>{jobAdvertisement.maxSalary} TL</Table.Cell>
+                <Table.Cell>{jobAdvertisement.maxSalary} TL</Table.Cell>
               </Table.Row>
             </Table.Body>
           </Table>
@@ -157,15 +131,22 @@ export default function JobAdvertisementsDetail() {
             </Table.Header>
             <Table.Body>
               <Table.Row>
-                <Table.Cell negative>{jobAdvertisement.deadline}</Table.Cell>
+                <Table.Cell>{jobAdvertisement.deadline}</Table.Cell>
               </Table.Row>
             </Table.Body>
           </Table>
+          <Button
+            onClick={() => confirm(jobAdvertisement.id)}
+            style={{ marginTop: "5pt" }}
+            floated="right"
+            inverted
+            color="green"
+            size="medium"
+          >
+            ONAYLA
+          </Button>
         </div>
       ))}
-      <Button style={{ marginTop: "5pt" }} floated="right" color="green">
-        BAŞVUR
-      </Button>
     </div>
   );
 }

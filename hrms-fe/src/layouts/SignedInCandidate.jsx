@@ -1,15 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Container, Dropdown, Menu, Image, Icon,Divider } from "semantic-ui-react";
-import logo from "../images/logo.png";
 
-export default function SignedInJobseeker({ signOut }) {
+export default function SignedInCandidate({ signOut }) {
   return (
     <div>
       <Menu color="red" inverted fixed="top" size="large">
         <Container className="app">
           <Menu.Item>
-            <Image src={logo} size="tiny" />
+            <Image src="https://www.ketmedya.com/wp-content/uploads/2021/01/ankara-ozel-yazilim.png" size="tiny" />
           </Menu.Item>
           <Menu.Item as={NavLink} to="/jobadvertisements">
             İş İlanları

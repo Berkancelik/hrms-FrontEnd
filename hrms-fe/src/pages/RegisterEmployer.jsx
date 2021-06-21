@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import {Button,Form,Grid,Header,Image,Message,Segment,}
 from "semantic-ui-react";
-import logo from "../images/logo.png";
 
 export default function RegisterEmployer() {
   return (
@@ -15,7 +14,7 @@ export default function RegisterEmployer() {
         <Grid.Column style={{ maxWidth: 450 }}>
           <Header as="h2" inverted color="red" textAlign="center">
             <Header.Content>
-              <Image src={logo} size="tiny" />
+              <Image src="https://www.ketmedya.com/wp-content/uploads/2021/01/ankara-ozel-yazilim.png"size="tiny" />
               <Header.Content>İşveren Yeni Üyelik Oluştur</Header.Content>
             </Header.Content>
           </Header>

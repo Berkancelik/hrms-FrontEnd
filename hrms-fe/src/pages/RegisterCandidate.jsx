@@ -2,8 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import {Button,Form,Grid,Header,Image,Message,Segment,} 
 from "semantic-ui-react";
-import logo from "../images/logo.png";
-import register from "../images/register.png";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function RegisterCandidate({signIn}) {
@@ -16,12 +14,12 @@ export default function RegisterCandidate({signIn}) {
       >
         <Grid.Row>
           <Grid.Column width={6}>
-            <Image src={register} size="huge"></Image>
+            <Image src="https://img.freepik.com/free-vector/online-registration-concept-with-flat-design_23-2147976705.jpg?size=338&ext=jpg" size="huge"></Image>
           </Grid.Column>
           <Grid.Column width={10} style={{ maxWidth: 450 }}>
             <Header as="h2" inverted color="red" textAlign="center">
               <Header.Content>
-                <Image src={logo} size="tiny" />
+                <Image src="https://www.ketmedya.com/wp-content/uploads/2021/01/ankara-ozel-yazilim.png" size="tiny" />
                 <Header.Content>Yeni Üyelik Oluştur</Header.Content>
               </Header.Content>
             </Header>

@@ -9,8 +9,6 @@ import {
   Message,
   Segment
 } from "semantic-ui-react";
-import logo from "../images/logo.png";
-import login from "../images/login.jpg";
 import { useState } from "react";
 
 export default function LoginCandidate({signIn}) {
@@ -19,12 +17,12 @@ export default function LoginCandidate({signIn}) {
       <Grid textAlign="center" verticalAlign="middle">
         <Grid.Row>
           <Grid.Column width={6}>
-            <Image src={login}></Image>
+            <Image src="https://ambalaj.org.tr/files/images/layout/login.png"></Image>
           </Grid.Column>
           <Grid.Column width={10} style={{ maxWidth: 450 }}>
             <Header as="h2" inverted color="red" textAlign="center">
               <Header.Content>
-                <Image src={logo} size="tiny" />
+                <Image src="https://techyhood.com/wp-content/uploads/2012/11/HRMS.png"size="tiny" />
                 <Header.Content>Giriş Yap</Header.Content>
               </Header.Content>
             </Header>

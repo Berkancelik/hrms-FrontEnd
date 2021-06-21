@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import JobAdvertisementService from "../services/jobAdvertisementService";
-import { Card, Header,Icon } from "semantic-ui-react";
-export default function JobAdvertisementList() {
+import { Card, Header, Icon } from "semantic-ui-react";
 import BusinessIcon from "@material-ui/icons/Business";
 import WorkIcon from "@material-ui/icons/Work";
+import { NavLink } from "react-router-dom";
+
+export default function JobAdvertisementList() {
+
   const [jobAdvertisements, setJobAdvertisements] = useState([]);
 
   useEffect(() => {
