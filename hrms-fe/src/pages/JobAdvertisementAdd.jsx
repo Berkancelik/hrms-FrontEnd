@@ -55,8 +55,8 @@ export default function JobAdvertisementAdd() {
       jobTitleId: "",
       cityId: "",
       openTitleCount: "",
-      minSalary: "",
-      maxSalary: "",
+      salaryMin: "",
+      salaryMax: "",
       workTypeId: "",
       workHourId: "",
       deadline: "",
@@ -68,8 +68,8 @@ export default function JobAdvertisementAdd() {
       openTitleCount: Yup.number().required(
         "Açık pozisyon sayısı giriniz!"
       ),
-      minSalary: Yup.number().required("Minimum maaş skalası giriniz!"),
-      maxSalary: Yup.number().required("Maksimum maaş skalası giriniz!"),
+      salaryMin: Yup.number().required("Minimum maaş skalası giriniz!"),
+      salaryMax: Yup.number().required("Maksimum maaş skalası giriniz!"),
       workTypeId: Yup.string().required("Bir çalışma türü seçiniz!"),
       workHourId: Yup.string().required("Bir çalışma zamanı seçiniz!"),
       deadline: Yup.date().required("Bitiş tarihini giriniz!"),
@@ -174,26 +174,26 @@ export default function JobAdvertisementAdd() {
           </Form.Group>
           <Form.Group widths="equal">
             <Form.Input
-              id="minSalary"
+              id="salaryMin"
               type="number"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.minSalary}
+              value={values.salaryMin}
               fluid
               label="Minimum Maaş Skalası"
               placeholder="Minimum Maaş Skalası"
-              error={errors.minSalary && touched.minSalary && errors.minSalary}
+              error={errors.salaryMin && touched.salaryMin && errors.salaryMin}
             ></Form.Input>
             <Form.Input
-              id="maxSalary"
+              id="salaryMax"
               type="number"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.maxSalary}
+              value={values.salaryMax}
               fluid
               label="Maksimum Maaş Skalası"
               placeholder="Maksimum Maaş Skalası"
-              error={errors.maxSalary && touched.maxSalary && errors.maxSalary}
+              error={errors.salaryMax && touched.salaryMax && errors.salaryMax}
             ></Form.Input>
           </Form.Group>
           <Form.Group widths="equal">

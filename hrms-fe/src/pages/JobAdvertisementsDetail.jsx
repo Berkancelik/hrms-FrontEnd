@@ -27,21 +27,7 @@ export default function JobAdvertisementsDetail() {
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell colSpan="2">
-                  {!jobAdvertisement.employer.image ? (
-                    <Image
-                      circular
-                      floated="left"
-                      size="mini"
-                      src="https://avatars.githubusercontent.com/u/79005929?v=4"
-                    ></Image>
-                  ) : (
-                    <Image
-                      circular
-                      floated="left"
-                      size="mini"
-                      src={jobAdvertisement.employer.image.imageUrl}
-                    ></Image>
-                  )}{" "}
+                 
                   ŞİRKET
                   <br />
                   BİLGİLERİ

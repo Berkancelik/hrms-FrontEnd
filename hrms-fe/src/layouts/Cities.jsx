@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CityService from "../services/cityService";
-import { Dropdown } from "semantic-ui-react";
+import { Dropdown} from "semantic-ui-react";
 
 export default function Cities() {
   const [cities, setCities] = useState([]);

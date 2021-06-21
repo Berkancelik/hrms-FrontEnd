@@ -8,7 +8,7 @@ export default function Navi({signIn}) {
       <Menu color="blue" inverted fixed="top" size="large">
         <Container className="app">
           <Menu.Item>
-            <Image src="https://techyhood.com/wp-content/uploads/2012/11/HRMS.png"size="tiny" />
+            <Image src="https://techyhood.com/wp-content/uploads/2012/11/HRMS.png" size="tiny" />
           </Menu.Item>
           <Menu.Item as={NavLink} to="/home">
             Ana Sayfa
