@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import JobAdvertisementService from "../services/jobAdvertisementService";
-import { Table, Message,Image, Button, Icon,Segment } from "semantic-ui-react";
+import { Table, Image, Button, Icon,Segment } from "semantic-ui-react";
 
 
 export default function JobAdvertisementsDetail() {
-  let { jobAvertisementId } = useParams();
+  let { id } = useParams();
 
   const [jobAdvertisements, setJobAdvertisements] = useState([]);
 
   useEffect(() => {
     let jobAdvertisementService = new JobAdvertisementService();
     jobAdvertisementService
-      .getByJobAdvertismentId(jobAvertisementId)
+      .getById(id)
       .then((result) => setJobAdvertisements([result.data.data]));
   }, []);
 
@@ -124,10 +124,10 @@ export default function JobAdvertisementsDetail() {
             </Table.Header>
             <Table.Body>
               <Table.Row>
-                <Table.Cell>Minimum Maaş Skalası</Table.Cell>
-                <Table.Cell positive>{jobAdvertisement.minSalary} TL</Table.Cell>
-                <Table.Cell>Maksimum Maaş Skalası</Table.Cell>
-                <Table.Cell positive>{jobAdvertisement.maxSalary} TL</Table.Cell>
+                <Table.Cell>Minimum Maaş </Table.Cell>
+                <Table.Cell positive>{jobAdvertisement.salaryMin} TL</Table.Cell>
+                <Table.Cell>Maksimum Maaş </Table.Cell>
+                <Table.Cell positive>{jobAdvertisement.salaryMax} TL</Table.Cell>
               </Table.Row>
             </Table.Body>
           </Table>
