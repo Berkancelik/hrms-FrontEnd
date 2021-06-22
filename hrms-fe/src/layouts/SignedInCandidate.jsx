@@ -5,7 +5,7 @@ import { Container, Dropdown, Menu, Image, Icon,Divider } from "semantic-ui-reac
 export default function SignedInCandidate({ signOut }) {
   return (
     <div>
-      <Menu color="red" inverted fixed="top" size="large">
+      <Menu color="blue" inverted fixed="top" size="large">
         <Container className="app">
           <Menu.Item>
             <Image src="https://www.ketmedya.com/wp-content/uploads/2021/01/ankara-ozel-yazilim.png" size="tiny" />
