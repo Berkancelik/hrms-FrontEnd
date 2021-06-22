@@ -19,7 +19,6 @@ export default function RegisterCandidate({signIn}) {
           <Grid.Column width={10} style={{ maxWidth: 450 }}>
             <Header as="h2" inverted color="red" textAlign="center">
               <Header.Content>
-                <Image src="https://www.ketmedya.com/wp-content/uploads/2021/01/ankara-ozel-yazilim.png" size="tiny" />
                 <Header.Content>Yeni Üyelik Oluştur</Header.Content>
               </Header.Content>
             </Header>
