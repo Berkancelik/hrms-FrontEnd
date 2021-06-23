@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import JobTitleService from "../services/jobTitleService";
 import CityService from "../services/cityService";
-import WorkHourService from "../services/workHourService";
-import {Button, Dropdown,Input,TextArea,Card,Form, Grid,} from "semantic-ui-react";
 import WorkTypeService from "../services/workTypeService";
-import JobAdvertisementService from "../services/jobAdvertisementService";
-import * as Yup from "yup";
+import WorkHourService from "../services/workHourService";
 import { useFormik } from "formik";
+import * as Yup from "yup";
+import JobAdvertisementService from "../services/jobAdvertisementService";
+import {Button,Input,TextArea,Card,Form, Grid,Dropdown} from "semantic-ui-react";
+import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
+
 
 export default function JobAdvertisementAdd() {
   let jobAdvertisementService = new JobAdvertisementService();
@@ -15,14 +18,14 @@ export default function JobAdvertisementAdd() {
     deadline: Yup.date()
       .nullable()
       .required("Bu alanın doldurulması zorunludur"),
-    description: Yup.string().required("Açıklama alanı boş bırakılamaz!"),
-    jobTitleId: Yup.string().required("Pozisyon boş bırakılamaz!"),
-    workHourId: Yup.string().required("Çalışma zamanı boş bırakılanaz!"),
-    workTypeId: Yup.string().required("Çalışma tipi boş bırakılamaz!"),
+    description: Yup.string().required("Bu alanın doldurulması zorunludur"),
+    jobTitleId: Yup.string().required("Bu alanın doldurulması zorunludur"),
+    workHourId: Yup.string().required("Bu alanın doldurulması zorunludur"),
+    workTypeId: Yup.string().required("Bu alanın doldurulması zorunludur"),
     openTitleCount: Yup.string()
       .required("Posizyon sayısı zorunludur")
       .min(1, "Posizyon kotası 1 den küçük olamaz"),
-    cityId: Yup.string().required("Şehir alanı boş bırakılamaz"),
+    cityId: Yup.string().required("Bu alanın doldurulması zorunludur"),
     salaryMin: Yup.number()
       .min(0, "0 Dan az olamaz")
       .required("Bu alan zorunludur"),
@@ -47,7 +50,7 @@ export default function JobAdvertisementAdd() {
     },
     validationSchema: AddJobAdvSchema,
     onSubmit: (values) => {
-      values.employerId = 6;
+      values.employerId = 25;
       jobAdvertisementService
         .add(values)
         .then((result) => console.log(result.data.data));
