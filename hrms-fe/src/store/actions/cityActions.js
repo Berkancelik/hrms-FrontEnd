@@ -25,7 +25,7 @@ export const _fetchCities = () => {
     return async dispatch => {
         let cityService = new CityService();
         dispatch(fetchCitiesPending());
-        await cityService.getCities().then(response => {
+        await cityService.getAll().then(response => {
             dispatch(fetchCitiesSuccess(response.data.data))
         }).catch(error => {
             dispatch(fetchCitiesError(error.message))
