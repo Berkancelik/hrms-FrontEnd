@@ -35,60 +35,9 @@ function App() {
   }
   return (
     <div className="app">
-      <ToastContainer position="top-right" />
-      <Container className="main">
-        {isAuthenticated ? (
-          <SignedInCandidate signOut={handleSignOut}></SignedInCandidate>
-        ) : (
-          <Navi></Navi>
-        )}
-        <Switch>
-          <Route exact path="/" component={HomePage}></Route>
-          <Route exact path="/home" component={HomePage}></Route>
-          <Route
-            exact
-            path="/registercandidate"
-            component={() => (
-              <RegisterCandidate signIn={handleSignIn}></RegisterCandidate>
-            )}
-          ></Route>
-          <Route
-            exact
-            path="/logincandidate"
-            component={() => (
-              <LoginCandidate signIn={handleSignIn}></LoginCandidate>
-            )}
-          ></Route>
-          <Route
-            exact
-            path="/registeremployer"
-            component={RegisterEmployer}
-          ></Route>
-          <Route exact path="/loginemployer" component={LoginEmployer}></Route>
-          <Route exact path="/jobAdvertisements" component={Dashboard}></Route>
-          <Route
-            exact
-            path="/jobAdvertisements/add"
-            component={JobAdvertisementAdd}
-          ></Route>
-          <Route
-            exact
-            path="/confirmjobadvertisements"
-            component={ConfirmJobAdvertisements}
-          ></Route>
-          <Route
-            exact
-            path="/jobadvertisements/:id"
-            component={JobAdvertisementsDetail}
-          ></Route>
-          <Route
-            exact
-            path="/reviewjobadvertisementdetails/:id"
-            component={ReviewJobAdvertisementDetails}
-          ></Route>
-        </Switch>
-      </Container>
-      <Footer></Footer>
+    <Navi />
+      <Dashboard />
+      <Footer/>
     </div>
   );
 }
