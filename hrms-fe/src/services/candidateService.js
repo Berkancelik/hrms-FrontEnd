@@ -9,4 +9,10 @@ export default class CandidateService{
     {
         return axios.get("http://localhost:8080/api/candidates/getbyid?id="+id)
     }
+
+    getByCvId(id)
+    {
+        return axios.get("http://localhost:8080/api/candidates/getcandidatecvbyid?id="+id)
+    }
+
 }
