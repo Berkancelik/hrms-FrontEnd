@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import JobAdvertisementService from "../services/jobAdvertisementService";
+import JobAdvertisementService from "../../services/jobAdvertisementService";
 import { Table, Button, Icon,Segment } from "semantic-ui-react";
 
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import JobAdvertisementService from "../services/jobAdvertisementService";
+import JobAdvertisementService from "../../services/jobAdvertisementService";
 import { Card, Header, Icon } from "semantic-ui-react";
 import BusinessIcon from "@material-ui/icons/Business";
 import WorkIcon from "@material-ui/icons/Work";

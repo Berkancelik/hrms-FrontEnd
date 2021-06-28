@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Button, Card, Header ,Icon} from "semantic-ui-react";
-import JobAdvertisementService from "../services/jobAdvertisementService";
+import JobAdvertisementService from "../../services/jobAdvertisementService";
 import HourglassFullRoundedIcon from "@material-ui/icons/HourglassFullRounded";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
