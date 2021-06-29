@@ -1,18 +1,15 @@
-  
-import React from 'react'
-import { NavLink } from "react-router-dom";
-import {
-  Button,Form, Grid,Header,Image,Message,Segment,} from "semantic-ui-react";
+import React from "react";
+import {Button,Form,Grid,Header,Segment,} 
+from "semantic-ui-react";
 
-export default function LoginEmployer() {
-    return (
-        <div>
-            <Grid textAlign="center" verticalAlign="middle">
+export default function LoginEmployee({signIn}) {
+  return (
+    <div>
+      <Grid textAlign="center" verticalAlign="middle">
         <Grid.Column style={{ maxWidth: 450 }}>
           <Header as="h2" inverted color="red" textAlign="center">
             <Header.Content>
-            <Image src="https://www.ketmedya.com/wp-content/uploads/2021/01/ankara-ozel-yazilim.png" size="tiny" />
-              <Header.Content>İşveren Giriş Yap</Header.Content>
+              <Header.Content>Sistem Personeli Girişi</Header.Content>
             </Header.Content>
           </Header>
           <Form size="large">
@@ -32,19 +29,13 @@ export default function LoginEmployer() {
                 placeholder="Şifre"
                 type="password"
               />
-              <Button primary fluid size="large">
-                İŞVEREN GİRİŞİ YAP
+              <Button onClick={signIn} primary fluid size="large">
+                SİSTEM PERSONELİ GİRİŞİ YAP
               </Button>
             </Segment>
           </Form>
-          <Message>
-            Hesabınız yok mu?{" "}
-            <Button as={NavLink} to="/registeremployer" color="green">
-              KAYIT OL
-            </Button>
-          </Message>
         </Grid.Column>
       </Grid>
-        </div>
-    )
+    </div>
+  );
 }
