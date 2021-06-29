@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Container, Dropdown, Menu, Image } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 
-export default function Navi({signIn}) {
+export default function Navi() {
   return (
     <div>
       <Menu color="blue" inverted fixed="top" size="large">
