@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form } from "formik";
 import { Button, Segment, FormGroup, Message } from "semantic-ui-react";
 import { toast } from "react-toastify";
-import ResumeService from "../../../services/resumeService";
+import ResumeService from "../../../../services/resumeService";
 
 export default function AddResume({ id }) {
   let resumeService = new ResumeService();

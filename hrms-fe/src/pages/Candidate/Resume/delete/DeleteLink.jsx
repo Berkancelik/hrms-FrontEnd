@@ -1,7 +1,7 @@
 import React from "react";
 import { toast } from "react-toastify";
 import { Message,Button } from "semantic-ui-react";
-import LinkService from "../../../services/linkService";
+import LinkService from "../../../../services/linkService";
 
 export default function DeleteLink({id}) {
   let linkService = new LinkService();
