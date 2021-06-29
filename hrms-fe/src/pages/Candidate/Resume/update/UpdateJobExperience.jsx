@@ -1,7 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import WorkExperienceService from "../../../../services/workExperienceService";
 import { useState } from "react";
 import { useEffect } from "react";
 import HrmsInput from "../../../../utilities/customFormControls/HrmsInput";
@@ -9,9 +8,10 @@ import HrmsDropdown from "../../../../utilities/customFormControls/HrmsDropdown"
 import { FormGroup, Button, Segment } from "semantic-ui-react";
 import JobTitleService from "../../../../services/jobTitleService";
 import { toast } from "react-toastify";
+import JobExperienceService from "../../../../services/jobExperienceService";
 
 export default function UpdateJobExperience({id,companyName,jobTitleId,startedDate,endedDate}) {
-  let workExperienceService = new WorkExperienceService();
+  let jobExperienceService = new JobExperienceService();
 
   const [jobTitles, setJobTitles] = useState([]);
 
@@ -31,7 +31,7 @@ export default function UpdateJobExperience({id,companyName,jobTitleId,startedDa
   const onSubmit = (values) => {
     values.id = id
     console.log(values);
-    workExperienceService
+    jobExperienceService
       .update(values)
       .then(
         (result) => console.log(result.data.data),

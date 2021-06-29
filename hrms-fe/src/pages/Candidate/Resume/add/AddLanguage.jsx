@@ -3,7 +3,7 @@ import { Formik, Form } from "formik";
 import { FormGroup, Button, Segment } from "semantic-ui-react";
 import { toast } from "react-toastify";
 import HrmsInput from "../../../../utilities/customFormControls/HrmsInput";
-import LanguageService from "../../../../services/languagService";
+import LanguageService from "../../../../services/languageService";
 
 export default function AddLanguage({ resumeId }) {
   let languagService = new LanguageService();

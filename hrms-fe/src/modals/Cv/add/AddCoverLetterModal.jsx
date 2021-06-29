@@ -1,5 +1,5 @@
 import React from "react";
-import AddCoverLetter from "../../../pages/Candidate/CV/add/AddCoverLetter";
+import AddCoverLetter from "../../../pages/Candidate/Resume/add/AddCoverLetter";
 import { Modal, Button } from "semantic-ui-react";
 import { useState } from "react";
 

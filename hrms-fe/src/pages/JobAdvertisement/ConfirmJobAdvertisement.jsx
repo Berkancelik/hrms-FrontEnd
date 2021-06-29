@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import BusinessIcon from "@material-ui/icons/Business";
 
-export default function ConfirmjobAdvertisement() {
+export default function ConfirmJobAdvertisement() {
   let jobAdvertisementService = new JobAdvertisementService();
 
   const [jobAdvertisements, setJobAdvertisements] = useState([]);

@@ -30,7 +30,7 @@ export default function AddResume({ id }) {
             <FormGroup widths="equal">
               <Message size="huge" positive>
                 Yeni bir özgeçmiş oluşturmak mı istiyorsun?
-                Oluşturulan özgeçmişi daha sonra düzeltilebilir.
+                Oluşturulan özgeçmişi daha sonra düzeltilebilirsin.
               </Message>
             </FormGroup>
             <Button style={{ marginLeft: "313pt" }} type="submit" color="green">

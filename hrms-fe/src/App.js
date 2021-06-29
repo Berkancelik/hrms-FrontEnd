@@ -4,10 +4,6 @@ import Dashboard from "./layouts/Dashboard";
 import Navi from "./layouts/Navi";
 import { Container } from "semantic-ui-react";
 import { Route } from "react-router";
-import JobAdvertisementAdd from "../pages/JobAdvertisement/JobAdvertisementAdd";
-import ConfirmJobAdvertisement from "../pages/JobAdvertisement/ConfirmJobAdvertisement";
-import JobAdvertisementsDetail from "../pages/JobAdvertisement/JobAdvertisementsDetail";
-import ReviewJobAdvertisementDetails from "./pages/ReviewJobAdvertisementDetails";
 import Footer from "./layouts/Footer";
 import HomePage from "./pages/HomePage";
 import { Switch, useHistory } from "react-router-dom";
@@ -24,6 +20,11 @@ import Profilecandidate from "./pages/Candidate/ProfileCandidate";
 import SettingsCandidate from "./pages/Candidate/SettingsCandidate";
 import ProfileEmployee from "./pages/Employee/ProfileEmployee";
 import FavoriteList from "./pages/Candidate/Favorite/FavoriteList";
+import ConfirmJobAdvertisement from "./pages/JobAdvertisement/ConfirmJobAdvertisement";
+import JobAdvertisementDetail from "./pages/JobAdvertisement/JobAdvertisementDetail";
+import ReviewJobAdvertisementDetails from "./pages/ReviewJobAdvertisementDetails";
+import JobAdvertisementAdd from "./pages/JobAdvertisement/JobAdvertisementAdd";
+import ResumeDetail from "./pages/Candidate/Resume/ResumeDetalil";
 
 function App() {
   const [isAuthenticatedCandidate, setIsAuthenticatedCandidate] =
@@ -134,7 +135,7 @@ function App() {
           <Route
             exact
             path="/jobadvertisement/:id"
-            component={JobAdvertisementsDetail}
+            component={JobAdvertisementDetail}
           ></Route>
           <Route
             exact

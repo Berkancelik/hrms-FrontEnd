@@ -3,10 +3,10 @@ import { Formik, Form } from "formik";
 import { FormGroup, Button, Segment } from "semantic-ui-react";
 import { toast } from "react-toastify";
 import HrmsInput from "../../../../utilities/customFormControls/HrmsInput";
-import Linkervice from "../../../../services/linkervice";
+import LinkService from "../../../../services/linkService";
 
 export default function AddLink({ resumeId }) {
-  let linkervice = new Linkervice();
+  let linkervice = new LinkService;
   const initialValues = {
     linkedin: "",
     github: "",

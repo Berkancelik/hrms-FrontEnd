@@ -1,19 +1,18 @@
+
 import React from "react";
 import { useState, useEffect } from "react";
-import JobTitleService from "../services/jobTitleService";
-import CityService from "../services/cityService";
-import WorkTypeService from "../services/workTypeService";
-import WorkHourService from "../services/workHourService";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import JobAdvertisementService from "../services/jobAdvertisementService";
 import { Button, Segment, Header, Image, FormGroup } from "semantic-ui-react";
 import { toast } from "react-toastify";
-import logo from "../images/logo-kırmızı.png";
-import HrmsDropdown from "../utilities/customFormControls/HrmsDropdown";
-import HrmsInput from "../utilities/customFormControls/HrmsInput";
-import HrmsTextInput from "../utilities/customFormControls/HrmsTextInput";
-
+import CityService from "../../services/cityService";
+import JobAdvertisementService from "../../services/jobAdvertisementService";
+import JobTitleService from "../../services/jobTitleService";
+import WorkHourService from "../../services/workHourService";
+import WorkTypeService from "../../services/workTypeService";
+import HrmsDropdown from "../../utilities/customFormControls/HrmsDropdown";
+import HrmsInput from "../../utilities/customFormControls/HrmsInput";
+import HrmsTextInput from "../../utilities/customFormControls/HrmsTextInput";
 export default function JobAdvertisementAdd() {
   let jobAdvertisementService = new JobAdvertisementService();
 
@@ -28,15 +27,15 @@ export default function JobAdvertisementAdd() {
       .getJobTitles()
       .then((result) => setJobTitles(result.data.data));
 
-    let cityService = new CityService();
+    let cityService = new CityService;
     cityService.getAll().then((result) => setCities(result.data.data));
 
-    let workTypeService = new WorkTypeService();
+    let workTypeService = new WorkTypeService;
     workTypeService
       .getWorkTypes()
       .then((result) => setWorkTypes(result.data.data));
 
-    let workHourService = new WorkHourService();
+    let workHourService = new WorkHourService;
     workHourService
       .getWorHours()
       .then((result) => setWorHours(result.data.data));
@@ -51,7 +50,7 @@ export default function JobAdvertisementAdd() {
     workTypeId: "",
     workHourId: "",
     deadline: "",
-    jobDescription: "",
+    description: "",
   };
 
   const validationSchema = Yup.object({
@@ -65,7 +64,7 @@ export default function JobAdvertisementAdd() {
     workTypeId: Yup.string().required("Bir çalışma türü seçiniz!"),
     workHourId: Yup.string().required("Bir çalışma zamanı seçiniz!"),
     deadline: Yup.date().required("Bitiş tarihini giriniz!"),
-    jobDescription: Yup.string().required(" Lütfen açıklama giriniz!"),
+    description: Yup.string().required(" Lütfen açıklama giriniz!"),
   });
 
   const onSubmit = (values) => {
@@ -107,7 +106,7 @@ export default function JobAdvertisementAdd() {
     <div className="form">
       <Header as="h2" inverted color="red" textAlign="center">
         <Header.Content>
-          <Image src={logo} size="tiny" />
+        <Image src="https://techyhood.com/wp-content/uploads/2012/11/HRMS.png"size="tiny" />
         </Header.Content>
         <Header.Content>İŞ İLANI YAYINLAMA</Header.Content>
       </Header>
@@ -190,7 +189,7 @@ export default function JobAdvertisementAdd() {
               </FormGroup>
               <FormGroup widths="equal">
                 <HrmsTextInput
-                  name="jobDescription"
+                  name="description"
                   type="text"
                   label="Açıklama"
                   placeholder="Açıklama Yazınız..."

@@ -4,7 +4,7 @@ import JobAdvertisementService from "../../services/jobAdvertisementService";
 import { Table, Button, Icon,Segment } from "semantic-ui-react";
 
 
-export default function JobAdvertisementsDetail() {
+export default function JobAdvertisementDetail() {
   let { id } = useParams();
 
   const [jobAdvertisements, setJobAdvertisements] = useState([]);

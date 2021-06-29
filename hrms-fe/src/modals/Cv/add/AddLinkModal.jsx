@@ -1,20 +1,18 @@
-  
 import React from "react";
+import AddLink from "../../../pages/Candidate/Resume/add/AddLink";
 import { Modal, Button } from "semantic-ui-react";
 import { useState } from "react";
-import AddLink from "../../../pages/Candidate/Resume/add/AddLink";
 
-export default function AddLinkModal({ resumeId }) {
-  const [setOpenAddLink, setOpenAddLink] = useState(false);
+export default function AddLinkModal({ id }) {
+  const [openLink, setOpenLink] = useState(false);
   return (
     <Modal
       size="tiny"
       closeIcon
-      onClose={() => setOpenAddLink(false)}
-      onOpen={() => setOpenAddLink(true)}
-      open={openAddLink}
+      onClose={() => setOpenLink(false)}
+      onOpen={() => setOpenLink(true)}
+      open={openLink}
       trigger={
-
         <Button
           floated="right"
           inverted
@@ -27,7 +25,7 @@ export default function AddLinkModal({ resumeId }) {
       <Modal.Header>Hesap Ekleme</Modal.Header>
       <Modal.Content>
         <Modal.Description>
-          <AddLink resumeId={resumeId}></AddLink>
+          <AddLink id={id}></AddLink>
         </Modal.Description>
       </Modal.Content>
     </Modal>
