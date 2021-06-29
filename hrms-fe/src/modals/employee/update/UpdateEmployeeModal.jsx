@@ -1,7 +1,7 @@
   
 import React from "react";
 import { useState } from "react";
-import UpdateEmployee from "../../../pages/SystemPersonnal/UpdateEmployee";
+import UpdateEmployee from "../../../pages/Employee/UpdateEmployee";
 import { Modal,Button,Icon } from "semantic-ui-react";
 
 export default function UpdateEmployeeModal({

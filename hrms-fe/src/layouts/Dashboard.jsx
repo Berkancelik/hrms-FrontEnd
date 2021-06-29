@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Button } from "semantic-ui-react";
-import JobAdvertisementList from "../pages/JobAdvertisementList";
+import JobAdvertisementList from "../pages/JobAdvertisement/JobAdvertisementList";
 import Cities from "./Cities.jsx";
 import JobTitles from "./JobTitles";
 

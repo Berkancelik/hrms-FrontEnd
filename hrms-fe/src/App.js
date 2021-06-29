@@ -4,26 +4,26 @@ import Dashboard from "./layouts/Dashboard";
 import Navi from "./layouts/Navi";
 import { Container } from "semantic-ui-react";
 import { Route } from "react-router";
-import AddJobAdvertisement from "./pages/AddJobAdvertisement";
-import ConfirmJobAdvertisement from "./pages/ConfirmJobAdvertisement";
-import JobAdvertisementsDetail from "./pages/JobAdvertisementsDetail";
+import JobAdvertisementAdd from "../pages/JobAdvertisement/JobAdvertisementAdd";
+import ConfirmJobAdvertisement from "../pages/JobAdvertisement/ConfirmJobAdvertisement";
+import JobAdvertisementsDetail from "../pages/JobAdvertisement/JobAdvertisementsDetail";
 import ReviewJobAdvertisementDetails from "./pages/ReviewJobAdvertisementDetails";
 import Footer from "./layouts/Footer";
 import HomePage from "./pages/HomePage";
 import { Switch, useHistory } from "react-router-dom";
-import RegisterCandidate from "./pages/candidate/RegisterCandidate";
-import LoginCandidate from "./pages/candidate/LoginCandidate";
+import RegisterCandidate from "./pages/Candidate/RegisterCandidate";
+import LoginCandidate from "./pages/Candidate/LoginCandidate";
 import RegisterEmployer from "./pages/Employer/RegisterEmployer";
 import LoginEmployer from "./pages/Employer/LoginEmployer";
 import { ToastContainer } from "react-toastify";
 import { useState } from "react";
 import SignedInCandidate from "./layouts/SignedInCandidate";
-import ResumeList from "./pages/candidate/Resume/ResumeList";
-import LoginEmployee from "./pages/employee/LoginEmployee";
-import Profilecandidate from "./pages/candidate/Profilecandidate";
-import SettingsCandidate from "./pages/candidate/SettingsCandidate";
-import ProfileEmployee from "./pages/employee/ProfileEmployee";
-import FavoriteList from "./pages/candidate/Favorite/FavoriteList";
+import ResumeList from "./pages/Candidate/Resume/ResumeList";
+import LoginEmployee from "./pages/Employee/LoginEmployee";
+import Profilecandidate from "./pages/Candidate/ProfileCandidate";
+import SettingsCandidate from "./pages/Candidate/SettingsCandidate";
+import ProfileEmployee from "./pages/Employee/ProfileEmployee";
+import FavoriteList from "./pages/Candidate/Favorite/FavoriteList";
 
 function App() {
   const [isAuthenticatedCandidate, setIsAuthenticatedCandidate] =
@@ -124,7 +124,7 @@ function App() {
           <Route
             exact
             path="/jobadvertisement/add"
-            component={AddJobAdvertisement}
+            component={JobAdvertisementAdd}
           ></Route>
           <Route
             exact

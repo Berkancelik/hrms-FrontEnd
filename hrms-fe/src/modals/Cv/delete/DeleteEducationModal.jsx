@@ -1,5 +1,5 @@
 import React from "react";
-import DeleteEducation from "../../../pages/Candidate/REsume/delete/DeleteEducation";
+import DeleteEducation from "../../../pages/Candidate/Resume/delete/DeleteEducation";
 import { Modal, Button, Icon } from "semantic-ui-react";
 import { useState } from "react";
 

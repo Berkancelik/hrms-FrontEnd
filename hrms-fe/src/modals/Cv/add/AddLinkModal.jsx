@@ -2,7 +2,7 @@
 import React from "react";
 import { Modal, Button } from "semantic-ui-react";
 import { useState } from "react";
-import AddLink from "../../../pages/Candidate/REsume/add/AddLink";
+import AddLink from "../../../pages/Candidate/Resume/add/AddLink";
 
 export default function AddLinkModal({ resumeId }) {
   const [setOpenAddLink, setOpenAddLink] = useState(false);
