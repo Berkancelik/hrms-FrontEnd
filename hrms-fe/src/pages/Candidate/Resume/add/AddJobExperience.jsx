@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import WorkExperienceService from "../../../../services/workExperienceService";
+import JobExperienceService from "../../../../services/jobExperienceService";
 import { useState } from "react";
 import { useEffect } from "react";
 import HrmsInput from "../../../../utilities/customFormControls/HrmsInput";
@@ -10,7 +10,7 @@ import JobTitleService from "../../../../services/jobTitleService";
 import { toast } from "react-toastify";
 
 export default function AddJobExperience({ id }) {
-  let workExperienceService = new WorkExperienceService();
+  let jobExperienceService = new JobExperienceService();
 
   const [jobTitles, setjobTitles] = useState([]);
 
@@ -30,7 +30,7 @@ export default function AddJobExperience({ id }) {
   const onSubmit = (values) => {
     values.id = id;
     console.log(values);
-    workExperienceService
+    jobExperienceService
       .add(values)
       .then(
         (result) => console.log(result.data.data),

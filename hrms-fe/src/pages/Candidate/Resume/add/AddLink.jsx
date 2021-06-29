@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import HrmsInput from "../../../../utilities/customFormControls/HrmsInput";
 import Linkervice from "../../../../services/linkervice";
 
-export default function AddAccount({ resumeId }) {
+export default function AddLink({ resumeId }) {
   let linkervice = new Linkervice();
   const initialValues = {
     linkedin: "",

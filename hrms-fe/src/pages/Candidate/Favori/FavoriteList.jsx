@@ -31,7 +31,7 @@ export default function FavoriteList() {
                   color="yellow"
                   fluid
                   as={NavLink}
-                  to={`/jobadvertisements/${favorite.jobAdvertisement.jobAdvertisementId}`}
+                  to={`/jobadvertisements/${favorite.jobAdvertisement.id}`}
                 >
                   <Card.Content>
                     {!favorite.jobAdvertisement.employer.image ? (

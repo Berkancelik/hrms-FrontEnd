@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import HrmsInput from "../../../../utilities/customFormControls/HrmsInput";
 import LanguageService from "../../../../services/languagService";
 
-export default function AddForeignLanguage({ resumeId }) {
+export default function AddLanguage({ resumeId }) {
   let languagService = new LanguageService();
 
   const initialValues = {
