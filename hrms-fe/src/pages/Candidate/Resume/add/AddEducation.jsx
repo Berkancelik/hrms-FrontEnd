@@ -1,12 +1,11 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import HrmsInput from "../../../../utilities/customFormControls/HrmsInput";
 import { FormGroup, Button, Segment } from "semantic-ui-react";
 import { toast } from "react-toastify";
 import EducationService from "../../../../services/educationService";
 
-export default function AddEducation({curriculumVitaeId}) {
+export default function AddEducation({resumeId}) {
   let educationServide = new EducationService();
 
   const initialValues = {
@@ -16,7 +15,7 @@ export default function AddEducation({curriculumVitaeId}) {
     endedDate: "",
   };
   const onSubmit = (values) => {
-    values.curriculumVitaeId = curriculumVitaeId;
+    values.resumeId = resumeId;
     console.log(values);
     educationServide
       .add(values)

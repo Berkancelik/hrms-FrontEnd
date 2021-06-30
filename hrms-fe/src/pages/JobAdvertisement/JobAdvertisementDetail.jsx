@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Table, Button, Icon, Segment } from "semantic-ui-react";
 import JobAdvertisementService from "../../services/jobAdvertisementService";
-import { Table, Button, Icon,Segment } from "semantic-ui-react";
-
 
 export default function JobAdvertisementDetail() {
   let { id } = useParams();
@@ -13,7 +12,7 @@ export default function JobAdvertisementDetail() {
     let jobAdvertisementService = new JobAdvertisementService();
     jobAdvertisementService
       .getById(id)
-      .then((result) => setJobAdvertisements([result.data.data]));
+      .then(result => setJobAdvertisements([result.data.data]));
   }, []);
 
   return (
@@ -27,7 +26,7 @@ export default function JobAdvertisementDetail() {
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell colSpan="2">
-                 
+
                   ŞİRKET
                   <br />
                   BİLGİLERİ
@@ -87,7 +86,7 @@ export default function JobAdvertisementDetail() {
               </Table.Row>
               <Table.Row>
                 <Table.Cell collapsing>Açık Pozisyon Sayısı</Table.Cell>
-                <Table.Cell>{jobAdvertisement.opetTitleCount}</Table.Cell>
+                <Table.Cell>{jobAdvertisement.openTitleCount}</Table.Cell>
               </Table.Row>
               <Table.Row>
                 <Table.Cell>Çalışma Türü</Table.Cell>
@@ -110,9 +109,9 @@ export default function JobAdvertisementDetail() {
             </Table.Header>
             <Table.Body>
               <Table.Row>
-                <Table.Cell>Minimum Maaş </Table.Cell>
+                <Table.Cell>Minimum Maaş Skalası</Table.Cell>
                 <Table.Cell positive>{jobAdvertisement.salaryMin} TL</Table.Cell>
-                <Table.Cell>Maksimum Maaş </Table.Cell>
+                <Table.Cell>Maksimum Maaş Skalası</Table.Cell>
                 <Table.Cell positive>{jobAdvertisement.salaryMax} TL</Table.Cell>
               </Table.Row>
             </Table.Body>

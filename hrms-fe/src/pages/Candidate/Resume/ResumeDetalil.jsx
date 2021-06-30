@@ -31,7 +31,7 @@ export default function ResumeDetail() {
   useEffect(() => {
     let resumeService = new ResumeService();
     resumeService
-      .getByResumeId(id)
+      .getById(id)
       .then((result) => setResumes([result.data.data]));
   }, []);
   return (

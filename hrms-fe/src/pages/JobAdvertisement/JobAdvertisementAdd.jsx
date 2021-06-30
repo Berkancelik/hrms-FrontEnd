@@ -13,13 +13,15 @@ import WorkTypeService from "../../services/workTypeService";
 import HrmsDropdown from "../../utilities/customFormControls/HrmsDropdown";
 import HrmsInput from "../../utilities/customFormControls/HrmsInput";
 import HrmsTextInput from "../../utilities/customFormControls/HrmsTextInput";
+import { useHistory } from "react-router-dom";
+
 export default function JobAdvertisementAdd() {
-  let jobAdvertisementService = new JobAdvertisementService();
+let jobAdvertisementService = new JobAdvertisementService();
 
   const [jobTitles, setJobTitles] = useState([]);
   const [cities, setCities] = useState([]);
   const [workTypes, setWorkTypes] = useState([]);
-  const [worHours, setWorHours] = useState([]);
+  const [workHours, setWorkHours] = useState([]);
 
   useEffect(() => {
     let jobTitleService = new JobTitleService();
@@ -37,8 +39,8 @@ export default function JobAdvertisementAdd() {
 
     let workHourService = new WorkHourService;
     workHourService
-      .getWorHours()
-      .then((result) => setWorHours(result.data.data));
+      .getWorkHours()
+      .then((result) => setWorkHours(result.data.data));
   }, []);
 
   const initialValues = {
@@ -52,6 +54,7 @@ export default function JobAdvertisementAdd() {
     deadline: "",
     description: "",
   };
+  const history = useHistory();
 
   const validationSchema = Yup.object({
     jobTitleId: Yup.number().required("Lütfen pozisyon seçiniz!"),
@@ -74,7 +77,9 @@ export default function JobAdvertisementAdd() {
       .add(values)
       .then(
         (result) => console.log(result.data.data),
-        toast.warning("İLAN ONAY BEKLİYOR")
+        toast.warning("İlan Onaylandıktan Sonra Listelenecek"),
+        history.push("/job-advertisements")
+
       );
   };
 
@@ -96,10 +101,10 @@ export default function JobAdvertisementAdd() {
     value: workType.id,
   }));
 
-  const worHourOptions = worHours.map((worHour) => ({
-    key: worHour.id,
-    text: worHour.worHour,
-    value: worHour.id,
+  const workHourOptions = workHours.map((workHour) => ({
+    key: workHour.id,
+    text: workHour.workHour,
+    value: workHour.id,
   }));
 
   return (
@@ -177,7 +182,7 @@ export default function JobAdvertisementAdd() {
                   name="workHourId"
                   label="Çalışma Zamanı"
                   placeholder="Çalışma Zamanı Seçiniz"
-                  options={worHourOptions}
+                  options={workHourOptions}
                 />
               </FormGroup>
               <FormGroup widths="equal">

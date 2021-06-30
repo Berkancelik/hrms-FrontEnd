@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container, Dropdown, Menu, Image } from "semantic-ui-react";
+import { Button, Container, Dropdown, Menu, Image ,Icon} from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 
 export default function Navi() {
@@ -8,16 +8,13 @@ export default function Navi() {
       <Menu color="blue" inverted fixed="top" size="large">
         <Container className="app">
           <Menu.Item>
-            <Image src="https://techyhood.com/wp-content/uploads/2012/11/HRMS.png" size="tiny" />
+          <Image src="https://techyhood.com/wp-content/uploads/2012/11/HRMS.png" size="tiny" />
           </Menu.Item>
           <Menu.Item as={NavLink} to="/home">
             Ana Sayfa
           </Menu.Item>
-          <Menu.Item as={NavLink} to="/jobadvertisements">
+          <Menu.Item as={NavLink} to={"jobadvertisements"}>
             İş İlanları
-          </Menu.Item>
-          <Menu.Item as={NavLink} to="/confirmjobadvertisement">
-            Bildirimler
           </Menu.Item>
 
           <Menu.Menu position="right">
@@ -50,12 +47,13 @@ export default function Navi() {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-              <Button
-                color="green"
-                as={NavLink}
-                to="/jobadvertisements/add"
-              >
+              <Button color="orange" as={NavLink} to="/jobadvertisements/add">
                 İLAN YAYINLA
+              </Button>
+            </Menu.Item>
+            <Menu.Item>
+              <Button as={NavLink} to="/loginemployee" icon>
+                <Icon name="world" />
               </Button>
             </Menu.Item>
           </Menu.Menu>

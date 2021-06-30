@@ -1,8 +1,10 @@
 import React from "react";
 import { Grid, Button } from "semantic-ui-react";
-import JobAdvertisementList from "../pages/JobAdvertisement/JobAdvertisementList";
-import Cities from "./Cities.jsx";
+import Cities from "./Cities";
 import JobTitles from "./JobTitles";
+import WorkTypes from "./WorkTypes";
+import WorkHours from "./WorkHours";
+import JobAdvertisementList from "../pages/JobAdvertisement/JobAdvertisementList";
 
 export default function Dashboard() {
   return (
@@ -10,11 +12,15 @@ export default function Dashboard() {
       <Grid divided>
         <Grid.Row>
           <Grid.Column width={4}>
-            <JobTitles></JobTitles>
-            <Cities></Cities>
-            <Button primary style={{ marginTop: "15pt" }}>
-              UYGULA
-            </Button>
+            <div className="fixed">
+              <JobTitles></JobTitles>
+              <Cities></Cities>
+              <WorkTypes></WorkTypes>
+              <WorkHours></WorkHours>
+              <Button fluid primary style={{ marginTop: "15pt" }}>
+                FİLTRELE
+              </Button>
+            </div>
           </Grid.Column>
           <Grid.Column width={12}>
             <JobAdvertisementList></JobAdvertisementList>

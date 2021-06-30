@@ -1,6 +1,6 @@
 import React from "react";
 import AddEducation from "../../../pages/Candidate/Resume/add/AddEducation";
-import { Modal, Button, Icon } from "semantic-ui-react";
+import { Modal, Button } from "semantic-ui-react";
 import { useState } from "react";
 
 export default function AddEducationModal({ resumeId }) {

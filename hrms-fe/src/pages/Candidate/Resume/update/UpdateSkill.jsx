@@ -1,6 +1,5 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import { FormGroup, Button, Segment } from "semantic-ui-react";
 import { toast } from "react-toastify";
 import HrmsInput from "../../../../utilities/customFormControls/HrmsInput";

@@ -1,9 +1,9 @@
 import React from "react";
 import AddLanguage from "../../../pages/Candidate/Resume/add/AddLanguage";
-import { Modal, Button, Icon } from "semantic-ui-react";
+import { Modal, Button} from "semantic-ui-react";
 import { useState } from "react";
 
-export default function AddLanguageModal({ curriculumVitaeId }) {
+export default function AddLanguageModal({ resumeId }) {
   const [openAddLanguage, setOpenAddLanguage] = useState(false);
   return (
     <Modal
@@ -22,7 +22,7 @@ export default function AddLanguageModal({ curriculumVitaeId }) {
       <Modal.Content>
         <Modal.Description>
           <AddLanguage
-            curriculumVitaeId={curriculumVitaeId}
+            resumeId={resumeId}
           ></AddLanguage>
         </Modal.Description>
       </Modal.Content>

@@ -27,12 +27,11 @@ export default function JobAdvertisementList() {
           <Card
             fluid
             as={NavLink}
-            to={`/jobAdvertisements/${jobAdvertisement.id}`}
+            to={`/jobadvertisements/${jobAdvertisement.id}`}
           >
             <Card.Content>
               <BusinessIcon></BusinessIcon>
               <Card.Header>{jobAdvertisement.jobTitle.jobTitle}</Card.Header>
-              <Card.Meta>{jobAdvertisement.employer.companyName}</Card.Meta>
               <Card.Description>
                 <Icon name="map marker alternate" />
                 {jobAdvertisement.city.name}

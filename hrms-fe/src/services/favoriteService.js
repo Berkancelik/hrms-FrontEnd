@@ -11,10 +11,10 @@ export default class FavoriteService {
     );
   }
 
-  getByid(id) {
+  getByCandidateId(candidateId) {
     return axios.get(
-      "http://localhost:8080/api/candidatejobadvertisementfavorites/getbyid?id=" +
-        id
+      "http://localhost:8080/api/candidatejobadvertisementfavorites/getbycandidateid?candidateId=" +
+      candidateId
     );
   }
 }

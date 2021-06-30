@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import ResumeService from "../../../services/resumeService";
-import {
-  Card,
-  Header,
-  Icon,
-  Image,
-  Segment,
-  Button,
-  Modal,
-} from "semantic-ui-react";
+import {Card, Header,Icon,Image,Segment,} from "semantic-ui-react";
 import DeleteResumeModal from "../../../modals/CV/delete/DeleteResumeModal";
 import AddResumeModal from "../../../modals/CV/add/AddResumeModal";
 export default function ResumeList() {
@@ -55,7 +47,7 @@ export default function ResumeList() {
 
                 <Card.Header
                   as={NavLink}
-                  to={`/candidate/${3}/curriculumvitae/${
+                  to={`/candidate/${19}/resume/${
                     resume.id
                   }`}
                 >

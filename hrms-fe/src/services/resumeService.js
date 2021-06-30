@@ -1,11 +1,11 @@
 import axios from "axios";
 
 export default class ResumeService{
-    getByJobseekerId(id){
+    getByCandidateId(id){
         return axios.get("http://localhost:8080/api/resumes/getbycandidateid?id="+id)
     }
 
-    getByid(id){
+    getById(id){
         return axios.get("http://localhost:8080/api/resumes/getById?id="+id)
     }
 

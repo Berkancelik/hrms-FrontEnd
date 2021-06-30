@@ -1,6 +1,6 @@
 import React from "react";
 import AddJobExperience from "../../../pages/Candidate/Resume/add/AddJobExperience";
-import { Modal, Button, Icon } from "semantic-ui-react";
+import { Modal, Button} from "semantic-ui-react";
 import { useState } from "react";
 
 export default function AddJobExperienceModal({ resumeId }) {

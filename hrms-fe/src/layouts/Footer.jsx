@@ -27,9 +27,8 @@ export default function Footer() {
               <Grid.Column width={3}>
                 <Header inverted as="h4" content="YARDIM" />
                 <List link inverted>
-                  <List.Item as="a">Sorum var</List.Item>
-                  <List.Item as="a">Önerim var</List.Item>
-                  <List.Item as="a">Sık SorulanSorular</List.Item>
+                
+                  <List.Item as="a">Sıkça Sorulan Sorular</List.Item>
                 </List>
               </Grid.Column>
               <Grid.Column width={3}>
