@@ -62,8 +62,8 @@ let jobAdvertisementService = new JobAdvertisementService();
     openTitleCount: Yup.number().required(
        "Açık pozisyon sayısı giriniz!"
     ),
-    salaryMin: Yup.number()(" Minimum maaş skalası giriniz!"),
-    salaryMax: Yup.number()("Maksimum maaş skalası giriniz!"),
+    salaryMin: Yup.number().required(" Minimum maaş skalası giriniz!"),
+    salaryMax: Yup.number().required("Maksimum maaş skalası giriniz!"),
     workTypeId: Yup.string().required("Bir çalışma türü seçiniz!"),
     workHourId: Yup.string().required("Bir çalışma zamanı seçiniz!"),
     deadline: Yup.date().required("Bitiş tarihini giriniz!"),
