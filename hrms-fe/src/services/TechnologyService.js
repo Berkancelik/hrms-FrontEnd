@@ -17,5 +17,6 @@ export default class TechnologyService {
       "http://localhost:8080/api/skills/delete?id=" +
       id
     );
+    
   }
 }
