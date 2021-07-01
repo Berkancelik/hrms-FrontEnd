@@ -18,7 +18,7 @@ export default function ReviewJobAdvertisementDetails() {
   useEffect(() => {
     let jobAdvertisementService = new JobAdvertisementService();
     jobAdvertisementService
-      .getByjobAdvertisementIdAndConfirmFalse(id)
+      .getByJobAdvertisementIdAndConfirmFalse(id)
       .then((result) => setjobAdvertisements([result.data.data]));
   }, []);
 
@@ -31,7 +31,7 @@ export default function ReviewJobAdvertisementDetails() {
   return (
     <div className="card">
       <Header as="h2" icon textAlign="center">
-        <Header.Content>İŞ İLANI DETAYI</Header.Content>
+        <Header.Content>İş İlanı Detayı</Header.Content>
         <DetailsIcon></DetailsIcon>
       </Header>
       {jobAdvertisements.map((jobAdvertisement) => (

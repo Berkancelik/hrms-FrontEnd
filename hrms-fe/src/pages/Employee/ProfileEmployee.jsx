@@ -25,7 +25,22 @@ export default function Profileemployee() {
           </Segment>
           <Grid divided>
             <Grid.Row>
-              <Grid.Column width={6}>              
+              <Grid.Column width={6}>
+              {!employee.resumeImage ? (
+                  <Image
+                    circular
+                    floated="left"
+                    size="huge"
+                    src="https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png"
+                  ></Image>
+                ) : (
+                  <Image
+                    circular
+                    floated="left"
+                    size="medium"
+                    src={employee.resumeImage.url}
+                  ></Image>    
+                  )}       
                   
            
               </Grid.Column>

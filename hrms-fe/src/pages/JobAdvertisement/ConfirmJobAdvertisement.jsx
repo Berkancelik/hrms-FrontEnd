@@ -1,13 +1,30 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Button, Card, Header ,Icon} from "semantic-ui-react";
-import JobAdvertisementService from "../../services/jobAdvertisementService";
-import HourglassFullRoundedIcon from "@material-ui/icons/HourglassFullRounded";
+import {Button,Card,Icon,Pagination,Message,Select} from "semantic-ui-react";
+import JobAdvertisementService from "../services/jobAdvertisementService";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
-import BusinessIcon from "@material-ui/icons/Business";
 
 export default function ConfirmJobAdvertisement() {
+  const [pageNo, setPageNo] = useState(1);
+  const [pageSize, setPageSize] = useState(3);
+  const [totalPages, setTotalPages] = useState(0);
+
+  const handleChangePageNo = (event, { activePage }) => {
+    setPageNo(activePage);
+  };
+
+  const handleChangePageSize = (event, { value }) => {
+    setPageSize(value);
+  };
+
+  const pageSizeOptions = [
+    { key: 2, value: 10, text: "10 İLAN" },
+    { key: 3, value: 20, text: "20 İLAN" },
+    { key: 5, value: 50, text: "50 İLAN" },
+    { key: 5, value: 100, text: "100 İLAN" },
+  ];
+
   let jobAdvertisementService = new JobAdvertisementService();
 
   const [jobAdvertisements, setJobAdvertisements] = useState([]);
@@ -15,27 +32,33 @@ export default function ConfirmJobAdvertisement() {
   useEffect(() => {
     let jobAdvertisementService = new JobAdvertisementService();
     jobAdvertisementService
-      .getByConfirmFalse()
-      .then((result) => setJobAdvertisements(result.data.data));
-  }, []);
+      .getByConfirmFalseAndActiveTrue(pageNo, pageSize)
+      .then((result) => {
+        setJobAdvertisements(result.data.data);
+        setTotalPages(parseInt(result.data.message));
+      });
+  }, [pageNo, pageSize]);
 
   const confirm = (id) => {
     jobAdvertisementService
       .confirm(id)
-      .then(toast.success("İLAN ONAYLANDI"),window.location.reload());
+      .then(toast.success("İLAN ONAYLANDI"), window.location.reload());
   };
 
   return (
     <div>
-      <Header as="h2" icon textAlign="center">
-        <HourglassFullRoundedIcon></HourglassFullRoundedIcon>
-        <Header.Content>ONAY BEKLEYEN İŞ İLANLARI</Header.Content>
-      </Header>
+      <Message size="large">
+        ONAY BEKLEYEN İŞ İLANLARI Bir Saydaki İlan Sayısı{" "}
+        <Select
+          onChange={handleChangePageSize}
+          placeholder="Seçiniz"
+          options={pageSizeOptions}
+        />
+      </Message>
       <Card.Group>
         {jobAdvertisements.map((jobAdvertisement) => (
           <Card fluid>
             <Card.Content>
-              <BusinessIcon></BusinessIcon>
               <Card.Header>{jobAdvertisement.jobTitle.jobTitle}</Card.Header>
               <Card.Meta>{jobAdvertisement.employer.companyName}</Card.Meta>
               <Card.Description>
@@ -65,6 +88,14 @@ export default function ConfirmJobAdvertisement() {
           </Card>
         ))}
       </Card.Group>
+      <Pagination
+        style={{ marginTop: "25pt" }}
+        firstItem={null}
+        lastItem={null}
+        activePage={pageNo}
+        onPageChange={handleChangePageNo}
+        totalPages={totalPages}
+      />
     </div>
   );
 }
