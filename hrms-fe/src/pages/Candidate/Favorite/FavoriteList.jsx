@@ -34,7 +34,7 @@ export default function FavoriteList() {
                   to={`/jobadvertisements/${favorite.jobAdvertisement.id}`}
                 >
                   <Card.Content>
-                    {!favorite.jobAdvertisement.employer.image ? (
+                    {!favorite.jobAdvertisement.employer.resumeImage.url? (
                       <Image
                         rounded
                         floated="left"
@@ -46,7 +46,7 @@ export default function FavoriteList() {
                         rounded
                         floated="left"
                         size="tiny"
-                        src={favorite.jobAdvertisement.employer.image.imageUrl}
+                        src={favorite.jobAdvertisement.employer.resumeImage.url}
                       ></Image>
                     )}
 

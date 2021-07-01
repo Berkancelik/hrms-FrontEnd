@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import EmployeeService from "../../services/employeeService";
-import { Table,  Grid, Segment } from "semantic-ui-react";
+import { Table,  Grid, Segment,Image } from "semantic-ui-react";
 import UpdateEmployeeModal from "../../modals/employee/update/UpdateEmployeeModal";
 
 export default function Profileemployee() {

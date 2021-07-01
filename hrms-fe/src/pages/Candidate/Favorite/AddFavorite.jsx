@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { Button,Rating } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 import { toast } from "react-toastify";
 import FavoriteService from "../../../services/favoriteService";
 

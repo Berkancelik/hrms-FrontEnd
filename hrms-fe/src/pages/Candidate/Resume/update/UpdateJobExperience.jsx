@@ -1,6 +1,5 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import { useState } from "react";
 import { useEffect } from "react";
 import HrmsInput from "../../../../utilities/customFormControls/HrmsInput";

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import JobAdvertisementService from "../services/jobAdvertisementService";
-import {Card,Icon,Image,Grid,Pagination,Select,Menu,Container,} from "semantic-ui-react";
+import {Card,Icon,Image,Grid,Pagination,Select,Menu,Container} from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
-import AddFavorite from "./Jobseeker/Favorite/AddFavorite";
-import FilterJobAdvertisement from "../layouts/FilterJobAdvertisement";
+import AddFavorite from "../Candidate/Favorite/AddFavorite";
+import JobAdvertisementFilters from "../../layouts/JobAdvertisementFilters";
+import JobAdvertisementService from "../../services/jobAdvertisementService";
 
-export default function JobAdvertsiementList() {
+export default function JobAdvertisementList() {
   const [jobAdvertisementFilters, setJobAdvertisementFilters] = useState({});
   const [pageNo, setPageNo] = useState(1);
   const [pageSize, setPageSize] = useState(3);
@@ -81,9 +81,9 @@ export default function JobAdvertsiementList() {
           <Grid.Row>
             <Grid.Column width={4}>
               <div className="filters">
-                <FilterJobAdvertisement
+                <JobAdvertisementFilters
                   jobAdvertisementFilters={handleFilter}
-                ></FilterJobAdvertisement>
+                ></JobAdvertisementFilters>
               </div>
             </Grid.Column>
             <Grid.Column width={12}>
@@ -93,15 +93,15 @@ export default function JobAdvertsiementList() {
                     <Card.Header textAlign="right">
                       Favorilere Ekle
                       <AddFavorite
-                        candidateId={21}
-                        id={jobAdvertisement.id}
+                        candidateId={23}
+                        jobAdvertisementId={jobAdvertisement.id}
                       ></AddFavorite>
                     </Card.Header>
                     <Card.Content
                       as={NavLink}
                       to={`/jobAdvertisements/${jobAdvertisement.id}`}
                     >
-                      {!jobAdvertisement.employer.image ? (
+                      {!jobAdvertisement.employer.resumeImage ? (
                         <Image
                           rounded
                           floated="left"
@@ -113,7 +113,7 @@ export default function JobAdvertsiementList() {
                           rounded
                           floated="left"
                           size="tiny"
-                          src={jobAdvertisement.employer.image.url}
+                          src={jobAdvertisement.employer.resumeImage.url}
                         ></Image>
                       )}
                       <Card.Header>

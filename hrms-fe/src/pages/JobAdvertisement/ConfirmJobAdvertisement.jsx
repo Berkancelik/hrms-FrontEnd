@@ -1,9 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {Button,Card,Icon,Pagination,Message,Select} from "semantic-ui-react";
-import JobAdvertisementService from "../services/jobAdvertisementService";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
+import JobAdvertisementService from "../../services/jobAdvertisementService";
 
 export default function ConfirmJobAdvertisement() {
   const [pageNo, setPageNo] = useState(1);
@@ -25,7 +25,7 @@ export default function ConfirmJobAdvertisement() {
     { key: 5, value: 100, text: "100 İLAN" },
   ];
 
-  let jobAdvertisementService = new JobAdvertisementService();
+  let jobAdvertisementService = new JobAdvertisementService;
 
   const [jobAdvertisements, setJobAdvertisements] = useState([]);
 

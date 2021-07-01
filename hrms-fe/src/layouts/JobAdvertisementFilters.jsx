@@ -5,7 +5,7 @@ import JobTitleService from "../services/jobTitleService";
 import WorkHourService from "../services/workHourService";
 import WorkTypeService from "../services/workTypeService";
 
-export default function JobAdvertisementFilter({ jobPostingFilters }) {
+export default function JobAdvertisementFilters({ jobAdvertisementFilters }) {
   const [jobtitles, setTitles] = useState([]);
   const [cities, setCities] = useState([]);
   const [workTypes, setWorkTypes] = useState([]);
@@ -130,7 +130,7 @@ export default function JobAdvertisementFilter({ jobPostingFilters }) {
       <Button
         type="button"
         onClick={() =>
-          jobPostingFilters({
+          jobAdvertisementFilters({
             jobtitleId: jobtitleId,
             cityId: cityId,
             workTypeId: workTypeId,
