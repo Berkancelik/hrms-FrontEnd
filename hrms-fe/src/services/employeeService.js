@@ -1,7 +1,11 @@
 import axios from "axios"
 
 export default class EmployeeService{
-    getEmployees(){
-        return axios.get("http://localhost:8080/api/employees/getall")
+    getEmployee(){
+        return axios.get("/employee/getall")
     }
-}
+
+    update(employee){
+        return axios.put("/employee/update",employee)
+    }
+}F

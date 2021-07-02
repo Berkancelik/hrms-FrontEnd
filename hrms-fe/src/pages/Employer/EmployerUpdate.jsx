@@ -1,50 +1,49 @@
-import React,{useState,useEffect} from "react";
-import { Button, Modal, Icon,Form,Label,Input,Container,Segment,Card,Grid,Dropdown} from "semantic-ui-react";
-import EmployeeService from "../../services/employeeService";
-import * as Yup from "yup";
+import React,{useState,useEffect} from 'react'
+import {Container,Segment,Card, Icon, Label, Modal, Button, Input, Form, Dropdown,Grid} from "semantic-ui-react";
+  import * as Yup from "yup";
 import { useFormik } from "formik";
-import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
-export default function UpdateEmployee({ employee }) {
+import EmployerService from '../../services/employerService';
+export default function EmployerUpdate({employer}) {
 
-    const EmployeeUpdateSchema = Yup.object().shape({
-        firstName: Yup.string().required("Okul adı boş bırakılamaz!"),
-        lastName:Yup.string().required("Bölüm adı boş bırakılamaz!"),
-        email:Yup.string().required("Başlangıç yılı boş bırakılamaz!"),
+    const EmployerUpdateSchema = Yup.object().shape({
+        companyName: Yup.string().required("Şirket adı boş bırakılamaz!"),
+        email:Yup.string().required("Mail adresi boş bırakılamaz!"),
+        phoneNumber:Yup.string().required("Telefon Numarası boş bırakılamaz!"),
         password:Yup.string().required("Şifre bilgisi boş bırakılamaz!"),
-        createdDate:Yup.date().required("İşe başlama tarihi boş bırakılamaz!")
+        webAddress:Yup.string().required("Şirket web adresi boş bırakılamaz!")
       });
-      const history = useHistory();
       const formik = useFormik({
         initialValues: {
-          id: employee.id,
-          firstName: employee.firstName,
-          lastName:employee.lastName,
-          email:employee.email,
-          password:employee.password,
-          createdDate:employee.createdDate,
-          employee: "",
+          id: employer.id,
+          companyName: employer.companyName,
+          email:employer.email,
+          phoneNumber:employer.phoneNumber,
+          password:employer.password,
+          webAddress:employer.webAddress,
+          createdDate:employer.createdDate,
+          employerUpdate:employer.employerUpdate,
+          employer: "",
         },
-        validationSchema: EmployeeUpdateSchema,
+        validationSchema: EmployerUpdateSchema,
         onSubmit: (values) => {
-          let employeeService = new EmployeeService();
-          employeeService.update(values).then((result) => console.log(result.data.data));
-          swal("Başarılı!", "Personel bilgisi güncellendi!", "success");
-          history.push("/employees");
+          let employerService = new EmployerService();
+          employerService.updateWaiting(values).then((result) => console.log(result.data.data));
+          swal("Başarılı!", "Güncelleme isteği alındı.Sistem personeli tarafından onaylandıktan sonra bilgileriniz güncellenecektir!", "success");
         },
       });
 
-      const [employees, setEmployees] = useState([])
+      const [employers, setEmployers] = useState([])
 
       useEffect(() => {
-          let employeeService=new EmployeeService();
-          employeeService.getEmployee().then(result=>setEmployees(result.data.data))
+          let employerService=new EmployerService();
+          employerService.getEmployers().then(result=>setEmployers(result.data.data))
       }, [])
 
-      const getEmployees = employees.map((employee, index) => ({
+      const getEmployers = employers.map((employer, index) => ({
         key: index,
-        text: employee.firstName,
-        value: employee,
+        text: employer.companyName,
+        value: employer,
       }));
 
     
@@ -52,42 +51,42 @@ export default function UpdateEmployee({ employee }) {
         formik.setFieldValue(fieldName, value);
       };
 
-  const [open, setOpen] = React.useState(false);
-  return (
-    <div>
-      <Modal
+    const [open, setOpen] = React.useState(false);
+    return (
+        <div>
+             <Modal
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
         trigger={
-          <Button
-            type="submit"
-            animated
-            basic
-            color="blue"
-            size="massive"
-            style={{ marginBottom: "2em" }}
-          >
-            <Button.Content visible>Güncelle</Button.Content>
-            <Button.Content hidden>
-              <Icon name="edit" />
-            </Button.Content>
-          </Button>
+            <Button
+                type="submit"
+                animated
+                basic
+                color="orange"
+                size="massive"
+                style={{ marginBottom: "1em" }}
+              >
+                <Button.Content visible>Güncelle</Button.Content>
+                <Button.Content hidden>
+                  <Icon name="edit" />
+                </Button.Content>
+              </Button>
         }
       >
-        <Modal.Header>Personel Bilgi Güncelleme</Modal.Header>
+        <Modal.Header>Şirket Bilgi Güncelleme</Modal.Header>
         <Modal.Description>
         <Container>
             <Segment circle="true" vertical style={{ padding: "3em 0em" }}>
               <Grid>
                 <Grid.Column width={1}></Grid.Column>
                 <Grid.Column width={14}>
-                  <Card fluid color="blue">
+                  <Card fluid color="orange">
                     <Card.Content>
                       <Form onSubmit={formik.handleSubmit}>
                         <Form.Field>
-                          <Label basic color="blue">
-                            <Icon name="list alternate" /> İsim:
+                          <Label basic color="orange">
+                            <Icon name="list alternate" /> Şirket:
                           </Label>
                           <Dropdown
                             style={{
@@ -97,49 +96,31 @@ export default function UpdateEmployee({ employee }) {
                             }}
                             clearable
                             item
-                            placeholder="İsim Seçiniz..."
+                            placeholder="Şirket Seçiniz..."
                             search
                             selection
                             onChange={(event, data) =>
-                              handleChangeSemantic(data.value, "employee")
+                              handleChangeSemantic(data.value, "employer")
                             }
                             onBlur={formik.onBlur}
-                            id="employee"
-                            value={formik.values.employee}
-                            options={getEmployees}
+                            id="employer"
+                            value={formik.values.employer}
+                            options={getEmployers}
                           />
-                          {formik.errors.employee &&
-                            formik.touched.employee && (
+                          {formik.errors.employer &&
+                            formik.touched.employer && (
                               <div className={"ui pointing red basic label"}>
-                                {formik.errors.employee}
+                                {formik.errors.employer}
                               </div>
                             )}
                         </Form.Field>
                         <Form.Field style={{ marginBottom: "1rem" }}>
-                        <Label basic color="blue">
-                            Soyisim:
+                        <Label basic color="orange">
+                            Mail:
                           </Label>
                           <Input
                             style={{ marginRight: "1em", marginTop: "1em" }}
-                            placeholder="Soyisim..."
-                            value={formik.values.lastName}
-                            name="lastName"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                          ></Input>
-                          {formik.errors.lastName && formik.touched.lastName && (
-                            <div className={"ui pointing red basic label"}>
-                              {formik.errors.lastName}
-                            </div>
-                          )}
-                        </Form.Field>
-                        <Form.Field style={{ marginBottom: "1rem" }}>
-                        <Label basic color="blue">
-                             Mail:
-                          </Label>
-                          <Input
-                            style={{ marginRight: "1em", marginTop: "1em" }}
-                            placeholder="Mail..."
+                            placeholder="SMail..."
                             value={formik.values.email}
                             name="email"
                             onChange={formik.handleChange}
@@ -152,7 +133,7 @@ export default function UpdateEmployee({ employee }) {
                           )}
                         </Form.Field>
                         <Form.Field style={{ marginBottom: "1rem" }}>
-                        <Label basic color="blue">
+                        <Label basic color="orange">
                              Şifre:
                           </Label>
                           <Input
@@ -170,8 +151,44 @@ export default function UpdateEmployee({ employee }) {
                           )}
                         </Form.Field>
                         <Form.Field style={{ marginBottom: "1rem" }}>
-                        <Label basic color="blue">
-                             İşe Başlangıç Tarihi:
+                        <Label basic color="orange">
+                             Telefon Numarası:
+                          </Label>
+                          <Input
+                            style={{ marginRight: "1em", marginTop: "1em" }}
+                            placeholder="Telefon..."
+                            value={formik.values.phoneNumber}
+                            name="phoneNumber"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                          ></Input>
+                          {formik.errors.phoneNumber && formik.touched.phoneNumber && (
+                            <div className={"ui pointing red basic label"}>
+                              {formik.errors.phoneNumber}
+                            </div>
+                          )}
+                        </Form.Field>
+                        <Form.Field style={{ marginBottom: "1rem" }}>
+                        <Label basic color="orange">
+                             Web Adresi:
+                          </Label>
+                          <Input
+                            style={{ marginRight: "1em", marginTop: "1em" }}
+                            placeholder="Web..."
+                            value={formik.values.webAddress}
+                            name="webAddress"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                          ></Input>
+                          {formik.errors.webAddress && formik.touched.webAddress && (
+                            <div className={"ui pointing red basic label"}>
+                              {formik.errors.webAddress}
+                            </div>
+                          )}
+                        </Form.Field>
+                        <Form.Field style={{ marginBottom: "1rem" }}>
+                        <Label basic color="orange">
+                             Kuruluş Tarihi:
                           </Label>
                           <Input
                           type="date"
@@ -188,13 +205,12 @@ export default function UpdateEmployee({ employee }) {
                             </div>
                           )}
                         </Form.Field>
-
                         <Modal.Actions>
                           <Button
                             onClick={() => setOpen(false)}
                             animated
                             basic
-                            color="blue"
+                            color="orange"
                             size="massive"
                             style={{
                               marginBottom: "0.4em",
@@ -210,7 +226,7 @@ export default function UpdateEmployee({ employee }) {
                             type="submit"
                             animated
                             basic
-                            color="blue"
+                            color="orange"
                             size="massive"
                             style={{
                               marginBottom: "0.4em",
@@ -233,6 +249,6 @@ export default function UpdateEmployee({ employee }) {
 
         </Modal.Description>
       </Modal>
-    </div>
-  );
+        </div>
+    )
 }

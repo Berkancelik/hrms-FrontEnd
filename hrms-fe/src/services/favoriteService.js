@@ -1,20 +1,15 @@
 import axios from "axios";
 
 export default class FavoriteService {
-  add(values) {
-    return axios.post("http://localhost:8080/api/candidatejobadvertisementfavorites/add", values);
-  }
+  add(favorite){
+    return axios.post("/candidatejobadvertisementfavorites/add",favorite)
+}
 
-  delete(id) {
-    return axios.delete(
-      "http://localhost:8080/api/candidatejobadvertisementfavorites/delete?id=" + id
-    );
-  }
+getByCandidateId(id){
+    return axios.get("/candidatejobadvertisementfavorites/getByCandidate_Id?id="+id)
+}
 
-  getByCandidateId(candidateId) {
-    return axios.get(
-      "http://localhost:8080/api/candidatejobadvertisementfavorites/getbycandidateid?candidateId=" +
-      candidateId
-    );
-  }
+deleteFavorites(id){
+    return axios.delete("/candidatejobadvertisementfavorites/deleteById?id="+id)
+}
 }

@@ -1,212 +1,268 @@
-
-import React from "react";
-import { useState, useEffect } from "react";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import { Button, Segment, Header, Image, FormGroup } from "semantic-ui-react";
-import { toast } from "react-toastify";
-import CityService from "../../services/cityService";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import * as moment from "moment";
+import {Container,Segment,Grid, Card, Icon, Label, Table, Button} from "semantic-ui-react";
+import swal from "sweetalert";
 import JobAdvertisementService from "../../services/jobAdvertisementService";
-import JobTitleService from "../../services/jobTitleService";
-import WorkHourService from "../../services/workHourService";
-import WorkTypeService from "../../services/workTypeService";
-import HrmsDropdown from "../../utilities/customFormControls/HrmsDropdown";
-import HrmsInput from "../../utilities/customFormControls/HrmsInput";
-import HrmsTextInput from "../../utilities/customFormControls/HrmsTextInput";
-import { useHistory } from "react-router-dom";
+import FavoriteService from "../../services/favoriteService";
 
-export default function JobAdvertisementAdd() {
-let jobAdvertisementService = new JobAdvertisementService();
-
-  const [jobTitles, setJobTitles] = useState([]);
-  const [cities, setCities] = useState([]);
-  const [workTypes, setWorkTypes] = useState([]);
-  const [workHours, setWorkHours] = useState([]);
+export default function JobAdvertisementDetails() {
+  let { id } = useParams();
+  const [jobPost, setJobPost] = useState({});
 
   useEffect(() => {
-    let jobTitleService = new JobTitleService();
-    jobTitleService
-      .getJobTitles()
-      .then((result) => setJobTitles(result.data.data));
-
-    let cityService = new CityService;
-    cityService.getAll().then((result) => setCities(result.data.data));
-
-    let workTypeService = new WorkTypeService;
-    workTypeService
-      .getWorkTypes()
-      .then((result) => setWorkTypes(result.data.data));
-
-    let workHourService = new WorkHourService;
-    workHourService
-      .getWorkHours()
-      .then((result) => setWorkHours(result.data.data));
-  }, []);
-
-  const initialValues = {
-    jobTitleId: "",
-    cityId: "",
-    openTitleCount: "",
-    salaryMin: "",
-    salaryMax: "",
-    workTypeId: "",
-    workHourId: "",
-    deadline: "",
-    description: "",
-  };
-  const history = useHistory();
-
-  const validationSchema = Yup.object({
-    jobTitleId: Yup.number().required("Lütfen pozisyon seçiniz!"),
-    cityId: Yup.string().required("Lütfen şehir seçiniz!"),
-    openTitleCount: Yup.number().required(
-       "Açık pozisyon sayısı giriniz!"
-    ),
-    salaryMin: Yup.number().required(" Minimum maaş skalası giriniz!"),
-    salaryMax: Yup.number().required("Maksimum maaş skalası giriniz!"),
-    workTypeId: Yup.string().required("Bir çalışma türü seçiniz!"),
-    workHourId: Yup.string().required("Bir çalışma zamanı seçiniz!"),
-    deadline: Yup.date().required("Bitiş tarihini giriniz!"),
-    description: Yup.string().required(" Lütfen açıklama giriniz!"),
-  });
-
-  const onSubmit = (values) => {
-    values.employerId = 10;
-    console.log(values);
+    let jobAdvertisementService = new JobAdvertisementService();
     jobAdvertisementService
-      .add(values)
-      .then(
-        (result) => console.log(result.data.data),
-        toast.warning("İlan Onaylandıktan Sonra Listelenecek"),
-        history.push("/job-advertisements")
+      .getByJobAdvertisementId(id)
+      .then((result) => setJobPost(result.data.data));
+  }, [id]);
 
-      );
-  };
+const addtoFavorites=()=>{
+  let favoriteService=new FavoriteService();
+  const favorite={
+    candidateId:1,
+    jobAdvertisementId:id
+  }
+  favoriteService.add(favorite).then(swal("Başarılı!", "Favorilere eklendi!", "success"));
+}
 
-  const jobTitleOptions = jobTitles.map((jobTitle) => ({
-    key: jobTitle.id,
-    text: jobTitle.jobTitle,
-    value: jobTitle.id,
-  }));
-
-  const cityOptions = cities.map((city) => ({
-    key: city.id,
-    text: city.name,
-    value: city.id,
-  }));
-
-  const workTypeOptions = workTypes.map((workType) => ({
-    key: workType.id,
-    text: workType.workType,
-    value: workType.id,
-  }));
-
-  const workHourOptions = workHours.map((workHour) => ({
-    key: workHour.id,
-    text: workHour.workHour,
-    value: workHour.id,
-  }));
 
   return (
-    <div className="form">
-      <Header as="h2" inverted color="red" textAlign="center">
-        <Header.Content>
-        <Image src="https://techyhood.com/wp-content/uploads/2012/11/HRMS.png"size="tiny" />
-        </Header.Content>
-        <Header.Content>İŞ İLANI YAYINLAMA</Header.Content>
-      </Header>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-      >
-        {({ setFieldValue }) => (
-          <Segment color="red">
-            <Form className="ui form">
-              <FormGroup widths="equal">
-                <HrmsDropdown
-                  onChange={(fieldName, data) =>
-                    setFieldValue("jobTitleId", data.value)
-                  }
-                  name="jobTitleId"
-                  label="Pozisyon"
-                  placeholder="Pozisyon Seçiniz"
-                  options={jobTitleOptions}
-                />
-                <HrmsDropdown
-                  onChange={(fieldName, data) =>
-                    setFieldValue("cityId", data.value)
-                  }
-                  name="cityId"
-                  label="Şehir"
-                  placeholder="Şehir Seçiniz"
-                  options={cityOptions}
-                />
-              </FormGroup>
-              <FormGroup widths="equal">
-                <HrmsInput
-                  name="openTitleCount"
-                  type="number"
-                  label="Açık Pozisyon Sayısı"
-                  placeholder="Açık Pozisyon Sayısı"
-                ></HrmsInput>
-              </FormGroup>
-              <FormGroup widths="equal">
-                <HrmsInput
-                  name="salaryMin"
-                  type="number"
-                  label="Minimum Maaş Skalası"
-                  placeholder="Minimum Maaş Skalası"
-                ></HrmsInput>
-                <HrmsInput
-                  name="salaryMax"
-                  type="number"
-                  label="Maksimum Maaş Skalası"
-                  placeholder="Maksimum Maaş Skalası"
-                ></HrmsInput>
-              </FormGroup>
-              <FormGroup widths="equal">
-                <HrmsDropdown
-                  onChange={(fieldName, data) =>
-                    setFieldValue("workTypeId", data.value)
-                  }
-                  name="workTypeId"
-                  label="Çalışma Türü"
-                  placeholder="Çalışma Türü Seçiniz"
-                  options={workTypeOptions}
-                />
-                <HrmsDropdown
-                  onChange={(fieldName, data) =>
-                    setFieldValue("workHourId", data.value)
-                  }
-                  name="workHourId"
-                  label="Çalışma Zamanı"
-                  placeholder="Çalışma Zamanı Seçiniz"
-                  options={workHourOptions}
-                />
-              </FormGroup>
-              <FormGroup widths="equal">
-                <HrmsInput
-                  name="deadline"
-                  type="date"
-                  label="Son Başvuru Tarihi"
-                ></HrmsInput>
-              </FormGroup>
-              <FormGroup widths="equal">
-                <HrmsTextInput
-                  name="description"
-                  type="text"
-                  label="Açıklama"
-                  placeholder="Açıklama Yazınız..."
-                ></HrmsTextInput>
-              </FormGroup>
-              <Button type="submit" color="green">
-                YAYINLA
-              </Button>
-            </Form>
-          </Segment>
-        )}
-      </Formik>
+    <div>
+      <Segment circle="true" style={{ padding: "10em 0em" }} vertical>
+        <Container>
+          <Grid>
+            <Grid.Row>
+              <Grid.Column width={11}>
+                <Card fluid color="green">
+                  <Card.Content>
+                 
+                    <Card.Header
+                      textAlign="center"
+                      style={{
+                        fontSize: "2em",
+                        color: "purple",
+                        marginTop: "1em",
+                      }}
+                    >
+                      
+                      {jobPost.jobTitle?.jobTitle} 
+                    </Card.Header>
+                    <Card.Meta
+                      textAlign="center"
+                      style={{
+                        fontSize: "1.5em",
+                        color: "grey",
+                        marginTop: "1em",
+                      }}
+                    >
+                      <Icon name="building outline" color="brown" />{" "}
+                      {jobPost.employer?.companyName}
+                    </Card.Meta>
+                    <Card.Meta
+                      textAlign="center"
+                      style={{
+                        fontSize: "1.5em",
+                        color: "grey",
+                        marginTop: "0.50em",
+                      }}
+                    >
+                      <Icon name="map marker" color="blue" />{" "}
+                      {jobPost.city?.cityName}
+                    </Card.Meta>
+
+                    <Card.Description
+                      style={{
+                        color: "grey",
+                        fontSize: "1.5em",
+                        textAlign: "center",
+                      }}
+                    >
+                      {jobPost.description}
+                    </Card.Description>
+                    <Card.Meta>
+                      <Table
+                        verticalAlign="middle"
+                        basic="very"
+                        style={{ marginTop: "2em" }}
+                      >
+                        <Table.Body>
+                          <Table.Row textAlign="center">
+                            <Table.Cell>
+                              <Label
+                                basic
+                                color="green"
+                                pointing="right"
+                                style={{
+                                  fontSize: "1.2em",
+                                }}
+                              >
+                                Maaş Aralığı:
+                              </Label>
+                            </Table.Cell>
+                            <Table.Cell style={{
+                                  fontSize: "1.4em",
+                                }} textAlign="center">
+                              {" "}
+                              {jobPost.salaryMin} <Icon name="lira" /> -{" "}
+                              {jobPost.salaryMax} <Icon name="lira" />
+                            </Table.Cell>
+                          </Table.Row>
+                          <Table.Row textAlign="center">
+                            <Table.Cell>
+                              {" "}
+                              <Label basic color="green" pointing="right" style={{
+                                  fontSize: "1.2em",
+                                }}>
+                                Çalışma Tipi:
+                              </Label>
+                            </Table.Cell>
+                            <Table.Cell style={{
+                                  fontSize: "1.4em",
+                                }}>
+                              {jobPost.workType?.workType}
+                            </Table.Cell>
+                          </Table.Row>
+                          <Table.Row textAlign="center">
+                            <Table.Cell>
+                              {" "}
+                              <Label basic color="green" pointing="right" style={{
+                                  fontSize: "1.2em",
+                                }}>
+                                Çalışma Zamanı Tipi:
+                              </Label>
+                            </Table.Cell>
+                            <Table.Cell style={{
+                                  fontSize: "1.4em",
+                                }}>
+                              {jobPost.workHour?.workHour}
+                            </Table.Cell>
+                          </Table.Row>
+
+                          <Table.Row textAlign="center">
+                            <Table.Cell>
+                              {" "}
+                              <Label basic color="green" pointing="right" style={{
+                                  fontSize: "1.2em",
+                                }}>
+                                Son Başvuru Tarihi:
+                              </Label>
+                            </Table.Cell>
+                            <Table.Cell style={{
+                                  fontSize: "1.4em",
+                                }}>
+                              {moment(jobPost.deadline).format(
+                                "DD.MM.yyyy"
+                              )}
+                            </Table.Cell>
+                          </Table.Row>
+
+                          <Table.Row textAlign="center">
+                            <Table.Cell>
+                              {" "}
+                              <Label basic color="green" pointing="right" style={{
+                                  fontSize: "1.2em",
+                                }}>
+                                Alınacak Personel Sayısı:
+                              </Label>
+                            </Table.Cell>
+                            <Table.Cell style={{
+                                  fontSize: "1.4em",
+                                }}>{jobPost.openTitleCount}</Table.Cell>
+                          </Table.Row>
+                         
+                        </Table.Body>
+                       
+                      </Table><Button basic color="red"  size="large" onClick={()=>addtoFavorites()} ><Icon name="heart"/> Favorilere Ekle</Button>
+                    </Card.Meta>
+                  </Card.Content>
+                </Card>
+              </Grid.Column>
+              <Grid.Column width={5} stretched>
+                {" "}
+                <Card fluid color="green" >
+                  <Card.Content>
+                    <Card.Header
+                      textAlign="center"
+                      style={{
+                        fontSize: "2em",
+                        marginTop: "3.5em",
+                        color: "purple",
+                      }}
+                    >
+                      {jobPost.employer?.companyName}
+                    </Card.Header>
+                    <Card.Meta
+                      textAlign="center"
+                      style={{
+                        fontSize: "1.5em",
+                        color: "black",
+                        marginTop: "1.5em",
+                      }}
+                    >
+                      {" "}
+                      <Icon name="mail" color="grey" pointing="right" />
+                      {" : "}
+                      {jobPost.employer?.email}
+                    </Card.Meta>
+
+                    <Card.Meta
+                      textAlign="center"
+                      style={{
+                        fontSize: "1.5em",
+                        color: "black",
+                        marginTop: "1.5em",
+                      }}
+                    >
+                      {" "}
+                      <Icon name="globe" color="grey" />
+                      {" : "}
+                      {jobPost.employer?.webAddress}
+                    </Card.Meta>
+
+                    <Card.Meta
+                      textAlign="center"
+                      style={{
+                        fontSize: "1.5em",
+                        color: "black",
+                        marginTop: "1.5em",
+                      }}
+                    >
+                      {" "}
+                      <Icon name="phone" color="grey" />
+                      {" : "}
+                      {jobPost.employer?.phoneNumber}
+                    </Card.Meta>
+                    <Card.Meta
+                      textAlign="center"
+                      style={{
+                        fontSize: "1.5em",
+                        color: "black",
+                        marginTop: "1.5em",
+                        marginRight: "1.2em",
+                        marginBottom: "3.2em",
+                      }}
+                    >
+                      {" "}
+                      <Icon name="calendar outline" color="grey" />
+                      {" : "}
+                      {moment(jobPost.employer?.createdDate).format(
+                        "DD.MM.yyyy"
+                      )}
+                    </Card.Meta>
+                    <Card.Description>
+                      <Button basic color="green"  size="large" >
+                        Başvur
+                      </Button>
+                    </Card.Description>
+                   
+                  </Card.Content>
+                </Card>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Container>
+      </Segment>
     </div>
   );
 }

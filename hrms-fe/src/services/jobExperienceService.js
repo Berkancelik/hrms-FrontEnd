@@ -1,7 +1,11 @@
 import axios from 'axios'
 
 export default class JobExperienceService{
-    getExperinces(){
-        return axios.get("/api/jobexperience/getall");
+    getJobExperiences(candidateId){
+        return axios.get("/jobExperience/getAllByCandidateId?candidateId="+candidateId)
+    }
+
+    update(jobExperience){
+        return axios.put("/jobExperience/update",jobExperience)
     }
 }

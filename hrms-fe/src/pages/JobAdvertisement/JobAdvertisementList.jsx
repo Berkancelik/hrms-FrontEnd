@@ -1,146 +1,155 @@
 import React, { useState, useEffect } from "react";
-import {Card,Icon,Image,Grid,Pagination,Select,Menu,Container} from "semantic-ui-react";
-import { NavLink } from "react-router-dom";
-import AddFavorite from "../Candidate/Favorite/AddFavorite";
-import JobAdvertisementFilters from "../../layouts/JobAdvertisementFilters";
+import {Button,Container, Divider, Header, Segment, Card, Icon, Pagination,} from "semantic-ui-react";
+import { NavLink} from "react-router-dom";
+import Filter from '../../layouts/Filter'
 import JobAdvertisementService from "../../services/jobAdvertisementService";
-
+import FavoriteService from "../../services/favoriteService";
+import swal from "sweetalert";
 export default function JobAdvertisementList() {
-  const [jobAdvertisementFilters, setJobAdvertisementFilters] = useState({});
-  const [pageNo, setPageNo] = useState(1);
-  const [pageSize, setPageSize] = useState(3);
-  const [totalPages, setTotalPages] = useState(0);
 
-  const handleChangePageNo = (event, { activePage }) => {
-    setPageNo(activePage);
-  };
+  const [pageNo, setPage] = useState(1);
+  const [filter, setFilter] = useState({});
+  const [pageSize] = useState(4);
+  const [jobPosts, setJobPosts] = useState([]);
 
-  const handleChangePageSize = (event, { value }) => {
-    setPageSize(value);
-  };
-
-  const pageSizeOptions = [
-    { key: 2, value: 10, text: "10 İLAN" },
-    { key: 3, value: 20, text: "20 İLAN" },
-    { key: 5, value: 50, text: "50 İLAN" },
-    { key: 5, value: 100, text: "100 İLAN" },
-  ];
-
-  const sortOptions = [
-    { key: 2, value: 10, text: "10 İLAN" },
-    { key: 3, value: 20, text: "20 İLAN" },
-  ];
-
-  const [jobAdvertisements, setJobAdvertisements] = useState([]);
   useEffect(() => {
-    let jobAdvertisementService = new JobAdvertisementService();
-    jobAdvertisementService
-      .getByFilter(jobAdvertisementFilters, pageNo, pageSize)
-      .then((result) => {
-        setJobAdvertisements(result.data.data);
-        setTotalPages(parseInt(result.data.message));
-      });
-  }, [jobAdvertisementFilters, pageNo, pageSize]);
+    let jobPostService = new JobAdvertisementService();
+    jobPostService
+      .getByisActiveTrueAndConfirmStatusTrueAndFilter(pageNo,pageSize,filter)
+      .then((result) => setJobPosts(result.data.data));
+  }, [filter,pageNo,pageSize]);
 
-  const handleFilter = (jobAdvertisementFilters) => {
-    if (jobAdvertisementFilters.jobTitleId.length === 0) {
-      jobAdvertisementFilters.jobTitleId = null;
-    }
-    if (jobAdvertisementFilters.cityId.length === 0) {
-      jobAdvertisementFilters.cityId = null;
-    }
-    if (jobAdvertisementFilters.workTypeId.length === 0) {
-      jobAdvertisementFilters.workTypeId = null;
-    }
-    if (jobAdvertisementFilters.workHourId.length === 0) {
-      jobAdvertisementFilters.workHourId = null;
-    }
 
-    setJobAdvertisementFilters(jobAdvertisementFilters);
-    setPageNo(1);
-  };
+  const handleFilterClick = (filter) => {
+    if(filter.cityId.length === 0){
+      filter.cityId = null;
+    }
+    if(filter.jobTitleId.length === 0){
+      filter.jobTitleId = null;
+    }
+    if(filter.workTypeId.length === 0){
+      filter.workTypeId = null;
+    }
+    if(filter.workHourId.length === 0){
+      filter.workHourId = null;
+    }
+    setFilter(filter);
+    setPage(1);
+  }
+
+  const handlePaginationChange = (e, { activePage }) => {
+    setPage(activePage);
+  }
+
+ 
+  const addtoFavorites=()=>{
+    let favoriteService=new FavoriteService();
+    const favorite={
+      candidateId:1,
+      jobAdvertisementId:32
+    }
+    favoriteService.add(favorite).then(swal("Başarılı!", "Favorilere eklendi!", "success"));
+  }
+
   return (
     <div>
-      <Menu className="fixedMenu" size="small">
-        <Container className="app">
-          <Menu.Item>İŞ İLANLARI</Menu.Item>
-          <Menu.Menu position="right">
-            <Menu.Item>
-              Bir Sayfadaki İlan Sayısı{" "}
-              <Select
-                placeholder="Seçiniz"
-                onChange={handleChangePageSize}
-                options={pageSizeOptions}
-              ></Select>
-            </Menu.Item>
-          </Menu.Menu>
+      <Filter  clickEvent={handleFilterClick}/>
+      <Segment circle="true"  style={{ padding: "8em 0em" }} vertical>
+        <Container>
+          
+          <Header circle="true" as="h3" style={{ fontSize: "3em" }}>
+            Recent Job
+          </Header>
+          <Card.Group itemsPerRow={4}>
+            {jobPosts.map((jobPost) => (
+              <Card
+                color="violet"
+                circle="true"
+                style={{
+                  minHeight: 350,
+                  fontSize: "1.2em",
+                  fontWeight: "normal",
+                  padding: "3.4em 0.50em",
+                }}
+                key={jobPost.id}>
+
+         
+
+     
+                <Card.Content >
+                <Card.Meta>
+                <Button
+                onClick={()=>addtoFavorites()}
+                    circular
+                    style={{ marginLeft: "9em" }}
+                    size="large"
+                    color="violet"
+                    icon="heart"
+                    inverted
+                  >
+                 
+                  </Button>
+                </Card.Meta>
+                  <Icon
+                    color="violet"
+                    style={{ paddingBottom: "1.7em" }}
+                    size="huge"
+                    name="briefcase"
+                  />
+
+                  <Card.Header>{jobPost.jobTitle.jobTitle}</Card.Header>
+                  <Card.Meta>{jobPost.employer.companyName}</Card.Meta>
+                  <Card.Description>
+                    {" "}
+                    <Icon name="map marker" /> {jobPost.city.cityName}
+                  </Card.Description>
+                  <Card.Description>
+                    {jobPost.minSalary} <Icon name="lira" /> -{" "}
+                    {jobPost.maxSalary} <Icon name="lira" />
+                  </Card.Description>
+                  <Card.Description>
+                    {" "}
+                    <Icon name="user" /> {jobPost.openTitleCount}
+                  </Card.Description>
+                  <Card.Description>
+                    {" "}
+                    <Icon name="time" /> {jobPost.workHour?.workHour}
+                  </Card.Description>
+                </Card.Content>
+
+                <Divider>
+                  <Button
+                    as={NavLink}
+                    to={`/jobadvertisements/${jobPost.id}`}
+                    circular
+                    style={{ marginTop: "0.90em" }}
+                    size="big"
+                    inverted
+                    color="blue"
+                  >
+                    İlana Git
+                  </Button>
+                </Divider>
+              </Card>
+            ))}
+          </Card.Group>
+          <br />
+          <Pagination
+           
+            boundaryRange={1}
+            siblingRange={1}
+            onPageChange={handlePaginationChange}
+            style={{ marginTop: "3.5em" }}
+            defaultActivePage={1}
+            pointing
+            secondary
+            circle="true"
+            size="massive"
+            totalPages={5}
+          
+          />
         </Container>
-      </Menu>
-      <Container>
-        <Grid divided>
-          <Grid.Row>
-            <Grid.Column width={4}>
-              <div className="filters">
-                <JobAdvertisementFilters
-                  jobAdvertisementFilters={handleFilter}
-                ></JobAdvertisementFilters>
-              </div>
-            </Grid.Column>
-            <Grid.Column width={12}>
-              <Card.Group style={{ marginTop: "115pt" }}>
-                {jobAdvertisements.map((jobAdvertisement) => (
-                  <Card color="yellow" fluid style={{ marginLeft: "10pt" }}>
-                    <Card.Header textAlign="right">
-                      Favorilere Ekle
-                      <AddFavorite
-                        candidateId={23}
-                        jobAdvertisementId={jobAdvertisement.id}
-                      ></AddFavorite>
-                    </Card.Header>
-                    <Card.Content
-                      as={NavLink}
-                      to={`/jobAdvertisements/${jobAdvertisement.id}`}
-                    >
-                      {!jobAdvertisement.employer.resumeImage ? (
-                        <Image
-                          rounded
-                          floated="left"
-                          size="tiny"
-                          src="https://image.flaticon.com/icons/png/128/2107/2107820.png"
-                        ></Image>
-                      ) : (
-                        <Image
-                          rounded
-                          floated="left"
-                          size="tiny"
-                          src={jobAdvertisement.employer.resumeImage.url}
-                        ></Image>
-                      )}
-                      <Card.Header>
-                        {jobAdvertisement.jobTitle.jobTitle}
-                      </Card.Header>
-                      <Card.Meta>{jobAdvertisement.employer.companyName}</Card.Meta>
-                      <Card.Meta>{jobAdvertisement.workHour.workHour}</Card.Meta>
-                      <Card.Description>
-                        <Icon name="map marker alternate" />
-                        {jobAdvertisement.city.name}
-                      </Card.Description>
-                    </Card.Content>
-                  </Card>
-                ))}
-              </Card.Group>
-              <Pagination
-                style={{ marginTop: "25pt" }}
-                firstItem={null}
-                lastItem={null}
-                activePage={pageNo}
-                onPageChange={handleChangePageNo}
-                totalPages={totalPages}
-              />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container>
+      </Segment>
     </div>
   );
 }

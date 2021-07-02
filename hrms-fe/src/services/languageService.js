@@ -1,21 +1,23 @@
 import axios from "axios";
 
 export default class LanguageService {
-  add(values) {
-    return axios.post("http://localhost:8080/api/languages/add", values);
+  getLanguages(candidateId) {
+    return axios.get("/languages/getAllByCandidateId?candidateId=" + candidateId)
   }
 
-  update(values) {
-    return axios.put(
-      "http://localhost:8080/api/languages/update",
-      values
-    );
+  add(language) {
+    return axios.post("/languages/add", language)
   }
 
-  delete(foreignLanguageId) {
-    return axios.delete(
-      "http://localhost:8080/api/languages/delete?foreignLanguageId=" +
-      foreignLanguageId
-    );
+  getLanguageList() {
+    return axios.get("/languages/getall")
+  }
+
+  getForeignLanguage() {
+    return axios.get("/language/getall")
+  }
+
+  updateLanguages(language) {
+    return axios.put("/languages/update", language)
   }
 }

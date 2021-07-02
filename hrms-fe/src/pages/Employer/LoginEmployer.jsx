@@ -10,8 +10,10 @@ export default function LoginEmployer() {
             <Grid textAlign="center" verticalAlign="middle">
         <Grid.Column style={{ maxWidth: 450 }}>
           <Header as="h2" inverted color="red" textAlign="center">
+
+            <br></br>
             <Header.Content>
-            <Image src="https://www.ketmedya.com/wp-content/uploads/2021/01/ankara-ozel-yazilim.png" size="tiny" />
+            <Image src="https://www.ketmedya.com/wp-content/uploads/2021/01/ankara-ozel-yazilim.png" size="small" />
               <Header.Content>İşveren Giriş Yap</Header.Content>
             </Header.Content>
           </Header>

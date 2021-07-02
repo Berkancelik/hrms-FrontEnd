@@ -29,3 +29,19 @@
   background-repeat: no-repeat;
   background-position: top left;
 }
+
+.filters {
+  width: 260px;
+  top: 110pt;
+  position: fixed;
+  
+  
+}
+
+.fixedMenu {
+  position: fixed;
+  top: 54pt;
+  z-index: 1;
+  width: 100%;
+  
+}

@@ -3,16 +3,18 @@ import axios from "axios"
 
 export default class CandidateService{
     getCandidates(){
-        return axios.get("http://localhost:8080/api/candidates/getall")
+        return axios.get("/candidates/getall")
     }
-    getById(id)
-    {
-        return axios.get("http://localhost:8080/api/candidates/getbyid?id="+id)
+    getResume(candidateId){
+        return axios.get("/candidates/getCandidateResumeByCandidateId?candidateId="+candidateId)
     }
 
-    getByCvId(id)
-    {
-        return axios.get("http://localhost:8080/api/candidates/getcandidatecvbyid?id="+id)
+    getById(candidateId){
+        return axios.get("/candidates/getById?id="+candidateId)
+    }
+
+    update(candidate){
+        return axios.put("/candidates/update",candidate)
     }
 
 }

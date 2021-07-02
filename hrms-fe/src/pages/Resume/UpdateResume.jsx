@@ -1,56 +1,57 @@
-import React,{useState,useEffect} from "react";
-import { Button, Modal, Icon,Form,Label,Input,Container,Segment,Card,Grid,Dropdown} from "semantic-ui-react";
-import EmployeeService from "../../services/employeeService";
+import React, { useState, useEffect } from "react";
+import {Button,Modal,Icon,Label,Form,Input,Segment,Container,Card,Grid,Dropdown,} from "semantic-ui-react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
-export default function UpdateEmployee({ employee }) {
+import CandidateService from "../../services/candidateService";
 
-    const EmployeeUpdateSchema = Yup.object().shape({
-        firstName: Yup.string().required("Okul adı boş bırakılamaz!"),
-        lastName:Yup.string().required("Bölüm adı boş bırakılamaz!"),
-        email:Yup.string().required("Başlangıç yılı boş bırakılamaz!"),
-        password:Yup.string().required("Şifre bilgisi boş bırakılamaz!"),
-        createdDate:Yup.date().required("İşe başlama tarihi boş bırakılamaz!")
-      });
-      const history = useHistory();
-      const formik = useFormik({
-        initialValues: {
-          id: employee.id,
-          firstName: employee.firstName,
-          lastName:employee.lastName,
-          email:employee.email,
-          password:employee.password,
-          createdDate:employee.createdDate,
-          employee: "",
-        },
-        validationSchema: EmployeeUpdateSchema,
-        onSubmit: (values) => {
-          let employeeService = new EmployeeService();
-          employeeService.update(values).then((result) => console.log(result.data.data));
-          swal("Başarılı!", "Personel bilgisi güncellendi!", "success");
-          history.push("/employees");
-        },
-      });
+export default function UpdateResume({ candidate }) {
+  const UpdateResumeSchema = Yup.object().shape({
+    email: Yup.string().required("Mail boş bırakılamaz!"),
+    dateOfBirth: Yup.date().required("Doğum tarihi boş bırakılamaz!"),
+  });
+  const history = useHistory();
+  const formik = useFormik({
+    initialValues: {
+      password: candidate.password,
+      firstName: candidate.firstName,
+      nationalId: candidate.nationalId,
+      lastName: candidate.lastName,
+      id: candidate.id,
+      email: candidate.email,
+      dateOfBirth: candidate.dateOfBirth,
+      candidate: candidate.firstName,
+      createdDate: candidate.createdDate,
+    },
+    validationSchema: UpdateResumeSchema,
+    onSubmit: (values) => {
+      let candidateService = new CandidateService();
+      candidateService
+        .update(values)
+        .then((result) => console.log(result.data.data));
+      swal("Başarılı!", "İletişim bilgisi güncellendi!", "success");
+      history.push("/resume/1");
+    },
+  });
 
-      const [employees, setEmployees] = useState([])
+  const [candidates, setcandidates] = useState([]);
+  useEffect(() => {
+    let candidateService = new CandidateService();
+    candidateService
+      .getCandidates()
+      .then((result) => setcandidates(result.data.data));
+  }, []);
 
-      useEffect(() => {
-          let employeeService=new EmployeeService();
-          employeeService.getEmployee().then(result=>setEmployees(result.data.data))
-      }, [])
+  const getCandidates = candidates.map((candidate, index) => ({
+    key: index,
+    text: candidate.firstName,
+    value: candidate,
+  }));
 
-      const getEmployees = employees.map((employee, index) => ({
-        key: index,
-        text: employee.firstName,
-        value: employee,
-      }));
-
-    
-      const handleChangeSemantic = (value, fieldName) => {
-        formik.setFieldValue(fieldName, value);
-      };
+  const handleChangeSemantic = (value, fieldName) => {
+    formik.setFieldValue(fieldName, value);
+  };
 
   const [open, setOpen] = React.useState(false);
   return (
@@ -64,9 +65,9 @@ export default function UpdateEmployee({ employee }) {
             type="submit"
             animated
             basic
-            color="blue"
-            size="massive"
-            style={{ marginBottom: "2em" }}
+            color="violet"
+            size="large"
+            style={{ marginLeft: "60em" }}
           >
             <Button.Content visible>Güncelle</Button.Content>
             <Button.Content hidden>
@@ -75,9 +76,9 @@ export default function UpdateEmployee({ employee }) {
           </Button>
         }
       >
-        <Modal.Header>Personel Bilgi Güncelleme</Modal.Header>
+        <Modal.Header>İletişim Bilgisi Güncelleme</Modal.Header>
         <Modal.Description>
-        <Container>
+          <Container>
             <Segment circle="true" vertical style={{ padding: "3em 0em" }}>
               <Grid>
                 <Grid.Column width={1}></Grid.Column>
@@ -101,23 +102,23 @@ export default function UpdateEmployee({ employee }) {
                             search
                             selection
                             onChange={(event, data) =>
-                              handleChangeSemantic(data.value, "employee")
+                              handleChangeSemantic(data.value, "candidate")
                             }
                             onBlur={formik.onBlur}
-                            id="employee"
-                            value={formik.values.employee}
-                            options={getEmployees}
+                            id="candidate"
+                            value={formik.values.candidate}
+                            options={getCandidates}
                           />
-                          {formik.errors.employee &&
-                            formik.touched.employee && (
+                          {formik.errors.candidate &&
+                            formik.touched.candidate && (
                               <div className={"ui pointing red basic label"}>
-                                {formik.errors.employee}
+                                {formik.errors.candidate}
                               </div>
                             )}
                         </Form.Field>
                         <Form.Field style={{ marginBottom: "1rem" }}>
-                        <Label basic color="blue">
-                            Soyisim:
+                          <Label basic color="blue">
+                            <Icon name="user" /> Soyisim:
                           </Label>
                           <Input
                             style={{ marginRight: "1em", marginTop: "1em" }}
@@ -127,15 +128,17 @@ export default function UpdateEmployee({ employee }) {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                           ></Input>
-                          {formik.errors.lastName && formik.touched.lastName && (
-                            <div className={"ui pointing red basic label"}>
-                              {formik.errors.lastName}
-                            </div>
-                          )}
+                          {formik.errors.lastName &&
+                            formik.touched.lastName && (
+                              <div className={"ui pointing red basic label"}>
+                                {formik.errors.lastName}
+                              </div>
+                            )}
                         </Form.Field>
+
                         <Form.Field style={{ marginBottom: "1rem" }}>
-                        <Label basic color="blue">
-                             Mail:
+                          <Label basic color="blue">
+                            <Icon name="mail" /> Email:
                           </Label>
                           <Input
                             style={{ marginRight: "1em", marginTop: "1em" }}
@@ -152,8 +155,8 @@ export default function UpdateEmployee({ employee }) {
                           )}
                         </Form.Field>
                         <Form.Field style={{ marginBottom: "1rem" }}>
-                        <Label basic color="blue">
-                             Şifre:
+                          <Label basic color="blue">
+                            <Icon name="key" /> Şifre:
                           </Label>
                           <Input
                             style={{ marginRight: "1em", marginTop: "1em" }}
@@ -163,30 +166,52 @@ export default function UpdateEmployee({ employee }) {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                           ></Input>
-                          {formik.errors.password && formik.touched.password && (
-                            <div className={"ui pointing red basic label"}>
-                              {formik.errors.password}
-                            </div>
-                          )}
+                          {formik.errors.password &&
+                            formik.touched.password && (
+                              <div className={"ui pointing red basic label"}>
+                                {formik.errors.password}
+                              </div>
+                            )}
                         </Form.Field>
                         <Form.Field style={{ marginBottom: "1rem" }}>
-                        <Label basic color="blue">
-                             İşe Başlangıç Tarihi:
+                          <Label basic color="blue">
+                            <Icon name="circle" /> Tc:
                           </Label>
                           <Input
-                          type="date"
                             style={{ marginRight: "1em", marginTop: "1em" }}
-                            placeholder="Başlangıç Tarihi..."
-                            value={formik.values.createdDate}
-                            name="createdDate"
+                            placeholder="Tc..."
+                            value={formik.values.nationalId}
+                            name="nationalId"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                           ></Input>
-                          {formik.errors.createdDate && formik.touched.createdDate && (
-                            <div className={"ui pointing red basic label"}>
-                              {formik.errors.createdDate}
-                            </div>
-                          )}
+                          {formik.errors.nationalId &&
+                            formik.touched.nationalId && (
+                              <div className={"ui pointing red basic label"}>
+                                {formik.errors.nationalId}
+                              </div>
+                            )}
+                        </Form.Field>
+                        <Form.Field style={{ marginBottom: "1rem" }}>
+                          <Label basic color="blue">
+                            <Icon name="calendar alternate outline" /> Doğum
+                            Tarihi:
+                          </Label>
+                          <Input
+                            type="date"
+                            style={{ marginRight: "1em", marginTop: "1em" }}
+                            placeholder="Tarih..."
+                            value={formik.values.dateOfBirth}
+                            name="dateOfBirth"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                          ></Input>
+                          {formik.errors.dateOfBirth &&
+                            formik.touched.dateOfBirth && (
+                              <div className={"ui pointing red basic label"}>
+                                {formik.errors.dateOfBirth}
+                              </div>
+                            )}
                         </Form.Field>
 
                         <Modal.Actions>
@@ -230,7 +255,6 @@ export default function UpdateEmployee({ employee }) {
               </Grid>
             </Segment>
           </Container>
-
         </Modal.Description>
       </Modal>
     </div>
