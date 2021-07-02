@@ -10,8 +10,8 @@ import {
 } from "semantic-ui-react";
 import LanguageService from "../../services/languageService";
 import { useParams } from "react-router-dom";
-import LanguageUpdate from "./LanguageUpdate";
-import LanguageAdd from "./LanguageAdd";
+import UpdateLanguage from "./UpdateLanguage";
+import AddLanguage from "./AddLanguage";
 
 export default function LanguageList() {
   let { candidateId } = useParams();
@@ -45,7 +45,7 @@ export default function LanguageList() {
                 <Icon name="language" color="violet" /> Dil Bilgisi{" "}
                
               </Message.Header>
-              <LanguageAdd language={language.id} />
+              <AddLanguage language={language.id} />
 
      
               <Card fluid color="violet"  >
@@ -109,7 +109,7 @@ export default function LanguageList() {
 
                 <Card.Description>
                   {" "}
-                  <LanguageUpdate language={language} />
+                  <UpdateLanguage language={language} />
                 </Card.Description>
               </Card> 
             </Message>

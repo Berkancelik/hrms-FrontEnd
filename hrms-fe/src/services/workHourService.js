@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default class WorkHourService {
 
-    workHours() {
+    getWorkHours() {
         return axios.get("/workhours/getall")
     }
 }

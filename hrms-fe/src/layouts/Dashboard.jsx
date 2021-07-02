@@ -1,11 +1,10 @@
 import React from 'react'
-import Home from '../pages/Home'
 import {Route} from 'react-router-dom'
 import { Grid } from "semantic-ui-react";
 import EmployeesList from '../pages/Employee/EmployeesList';
 import JobConfirmList from '../pages/Employee/JobConfirmList';
 import EmployerUpdateConfirm from '../pages/Employee/EmployerUpdateConfirm';
-import EmployerList from '../pages/Employer/employerList';
+import EmployerList from '../pages/Employer/EmployerList';
 import CandidateList from '../pages/Candidate/CandidateList';
 import JobAdvertisementAdd from '../pages/JobAdvertisement/JobAdvertisementAdd';
 import FavoriteJobAdvertisement from '../pages/Candidate/FavoriteJobAdvertisement';
@@ -13,7 +12,7 @@ import JobAdvertisementDetail from '../pages/JobAdvertisement/JobAdvertisementDe
 import Resume from '../pages/Resume/Resume';
 import JobAdvertisementList from '../pages/JobAdvertisement/JobAdvertisementList'
 import JobaAdvertisementAdd from '../pages/JobAdvertisement/JobAdvertisementAdd';
-import HomePAge from '../pages/HomePAge'
+import HomePage from '../pages/HomePage'
 
 export default function Dashboard() {
   return (
@@ -23,8 +22,8 @@ export default function Dashboard() {
       <Grid>
         <Grid.Row>
           <Grid.Column>
-          <Route exact path="/" component={HomePAge} />
-          <Route exact path="/home" component={HomePAge} />
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/home" component={HomePage} />
           <Route exact path='/jobadvertisements/:jobTtitle/:city/:workHour' component={JobaAdvertisementAdd}/>
           <Route exact path="/jobadvertisements" component={JobAdvertisementList} />
           <Route exact path="/employers" component={EmployerList} />

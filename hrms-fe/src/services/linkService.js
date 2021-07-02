@@ -4,7 +4,7 @@ export default class LinkService {
   getSocialMedias(candidateId) {
     return axios.get("/links/getAllByCandidateId?candidateId=" + candidateId)
   }
-  update(v) {
+  update(resumeLink) {
     return axios.put("/links/update", resumeLink)
   }
 }

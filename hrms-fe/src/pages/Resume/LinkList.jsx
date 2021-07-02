@@ -11,7 +11,7 @@ import {
   Card,
   Button,
 } from "semantic-ui-react";
-import LinkUpdate from "./LinkUpdate";
+import UpdateLink from "./UpdateLink";
 
 export default function LinkList() {
   let { candidateId } = useParams();
@@ -121,7 +121,7 @@ export default function LinkList() {
 
                 <Card.Description>
                   {" "}
-                  <LinkUpdate resumeLnk={resumeLnk} />
+                  <UpdateLink resumeLnk={resumeLnk} />
                 </Card.Description>
               </Card>
             </Message>

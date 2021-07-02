@@ -62,21 +62,21 @@ export default function JobAdvertisementAdd() {
       let titleService = new JobTitleService()
       let employerService=new EmployerService()
 
-      workHourService.getWorkTimes().then(result => setworkHours(result.data.data))
+      workHourService.getWorkHours().then(result => setworkHours(result.data.data))
       workTypeService.getWorkTypes().then(result => setworkTypes(result.data.data))
-      cityService.getCities().then(result => setCities(result.data.data))
+      cityService.getAll().then(result => setCities(result.data.data))
       titleService.getJobTitles().then(result => setjobTitles(result.data.data))
       employerService.getEmployers().then(result=>setEmployers(result.data.data))
   }, [])
 
-  const getWorkTimes  = workHours.map((workHour, index) => ({
+  const getWorkHours  = workHours.map((workHour, index) => ({
       key: index,
-      text: workHour.workTimeName,
+      text: workHour.workHour,
       value: workHour,
   }));
   const getWorkTypes  = workTypes.map((workType, index) => ({
       key: index,
-      text: workType.workTypeName,
+      text: workType.workType,
       value: workType,
   }));
   const getCities  = cities.map((city, index) => ({
@@ -86,7 +86,7 @@ export default function JobAdvertisementAdd() {
   }));
   const getJobTitles  = jobTitles.map((jobTitle, index) => ({
       key: index,
-      text: jobTitle.title,
+      text: jobTitle.jobTitle,
       value: jobTitle,
   }));
   const getEmployers  = employers.map((employer, index) => ({
@@ -249,7 +249,7 @@ export default function JobAdvertisementAdd() {
                               onBlur={formik.onBlur}
                               id="workHour"
                               value={formik.values.workHour}
-                              options={getWorkTimes}
+                              options={getWorkHours}
                           />
                           {formik.errors.workHour && formik.touched.workHour && (
                               <div className={"ui pointing red basic label"}>{formik.errors.workHour}</div>

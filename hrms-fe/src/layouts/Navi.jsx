@@ -13,9 +13,6 @@ import SignedOut from "./SignedOut";
 import { NavLink } from "react-router-dom";
 
 
-
-
-
 export default function Navi() {
     const [isAuthenticated,setIsAuthenticated]=useState(true)
     const history= useHistory()
@@ -44,14 +41,14 @@ export default function Navi() {
               size='large'
             >
               <Container>
-              <Menu.Item  as={NavLink} to="/home">Home</Menu.Item>
-              <Menu.Item as={NavLink} to="/jobadvertisements">Jobs</Menu.Item>
-              <Menu.Item as={NavLink} to="/candidates">Candidates</Menu.Item>
-              <Menu.Item as={NavLink} to="/employers">Employers</Menu.Item>
+              <Menu.Item  as={NavLink} to="/home">Ana Sayfa</Menu.Item>
+              <Menu.Item as={NavLink} to="/jobadvertisements">İş İlanları</Menu.Item>
+              <Menu.Item as={NavLink} to="/candidates">İş Adayları</Menu.Item>
+              <Menu.Item as={NavLink} to="/employers">İş Verenler</Menu.Item>
 
 
               <Menu.Menu style={{marginTop:"1.3em"}} >
-          <Dropdown item text='Employees' pointing="top">
+          <Dropdown item text='Sistem Çalışanları' pointing="top">
             <Dropdown.Menu>
                 <Dropdown.Item as={NavLink} to="/employees">HRMS Personel</Dropdown.Item>
                    <Dropdown.Item as={NavLink} to="/jobconfirm">Onaylanmamış İlanlar</Dropdown.Item>
@@ -61,7 +58,7 @@ export default function Navi() {
           </Menu.Menu>
               <Menu.Menu position="right">
                 <Menu.Item >
-                   <Button as={NavLink} to="/jobadd" circular inverted color='purple'  ><Icon  name="upload" />Post A Job</Button>
+                   <Button as={NavLink} to="/jobadd" circular inverted color='purple'  ><Icon  name="upload" />İşe başvur</Button>
                 </Menu.Item>
 
                 <Menu.Item>
@@ -74,8 +71,7 @@ export default function Navi() {
               </Menu.Menu>
             </Container>
           </Menu>
-          </Segment>
-           
+          </Segment>      
      
      
 

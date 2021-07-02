@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import EducationList from ".EducationList";
+import EducationList from "./EducationList";
 import LanguageList from "./LanguageList";
 import JobExperienceList from "./JobExperienceList";
 import LinkList from "./LinkList";
@@ -8,16 +8,7 @@ import AddCoverLetter from "./AddCoverLetter";
 import { useParams } from "react-router-dom";
 import * as moment from 'moment';
 import CandidateService from "../../services/candidateService";
-import {
-  Icon,
-  Card,
-  Segment,
-  Container,
-  Grid,
-  Message,
-  Table,
-  Label
-} from "semantic-ui-react";
+import {Icon,Card,Segment,Container,Grid,Message,Table,Label} from "semantic-ui-react";
 import ImageList from "./ImageList";
 import UpdateResume from "./UpdateResume";
 
@@ -163,7 +154,6 @@ export default function Resume() {
  
 
      <LanguageList></LanguageList>
-
       <JobExperienceList></JobExperienceList>
       <LinkList></LinkList>
       <SkillList></SkillList>

@@ -58,7 +58,7 @@ export default function JobAdvertisementList() {
         <Container>
           
           <Header circle="true" as="h3" style={{ fontSize: "3em" }}>
-            Recent Job
+          Son İş
           </Header>
           <Card.Group itemsPerRow={4}>
             {jobPosts.map((jobPost) => (

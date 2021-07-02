@@ -68,7 +68,7 @@ export default function Filter({ clickEvent }) {
         <Container>
           <Header
             as="h2"
-            content="The Easiest Way to Get Your New Job"
+            content="Yeni İşinizi Almanın En Kolay Yolu"
             inverted
             style={{
               fontSize: "4em",
@@ -83,7 +83,7 @@ export default function Filter({ clickEvent }) {
                 <Grid.Row verticalAlign="middle">
                   <Grid.Column>
                     <Dropdown
-                      placeholder="Şehir..."
+                      placeholder="Şehir"
                       selection
                       search
                       multiple
@@ -102,7 +102,7 @@ export default function Filter({ clickEvent }) {
 
                   <Grid.Column>
                     <Dropdown
-                      placeholder="Çalışma Zamanı..."
+                      placeholder="Çalışma Zamanı"
                       selection
                       search
                       multiple
@@ -121,7 +121,7 @@ export default function Filter({ clickEvent }) {
 
                   <Grid.Column>
                     <Dropdown
-                      placeholder="Çalışma Tipi..."
+                      placeholder="Çalışma Tipi"
                       selection
                       search
                       multiple
@@ -140,7 +140,7 @@ export default function Filter({ clickEvent }) {
 
                   <Grid.Column>
                     <Dropdown
-                      placeholder="Pozisyon..."
+                      placeholder="Pozisyon"
                       selection
                       search
                       multiple

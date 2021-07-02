@@ -8,4 +8,4 @@ export default class EmployeeService{
     update(employee){
         return axios.put("/employee/update",employee)
     }
-}F
+}
