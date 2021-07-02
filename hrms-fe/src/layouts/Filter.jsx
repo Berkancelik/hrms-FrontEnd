@@ -140,7 +140,7 @@ export default function Filter({ clickEvent }) {
 
                   <Grid.Column>
                     <Dropdown
-                      placeholder="Pozisyon"
+                      placeholder="Pozisyon..."
                       selection
                       search
                       multiple

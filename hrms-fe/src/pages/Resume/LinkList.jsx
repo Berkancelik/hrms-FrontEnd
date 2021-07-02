@@ -19,7 +19,7 @@ export default function LinkList() {
   useEffect(() => {
     let linkService = new LinkService();
     linkService
-      .geLinkss(candidateId)
+      .getLinks(candidateId)
       .then((result) => setLinks(result.data.data));
   }, [candidateId]);
 

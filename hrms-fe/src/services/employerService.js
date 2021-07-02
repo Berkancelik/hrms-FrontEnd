@@ -2,20 +2,20 @@ import axios from "axios"
 
 export default class EmployerService{
     getEmployers(){
-        return axios.get("/employers/getall")
+        return axios.get("http://localhost:8080/api/employers/getall")
     }
 
     getById(employerId){
-        return axios.get("/employers/getById?id="+employerId)
+        return axios.get("http://localhost:8080/api/employers/getById?id="+employerId)
     }
 
     updateWaiting(employer){
-        return axios.post("/employers/updateWaiting",employer)
+        return axios.post("http://localhost:8080/api/employers/updateWaiting",employer)
     }
     updateConfirmStatus(employerId){
-        return axios.post("/employers/updateConfirmStatus?employerId="+employerId)
+        return axios.post("http://localhost:8080/api/employers/updateConfirmStatus?employerId="+employerId)
     }
     getByConfirmStatusFalse(){
-        return axios.get("/employers/getByConfirmStatusFalse")
+        return axios.get("http://localhost:8080/api/employers/getByConfirmStatusFalse")
     }
 }

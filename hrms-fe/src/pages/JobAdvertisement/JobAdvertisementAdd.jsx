@@ -6,16 +6,16 @@ import { Button, Dropdown, Input, TextArea, Card, Form, Grid,Segment,Container,L
 import JobAdvertisementService from '../../services/jobAdvertisementService';
 import CityService from '../../services/cityService';
 import WorkTypeService from '../../services/workTypeService';
-import WorkHourService from '../../services/workHourService';
 import JobTitleService from '../../services/jobTitleService';
 import EmployerService from "../../services/employerService";
 import * as moment from 'moment'
 import swal from "sweetalert";
+import WorkHourService from '../../services/workHourService';
 
-export default function JobAdvertisementAdd() {
+export default function JobPosting() {
   let jobAdvertisementService = new JobAdvertisementService()
 
-  const JobAdvertisementAddSchema = Yup.object().shape({
+  const JobAdvertAddSchema = Yup.object().shape({
       deadline: Yup.string().nullable().required("Son başvuru tarihi boş bırakılamaz!"),
       description: Yup.string().required("İş açıklaması boş bırakılamaz!"),
       jobTitle: new Yup.ObjectSchema().required("İş pozisyonu bilgisi boş geçilemez!"),
@@ -37,11 +37,11 @@ export default function JobAdvertisementAdd() {
           openTitleCount: "",
           city: "",
           salaryMin: "",
-          salaryMac: "",
+          salaryMax: "",
           deadline:moment().format("YYYY-MM-DD")
        
       },
-      validationSchema: JobAdvertisementAddSchema,
+      validationSchema: JobAdvertAddSchema,
       onSubmit: (values) => {
           jobAdvertisementService.addJobAdvertisement(values).then((result) => console.log(result.data.data));
           swal("Başarılı!", "İş ilanı eklendi!", "success");
@@ -50,8 +50,8 @@ export default function JobAdvertisementAdd() {
   });
 
   const[employers,setEmployers]=useState([]);
-  const [workHours, setworkHours] = useState([]);
-  const [workTypes, setworkTypes] = useState([]);
+  const [workHours, setWorkHours] = useState([]);
+  const [workTypes, setWorkTypes] = useState([]);
   const [cities, setCities] = useState([]);
   const [jobTitles, setjobTitles] = useState([]);
 
@@ -61,19 +61,18 @@ export default function JobAdvertisementAdd() {
       let cityService = new CityService()
       let titleService = new JobTitleService()
       let employerService=new EmployerService()
-
-      workHourService.getWorkHours().then(result => setworkHours(result.data.data))
-      workTypeService.getWorkTypes().then(result => setworkTypes(result.data.data))
+      workHourService.getWorkHours().then(result => setWorkHours(result.data.data))
+      workTypeService.getWorkTypes().then(result => setWorkTypes(result.data.data))
       cityService.getAll().then(result => setCities(result.data.data))
       titleService.getJobTitles().then(result => setjobTitles(result.data.data))
       employerService.getEmployers().then(result=>setEmployers(result.data.data))
   }, [])
 
-  const getWorkHours  = workHours.map((workHour, index) => ({
-      key: index,
-      text: workHour.workHour,
-      value: workHour,
-  }));
+  const getWorkTimes  = workHours.map((workHour, index) => ({
+    key: index,
+    text: workHour.workHour,
+    value: workHour,
+}));
   const getWorkTypes  = workTypes.map((workType, index) => ({
       key: index,
       text: workType.workType,
@@ -86,7 +85,7 @@ export default function JobAdvertisementAdd() {
   }));
   const getJobTitles  = jobTitles.map((jobTitle, index) => ({
       key: index,
-      text: jobTitle.jobTitle,
+      text: jobTitle.title,
       value: jobTitle,
   }));
   const getEmployers  = employers.map((employer, index) => ({
@@ -202,7 +201,7 @@ export default function JobAdvertisementAdd() {
                       <Form.Field>
                       <Label basic color="blue">
                     <Icon name="list alternate" /> Çalışma Tipi:
-                  </Label>
+                    </Label>
                           <Dropdown
                             style={{
                               marginRight: "1em",
@@ -249,7 +248,7 @@ export default function JobAdvertisementAdd() {
                               onBlur={formik.onBlur}
                               id="workHour"
                               value={formik.values.workHour}
-                              options={getWorkHours}
+                              options={getWorkTimes}
                           />
                           {formik.errors.workHour && formik.touched.workHour && (
                               <div className={"ui pointing red basic label"}>{formik.errors.workHour}</div>
@@ -285,15 +284,15 @@ export default function JobAdvertisementAdd() {
                                        style={{ marginRight: "1em", marginTop: "1em" }}
                                       type="number"
                                       placeholder="Maximum Maaş..."
-                                      value={formik.values.salaryMac}
-                                      name="salaryMac"
+                                      value={formik.values.salaryMax}
+                                      name="salaryMax"
                                       onChange={formik.handleChange}
                                       onBlur={formik.handleBlur}
                                   >
                                   </Input>
-                                  {formik.errors.salaryMac && formik.touched.salaryMac && (
+                                  {formik.errors.salaryMax && formik.touched.salaryMax && (
                                       <div className={"ui pointing red basic label"}>
-                                          {formik.errors.salaryMac}
+                                          {formik.errors.salaryMax}
                                       </div>
                                   )}
                               </Grid.Column>
