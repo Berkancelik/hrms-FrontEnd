@@ -1,10 +1,10 @@
   
 import React from "react";
-import SkillService from "../../../../services/skillService";
 import { Formik, Form } from "formik";
 import { FormGroup, Button, Segment } from "semantic-ui-react";
 import { toast } from "react-toastify";
 import HrmsInput from "../../../../utilities/customFormControls/HrmsInput";
+import SkillService from "../../services/skillService";
 
 export default function AddSkill({id}) {
   let skillService = new SkillService();

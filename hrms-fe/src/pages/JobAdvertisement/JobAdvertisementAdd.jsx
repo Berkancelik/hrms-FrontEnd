@@ -1,268 +1,391 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import * as moment from "moment";
-import {Container,Segment,Grid, Card, Icon, Label, Table, Button} from "semantic-ui-react";
+import React, { useEffect, useState } from 'react'
+import * as Yup from 'yup'
+import { useHistory } from 'react-router-dom';
+import { useFormik } from "formik";
+import { Button, Dropdown, Input, TextArea, Card, Form, Grid,Segment,Container,Label,Icon } from "semantic-ui-react";
+import JobAdvertisementService from '../../services/jobAdvertisementService';
+import CityService from '../../services/cityService';
+import WorkTypeService from '../../services/workTypeService';
+import WorkHourService from '../../services/workHourService';
+import JobTitleService from '../../services/jobTitleService';
+import EmployerService from "../../services/employerService";
+import * as moment from 'moment'
 import swal from "sweetalert";
-import JobAdvertisementService from "../../services/jobAdvertisementService";
-import FavoriteService from "../../services/favoriteService";
 
-export default function JobAdvertisementDetails() {
-  let { id } = useParams();
-  const [jobPost, setJobPost] = useState({});
+export default function JobAdvertisementAdd() {
+  let jobAdvertisementService = new JobAdvertisementService()
+
+  const JobAdvertisementAddSchema = Yup.object().shape({
+      deadline: Yup.string().nullable().required("Son başvuru tarihi boş bırakılamaz!"),
+      description: Yup.string().required("İş açıklaması boş bırakılamaz!"),
+      jobTitle: new Yup.ObjectSchema().required("İş pozisyonu bilgisi boş geçilemez!"),
+      workHour: new Yup.ObjectSchema().required("Çalışma zamanı tipi boş bırakılamaz!"),
+      workType: new Yup.ObjectSchema().required("Çalışma tipi boş bırakılamaz!"),
+      openTitleCount: Yup.string().required("Kişi sayısı boş bırakılamaz!"),
+      city: new Yup.ObjectSchema().required("Şehir bilgisi boş bırakılamaz!"),
+  });
+
+  const history = useHistory()
+
+  const formik = useFormik({
+      initialValues: {
+          employer:"",
+          description: "",
+          jobTitle: "",
+          workHour: "",
+          workType: "",
+          openTitleCount: "",
+          city: "",
+          salaryMin: "",
+          salaryMac: "",
+          deadline:moment().format("YYYY-MM-DD")
+       
+      },
+      validationSchema: JobAdvertisementAddSchema,
+      onSubmit: (values) => {
+          jobAdvertisementService.addJobAdvertisement(values).then((result) => console.log(result.data.data));
+          swal("Başarılı!", "İş ilanı eklendi!", "success");
+          history.push("/jobadd");
+      },
+  });
+
+  const[employers,setEmployers]=useState([]);
+  const [workHours, setworkHours] = useState([]);
+  const [workTypes, setworkTypes] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [jobTitles, setjobTitles] = useState([]);
 
   useEffect(() => {
-    let jobAdvertisementService = new JobAdvertisementService();
-    jobAdvertisementService
-      .getByJobAdvertisementId(id)
-      .then((result) => setJobPost(result.data.data));
-  }, [id]);
+      let workHourService = new WorkHourService()
+      let workTypeService = new WorkTypeService()
+      let cityService = new CityService()
+      let titleService = new JobTitleService()
+      let employerService=new EmployerService()
 
-const addtoFavorites=()=>{
-  let favoriteService=new FavoriteService();
-  const favorite={
-    candidateId:1,
-    jobAdvertisementId:id
+      workHourService.getWorkTimes().then(result => setworkHours(result.data.data))
+      workTypeService.getWorkTypes().then(result => setworkTypes(result.data.data))
+      cityService.getCities().then(result => setCities(result.data.data))
+      titleService.getJobTitles().then(result => setjobTitles(result.data.data))
+      employerService.getEmployers().then(result=>setEmployers(result.data.data))
+  }, [])
+
+  const getWorkTimes  = workHours.map((workHour, index) => ({
+      key: index,
+      text: workHour.workTimeName,
+      value: workHour,
+  }));
+  const getWorkTypes  = workTypes.map((workType, index) => ({
+      key: index,
+      text: workType.workTypeName,
+      value: workType,
+  }));
+  const getCities  = cities.map((city, index) => ({
+      key: index,
+      text: city.cityName,
+      value: city,
+  }));
+  const getJobTitles  = jobTitles.map((jobTitle, index) => ({
+      key: index,
+      text: jobTitle.title,
+      value: jobTitle,
+  }));
+  const getEmployers  = employers.map((employer, index) => ({
+    key: index,
+    text: employer.companyName,
+    value: employer,
+}));
+
+  const handleChangeSemantic = (value, fieldName) => {
+      formik.setFieldValue(fieldName, value);
   }
-  favoriteService.add(favorite).then(swal("Başarılı!", "Favorilere eklendi!", "success"));
-}
-
 
   return (
-    <div>
-      <Segment circle="true" style={{ padding: "10em 0em" }} vertical>
+      <div>
+         <Segment style={{ padding: "10em 0em" }} vertical>
         <Container>
-          <Grid>
-            <Grid.Row>
-              <Grid.Column width={11}>
-                <Card fluid color="green">
-                  <Card.Content>
-                 
-                    <Card.Header
-                      textAlign="center"
-                      style={{
-                        fontSize: "2em",
-                        color: "purple",
-                        marginTop: "1em",
-                      }}
-                    >
-                      
-                      {jobPost.jobTitle?.jobTitle} 
-                    </Card.Header>
-                    <Card.Meta
-                      textAlign="center"
-                      style={{
-                        fontSize: "1.5em",
-                        color: "grey",
-                        marginTop: "1em",
-                      }}
-                    >
-                      <Icon name="building outline" color="brown" />{" "}
-                      {jobPost.employer?.companyName}
-                    </Card.Meta>
-                    <Card.Meta
-                      textAlign="center"
-                      style={{
-                        fontSize: "1.5em",
-                        color: "grey",
-                        marginTop: "0.50em",
-                      }}
-                    >
-                      <Icon name="map marker" color="blue" />{" "}
-                      {jobPost.city?.cityName}
-                    </Card.Meta>
+          <Card fluid color = 'blue'>
+          <Card.Header
+              textAlign="center"
+              style={{ fontSize: "2em", marginBottom: "1em", marginTop: "1em" }}
+            >
+              İş İlanı Ekle
+            </Card.Header>
+              <Card.Content>
+                  <Form onSubmit={formik.handleSubmit}><Form.Field style={{ marginBottom: "1rem" }}>
+                  <Label basic color="blue">
+                    <Icon name="list alternate" /> Şirket:
+                  </Label>
+                          <Dropdown
+                            style={{
+                              marginRight: "1em",
+                              marginTop: "1em",
+                              fontWeight: "lighter",
+                            }}
+                              clearable
+                              item
+                              placeholder="Şirket Seçiniz..."
+                              search
+                              selection
+                              onChange={(event, data) =>
+                                  handleChangeSemantic(data.value, "employer")
+                              }
+                              onBlur={formik.onBlur}
+                              id="employer"
+                              value={formik.values.employer}
+                              options={getEmployers}
+                          />
+                          {formik.errors.employer && formik.touched.employer && (
+                              <div className={"ui pointing red basic label"}>
+                                  {formik.errors.employer}
+                              </div>
+                          )}
+                      </Form.Field>
 
-                    <Card.Description
-                      style={{
-                        color: "grey",
-                        fontSize: "1.5em",
-                        textAlign: "center",
-                      }}
-                    >
-                      {jobPost.description}
-                    </Card.Description>
-                    <Card.Meta>
-                      <Table
-                        verticalAlign="middle"
-                        basic="very"
-                        style={{ marginTop: "2em" }}
-                      >
-                        <Table.Body>
-                          <Table.Row textAlign="center">
-                            <Table.Cell>
-                              <Label
-                                basic
-                                color="green"
-                                pointing="right"
-                                style={{
-                                  fontSize: "1.2em",
-                                }}
-                              >
-                                Maaş Aralığı:
-                              </Label>
-                            </Table.Cell>
-                            <Table.Cell style={{
-                                  fontSize: "1.4em",
-                                }} textAlign="center">
-                              {" "}
-                              {jobPost.salaryMin} <Icon name="lira" /> -{" "}
-                              {jobPost.salaryMax} <Icon name="lira" />
-                            </Table.Cell>
-                          </Table.Row>
-                          <Table.Row textAlign="center">
-                            <Table.Cell>
-                              {" "}
-                              <Label basic color="green" pointing="right" style={{
-                                  fontSize: "1.2em",
-                                }}>
-                                Çalışma Tipi:
-                              </Label>
-                            </Table.Cell>
-                            <Table.Cell style={{
-                                  fontSize: "1.4em",
-                                }}>
-                              {jobPost.workType?.workType}
-                            </Table.Cell>
-                          </Table.Row>
-                          <Table.Row textAlign="center">
-                            <Table.Cell>
-                              {" "}
-                              <Label basic color="green" pointing="right" style={{
-                                  fontSize: "1.2em",
-                                }}>
-                                Çalışma Zamanı Tipi:
-                              </Label>
-                            </Table.Cell>
-                            <Table.Cell style={{
-                                  fontSize: "1.4em",
-                                }}>
-                              {jobPost.workHour?.workHour}
-                            </Table.Cell>
-                          </Table.Row>
+                      <Form.Field style={{ marginBottom: "1rem" }}>
+                      <Label basic color="blue">
+                    <Icon name="list alternate" /> Şehir:
+                  </Label>
+                          <Dropdown
+                           style={{
+                            marginRight: "1em",
+                            marginTop: "1em",
+                            fontWeight: "lighter",
+                          }}
+                              clearable
+                              item
+                              placeholder="Şehir Seçiniz..."
+                              search
+                              selection
+                              onChange={(event, data) =>
+                                  handleChangeSemantic(data.value, "city")
+                              }
+                              onBlur={formik.onBlur}
+                              id="title"
+                              value={formik.values.city}
+                              options={getCities}
+                          />
+                          {formik.errors.city && formik.touched.city && (
+                              <div className={"ui pointing red basic label"}>
+                                  {formik.errors.city}
+                              </div>
+                          )}
+                      </Form.Field>
+                      <Form.Field>
+                      <Label basic color="blue">
+                    <Icon name="list alternate" /> İş Pozisyonu:
+                  </Label>
+                          <Dropdown
+                           style={{
+                            marginRight: "1em",
+                            marginTop: "1em",
+                            fontWeight: "lighter",
+                          }}
+                              clearable
+                              item
+                              placeholder="İş Pozisyonu Seçiniz..."
+                              search
+                              selection
+                              onChange={(event, data) =>
+                                  handleChangeSemantic(data.value, "jobTitle")
+                              }
+                              onBlur={formik.onBlur}
+                              id="city"
+                              value={formik.values.jobTitle}
+                              options={getJobTitles}
+                          />
+                          {formik.errors.jobTitle && formik.touched.jobTitle && (
+                              <div className={"ui pointing red basic label"}>
+                                  {formik.errors.jobTitle}
+                              </div>
+                          )}
+                      </Form.Field>
+                      <Form.Field>
+                      <Label basic color="blue">
+                    <Icon name="list alternate" /> Çalışma Tipi:
+                  </Label>
+                          <Dropdown
+                            style={{
+                              marginRight: "1em",
+                              marginTop: "1em",
+                              fontWeight: "lighter",
+                            }}
+                              clearable
+                              item
+                              placeholder="Çalışma Tipi Seçiniz..."
+                              search
+                              selection
+                              onChange={(event, data) =>
+                                  handleChangeSemantic(data.value, "workType")
+                              }
+                              onBlur={formik.onBlur}
+                              id="workType"
+                              value={formik.values.workType}
+                              options={getWorkTypes}
+                          />
+                          {formik.errors.workType && formik.touched.workType && (
+                              <div className={"ui pointing red basic label"}>
+                                  {formik.errors.workType}
+                              </div>
+                          )}
+                      </Form.Field>
+                      <Form.Field>
+                      <Label basic color="blue">
+                    <Icon name="list alternate" /> Çalışma Zamanı Tipi:
+                  </Label>
+                          <Dropdown
+                           style={{
+                            marginRight: "1em",
+                            marginTop: "1em",
+                            fontWeight: "lighter",
+                          }}
+                              clearable
+                              item
+                              placeholder="Çalışma Zamanı Tipi Seçiniz..."
+                              search
+                              selection
+                              onChange={(event, data) =>
+                                  handleChangeSemantic(data.value, "workHour")
+                              }
+                              onBlur={formik.onBlur}
+                              id="workHour"
+                              value={formik.values.workHour}
+                              options={getWorkTimes}
+                          />
+                          {formik.errors.workHour && formik.touched.workHour && (
+                              <div className={"ui pointing red basic label"}>{formik.errors.workHour}</div>
+                          )}
+                      </Form.Field>
+                      <Form.Field>
+                          <Grid stackable>
+                              <Grid.Column width={8}>
+                              <Label basic color="blue">
+                        <Icon name="lira" /> Minimum Maaş:
+                      </Label>
+                                  <Input
+                                       style={{ marginRight: "1em", marginTop: "1em" }}
+                                      type="number"
+                                      placeholder="Minimum Maaş..."
+                                      value={formik.values.salaryMin}
+                                      name="salaryMin"
+                                      onChange={formik.handleChange}
+                                      onBlur={formik.handleBlur}
+                                  >
+                                  </Input>
+                                  {formik.errors.salaryMin && formik.touched.salaryMin && (
+                                      <div className={"ui pointing red basic label"}>
+                                          {formik.errors.salaryMin}
+                                      </div>
+                                  )}
+                              </Grid.Column>
+                              <Grid.Column width={8}>
+                              <Label basic color="blue">
+                        <Icon name="lira" /> Maximum Maaş:
+                      </Label>
+                                  <Input
+                                       style={{ marginRight: "1em", marginTop: "1em" }}
+                                      type="number"
+                                      placeholder="Maximum Maaş..."
+                                      value={formik.values.salaryMac}
+                                      name="salaryMac"
+                                      onChange={formik.handleChange}
+                                      onBlur={formik.handleBlur}
+                                  >
+                                  </Input>
+                                  {formik.errors.salaryMac && formik.touched.salaryMac && (
+                                      <div className={"ui pointing red basic label"}>
+                                          {formik.errors.salaryMac}
+                                      </div>
+                                  )}
+                              </Grid.Column>
+                          </Grid>
+                      </Form.Field>
 
-                          <Table.Row textAlign="center">
-                            <Table.Cell>
-                              {" "}
-                              <Label basic color="green" pointing="right" style={{
-                                  fontSize: "1.2em",
-                                }}>
-                                Son Başvuru Tarihi:
-                              </Label>
-                            </Table.Cell>
-                            <Table.Cell style={{
-                                  fontSize: "1.4em",
-                                }}>
-                              {moment(jobPost.deadline).format(
-                                "DD.MM.yyyy"
-                              )}
-                            </Table.Cell>
-                          </Table.Row>
+                      <Form.Field>
+                          <Grid stackable>
+                              <Grid.Column width={8}>
+                              <Label basic color="blue">
+                        <Icon name="user" />Alınacak Personel Sayısı:
+                      </Label>
+                                  <Input
+                                      style={{ marginRight: "1em", marginTop: "1em" }}
+                                      id="openTitleCount"
+                                      name="openTitleCount"
+                                      error={Boolean(formik.errors.openTitleCount)}
+                                      onChange={formik.handleChange}
+                                      value={formik.values.openTitleCount}
+                                      onBlur={formik.handleBlur}
+                                      type="number"
+                                      placeholder="Personel Sayısı..."
+                                  />
+                                  {formik.errors.openTitleCount && formik.touched.openTitleCount && (
+                                      <div className={"ui pointing red basic label"}>
+                                          {formik.errors.openTitleCount}
+                                      </div>
+                                  )}
+                              </Grid.Column>
+                              <Grid.Column width={8}>
+                              <Label basic color="blue">
+                        <Icon name="calendar alternate outline" /> Son Başvuru
+                        Tarihi:
+                      </Label>
+                                  <Input 
+                                        style={{ marginRight: "1em", marginTop: "1em" }}
+                                      type="date"
+                                      error={Boolean(formik.errors.deadline)}
+                                      onChange={(event, data) =>
+                                          handleChangeSemantic(data.value, "deadline")
+                                      }
+                                      value={formik.values.deadline}
+                                      onBlur={formik.handleBlur}
+                                      name="deadline"
+                                      placeholder="Son Başvuru Tarihi..."
+                                  />
+                                  {formik.errors.deadline && formik.touched.deadline && (
+                                      <div className={"ui pointing red basic label"}>
+                                          {formik.errors.deadline}
+                                      </div>
+                                  )}
+                              </Grid.Column>
+                          </Grid>
+                      </Form.Field>
 
-                          <Table.Row textAlign="center">
-                            <Table.Cell>
-                              {" "}
-                              <Label basic color="green" pointing="right" style={{
-                                  fontSize: "1.2em",
-                                }}>
-                                Alınacak Personel Sayısı:
-                              </Label>
-                            </Table.Cell>
-                            <Table.Cell style={{
-                                  fontSize: "1.4em",
-                                }}>{jobPost.openTitleCount}</Table.Cell>
-                          </Table.Row>
-                         
-                        </Table.Body>
-                       
-                      </Table><Button basic color="red"  size="large" onClick={()=>addtoFavorites()} ><Icon name="heart"/> Favorilere Ekle</Button>
-                    </Card.Meta>
-                  </Card.Content>
-                </Card>
-              </Grid.Column>
-              <Grid.Column width={5} stretched>
-                {" "}
-                <Card fluid color="green" >
-                  <Card.Content>
-                    <Card.Header
-                      textAlign="center"
-                      style={{
-                        fontSize: "2em",
-                        marginTop: "3.5em",
-                        color: "purple",
-                      }}
-                    >
-                      {jobPost.employer?.companyName}
-                    </Card.Header>
-                    <Card.Meta
-                      textAlign="center"
-                      style={{
-                        fontSize: "1.5em",
-                        color: "black",
-                        marginTop: "1.5em",
-                      }}
-                    >
-                      {" "}
-                      <Icon name="mail" color="grey" pointing="right" />
-                      {" : "}
-                      {jobPost.employer?.email}
-                    </Card.Meta>
-
-                    <Card.Meta
-                      textAlign="center"
-                      style={{
-                        fontSize: "1.5em",
-                        color: "black",
-                        marginTop: "1.5em",
-                      }}
-                    >
-                      {" "}
-                      <Icon name="globe" color="grey" />
-                      {" : "}
-                      {jobPost.employer?.webAddress}
-                    </Card.Meta>
-
-                    <Card.Meta
-                      textAlign="center"
-                      style={{
-                        fontSize: "1.5em",
-                        color: "black",
-                        marginTop: "1.5em",
-                      }}
-                    >
-                      {" "}
-                      <Icon name="phone" color="grey" />
-                      {" : "}
-                      {jobPost.employer?.phoneNumber}
-                    </Card.Meta>
-                    <Card.Meta
-                      textAlign="center"
-                      style={{
-                        fontSize: "1.5em",
-                        color: "black",
-                        marginTop: "1.5em",
-                        marginRight: "1.2em",
-                        marginBottom: "3.2em",
-                      }}
-                    >
-                      {" "}
-                      <Icon name="calendar outline" color="grey" />
-                      {" : "}
-                      {moment(jobPost.employer?.createdDate).format(
-                        "DD.MM.yyyy"
-                      )}
-                    </Card.Meta>
-                    <Card.Description>
-                      <Button basic color="green"  size="large" >
-                        Başvur
-                      </Button>
-                    </Card.Description>
-                   
-                  </Card.Content>
-                </Card>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Container>
-      </Segment>
-    </div>
-  );
+                      <Form.Field>
+                      <Label basic color="blue">
+                    <Icon name="briefcase" /> İş Tanımı:
+                  </Label>
+                          <TextArea
+                              placeholder="İş Tanımı..."
+                              style={{ marginRight: "1em", marginTop: "1em" }}
+                              error={Boolean(formik.errors.description).toString()}
+                              value={formik.values.description}
+                              name="description"
+                              onChange={formik.handleChange}
+                              onBlur={formik.handleBlur}
+                          />
+                          {formik.errors.description && formik.touched.description && (
+                              <div className={"ui pointing red basic label"}>
+                                  {formik.errors.description}
+                              </div>
+                          )}
+                      </Form.Field>
+                      <Button
+                  type="submit"
+                  animated
+                  basic
+                  color="blue"
+                  size="massive"
+                  style={{ marginBottom: "0.4em" }}
+                >
+                  <Button.Content visible>Ekle</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="check" />
+                  </Button.Content>
+                </Button>
+                  </Form>
+              </Card.Content>
+          </Card>
+          </Container>
+        </Segment>
+      </div>
+  )
 }

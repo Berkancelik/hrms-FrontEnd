@@ -1,8 +1,8 @@
   
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import ImageService from "../../services/ımageService";
 import { Image } from "semantic-ui-react";
+import ImageService from "../../services/imageService";
 export default function ImageList() {
   let { candidateId } = useParams();
   const [images, setImages] = useState([]);
