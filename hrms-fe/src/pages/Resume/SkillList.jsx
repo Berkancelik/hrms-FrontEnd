@@ -11,7 +11,7 @@ import {
   Message,
   Card
 } from "semantic-ui-react";
-import UpdateSkill from "./UpdateSkill";
+import UpdateSkill from "./update/UpdateSkill";
 
 export default function SkillList() {
   let { candidateId } = useParams();

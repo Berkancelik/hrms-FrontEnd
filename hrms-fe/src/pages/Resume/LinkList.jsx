@@ -11,7 +11,7 @@ import {
   Card,
   Button,
 } from "semantic-ui-react";
-import UpdateLink from "./UpdateLink";
+import UpdateLink from "./update/UpdateLink";
 
 export default function LinkList() {
   let { candidateId } = useParams();

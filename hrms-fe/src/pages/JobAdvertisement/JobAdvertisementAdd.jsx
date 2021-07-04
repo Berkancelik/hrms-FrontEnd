@@ -6,13 +6,13 @@ import { Button, Dropdown, Input, TextArea, Card, Form, Grid,Segment,Container,L
 import JobAdvertisementService from '../../services/jobAdvertisementService';
 import CityService from '../../services/cityService';
 import WorkTypeService from '../../services/workTypeService';
+import WorkHourService from '../../services/workHourService';
 import JobTitleService from '../../services/jobTitleService';
 import EmployerService from "../../services/employerService";
 import * as moment from 'moment'
 import swal from "sweetalert";
-import WorkHourService from '../../services/workHourService';
 
-export default function JobPosting() {
+export default function JobAdvertisementAdd() {
   let jobAdvertisementService = new JobAdvertisementService()
 
   const JobAdvertAddSchema = Yup.object().shape({
@@ -50,8 +50,8 @@ export default function JobPosting() {
   });
 
   const[employers,setEmployers]=useState([]);
-  const [workHours, setWorkHours] = useState([]);
-  const [workTypes, setWorkTypes] = useState([]);
+  const [workHours, setworkHours] = useState([]);
+  const [workTypes, setworkTypes] = useState([]);
   const [cities, setCities] = useState([]);
   const [jobTitles, setjobTitles] = useState([]);
 
@@ -61,18 +61,19 @@ export default function JobPosting() {
       let cityService = new CityService()
       let titleService = new JobTitleService()
       let employerService=new EmployerService()
-      workHourService.getWorkHours().then(result => setWorkHours(result.data.data))
-      workTypeService.getWorkTypes().then(result => setWorkTypes(result.data.data))
+
+      workHourService.getWorkHours().then(result => setworkHours(result.data.data))
+      workTypeService.getWorkTypes().then(result => setworkTypes(result.data.data))
       cityService.getAll().then(result => setCities(result.data.data))
       titleService.getJobTitles().then(result => setjobTitles(result.data.data))
       employerService.getEmployers().then(result=>setEmployers(result.data.data))
   }, [])
 
-  const getWorkTimes  = workHours.map((workHour, index) => ({
-    key: index,
-    text: workHour.workHour,
-    value: workHour,
-}));
+  const getWorkHours  = workHours.map((workHour, index) => ({
+      key: index,
+      text: workHour.workHour,
+      value: workHour,
+  }));
   const getWorkTypes  = workTypes.map((workType, index) => ({
       key: index,
       text: workType.workType,
@@ -85,7 +86,7 @@ export default function JobPosting() {
   }));
   const getJobTitles  = jobTitles.map((jobTitle, index) => ({
       key: index,
-      text: jobTitle.title,
+      text: jobTitle.jobTitle,
       value: jobTitle,
   }));
   const getEmployers  = employers.map((employer, index) => ({
@@ -201,7 +202,7 @@ export default function JobPosting() {
                       <Form.Field>
                       <Label basic color="blue">
                     <Icon name="list alternate" /> Çalışma Tipi:
-                    </Label>
+                  </Label>
                           <Dropdown
                             style={{
                               marginRight: "1em",
@@ -248,7 +249,7 @@ export default function JobPosting() {
                               onBlur={formik.onBlur}
                               id="workHour"
                               value={formik.values.workHour}
-                              options={getWorkTimes}
+                              options={getWorkHours}
                           />
                           {formik.errors.workHour && formik.touched.workHour && (
                               <div className={"ui pointing red basic label"}>{formik.errors.workHour}</div>

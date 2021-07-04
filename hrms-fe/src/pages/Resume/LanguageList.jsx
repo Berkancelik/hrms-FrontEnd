@@ -10,7 +10,7 @@ import {
 } from "semantic-ui-react";
 import LanguageService from "../../services/languageService";
 import { useParams } from "react-router-dom";
-import UpdateLanguage from "./UpdateLanguage";
+import UpdateLanguage from "./update/UpdateLanguage";
 import AddLanguage from "./AddLanguage";
 
 export default function LanguageList() {

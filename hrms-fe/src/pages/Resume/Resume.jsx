@@ -10,7 +10,7 @@ import * as moment from 'moment';
 import CandidateService from "../../services/candidateService";
 import {Icon,Card,Segment,Container,Grid,Message,Table,Label} from "semantic-ui-react";
 import ImageList from "./ImageList";
-import UpdateResume from "./UpdateResume";
+import UpdateResume from "./update/UpdateResume";
 
 
 export default function Resume() {
