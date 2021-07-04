@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ProfileJobseeker() {
+export default function ProfileCandidate() {
     return (
         <div>
             İş Arayan Profili

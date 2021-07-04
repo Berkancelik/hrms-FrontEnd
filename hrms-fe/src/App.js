@@ -16,15 +16,15 @@ import { useState } from "react";
 import SignedInCandidate from "./layouts/SignedInCandidate";
 import ResumeList from "./pages/Candidate/Resume/ResumeList";
 import LoginEmployee from "./pages/Employee/LoginEmployee";
-import Profilecandidate from "./pages/Candidate/ProfileCandidate";
+import ProfileCandidate from "./pages/Candidate/ProfileCandidate";
 import SettingsCandidate from "./pages/Candidate/SettingsCandidate";
 import ProfileEmployee from "./pages/Employee/ProfileEmployee";
 import FavoriteList from "./pages/Candidate/Favorite/FavoriteList";
 import ConfirmJobAdvertisement from "./pages/JobAdvertisement/ConfirmJobAdvertisement";
 import JobAdvertisementDetail from "./pages/JobAdvertisement/JobAdvertisementDetail";
-import ReviewJobAdvertisementDetails from "./pages/ReviewJobAdvertisementDetails";
 import JobAdvertisementAdd from "./pages/JobAdvertisement/JobAdvertisementAdd";
-import ResumeDetail from "./pages/Candidate/Resume/ResumeDetalil";
+import ReviewJobAdvertisementDetails from "./pages/ReiewJobAdvertisementDetails";
+import ResumeDetail from "./pages/Candidate/Resume/ResumeDetail";
 
 function App() {
   const [isAuthenticatedCandidate, setIsAuthenticatedCandidate] =
@@ -33,39 +33,38 @@ function App() {
 
   const history = useHistory();
 
-  function handleSignInCandidate() {
+  const handleSignInCandidate = () => {
     setIsAuthenticatedCandidate(true);
-    history.push("/jobadvertisement");
+    history.push("/jobadvertisements");
   }
 
-  function handleSignOutCandidate() {
+  const handleSignOutCandidate = () => {
     setIsAuthenticatedCandidate(false);
     history.push("/home");
   }
 
-
   return (
     <div className="app">
       <ToastContainer position="top-right" />
+      <Route exact path="/jobadvertisements" component={Dashboard}></Route>
       <Container className="main">
         {isAuthenticatedCandidate ? (
           <SignedInCandidate
-            signOutcandidate={handleSignOutCandidate}
+            signOutCandidate={handleSignOutCandidate}
           ></SignedInCandidate>
         ) : (
           <Navi></Navi>
-        )}
-      
+        )}     
         <Switch>
           <Route
             exact
-            path={`/employee/:userId/profile`}
+            path={`/employee/:id/profile`}
             component={ProfileEmployee}
           ></Route>
           <Route
             exact
             path={`/candidate/:id/profile`}
-            component={Profilecandidate}
+            component={ProfileCandidate}
           ></Route>
           <Route
             exact
@@ -121,25 +120,24 @@ function App() {
               ></LoginEmployee>
             )}
           ></Route>
-          <Route exact path="/jobadvertisement" component={Dashboard}></Route>
           <Route
             exact
-            path="/jobadvertisement/add"
+            path="/jobadvertisements/add"
             component={JobAdvertisementAdd}
           ></Route>
           <Route
             exact
-            path="/connfirmjoaadvertisement"
+            path="/confirmjobadvertisement"
             component={ConfirmJobAdvertisement}
           ></Route>
           <Route
             exact
-            path="/jobadvertisement/:id"
+            path="/jobadvertisements/:id"
             component={JobAdvertisementDetail}
           ></Route>
           <Route
             exact
-            path="/reviewjobadvertisement/:id"
+            path="/reviewjobadvertisementdetails/:id"
             component={ReviewJobAdvertisementDetails}
           ></Route>
         </Switch>
