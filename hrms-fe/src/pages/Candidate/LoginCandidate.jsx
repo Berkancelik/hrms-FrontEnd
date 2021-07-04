@@ -6,6 +6,7 @@ import {Button,Form,Grid,Header,Image,Message,Segment} from "semantic-ui-react";
 export default function LoginCandidate({signInCandidate}) {
   return (
     <div>
+
       <Grid textAlign="center" verticalAlign="middle">
         <Grid.Row>
           <Grid.Column width={6}>

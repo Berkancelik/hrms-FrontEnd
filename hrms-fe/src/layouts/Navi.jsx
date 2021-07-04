@@ -2,6 +2,7 @@
 import React from "react";
 import { Button, Container, Dropdown, Menu, Image ,Icon} from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
+import ThemeButton from ".//ThemeButton";
 
 export default function Navi() {
   return (
@@ -56,6 +57,7 @@ export default function Navi() {
               <Button as={NavLink} to="/loginemployee" icon>
                 <Icon name="world" />
               </Button>
+              <ThemeButton />
             </Menu.Item>
           </Menu.Menu>
         </Container>
