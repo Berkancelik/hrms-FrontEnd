@@ -1,21 +1,20 @@
-import axios from "axios"
+import axios from "axios";
 
-export default class EmployerService{
-    getEmployers(){
-        return axios.get("http://localhost:8080/api/employers/getall")
-    }
+export default class FavoriteService {
+  add(values) {
+    return axios.post("http://localhost:8080/api/candidatejobadvertisementfavorites/add", values);
+  }
 
-    getById(employerId){
-        return axios.get("http://localhost:8080/api/employers/getById?id="+employerId)
-    }
+  delete(id) {
+    return axios.delete(
+      "http://localhost:8080/api/candidatejobadvertisementfavorites/delete?id=" + id
+    );
+  }
 
-    updateWaiting(employer){
-        return axios.post("http://localhost:8080/api/employers/updateWaiting",employer)
-    }
-    updateConfirmStatus(employerId){
-        return axios.post("http://localhost:8080/api/employers/updateConfirmStatus?employerId="+employerId)
-    }
-    getByConfirmStatusFalse(){
-        return axios.get("http://localhost:8080/api/employers/getByConfirmStatusFalse")
-    }
+  getByCandidateId(candidateId) {
+    return axios.get(
+      "http://localhost:8080/api/candidatejobadvertisementfavorites/getbycandidateid?candidateId=" +
+      candidateId
+    );
+  }
 }

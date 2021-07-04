@@ -1,48 +1,27 @@
 import axios from "axios"
 
-export default class JobAdvertisementService {
+export default class JobAdvertisementService{
+    getAllOpenJobAdvertisementList(){
+    return axios.get("http://localhost:8080/api/jobadvertisements/getbyisconfirmandisactive?isActive=true&isConfirm=true")
+}
 
+getByConfirmFalse(){
+    return axios.get("http://localhost:8080/api/jobadvertisements/getbyisconfirm?isConfirm=false")
+}
 
-  getJobPost() {
-    return axios.get("http://localhost:8080/api/jobadvertisements/getall")
-  }
+getByJobAdvertisementIdAndConfirmFalse(id){
+    return axios.get("http://localhost:8080/api/jobadvertisements/getbyisconfirm?isConfirm=false&id="+id)
+}
 
-  addJobAdvertisement(jobAdvertisement) {
-    return axios.post("http://localhost:8080/api/jobadvertisements/add", jobAdvertisement)
-  }
+getById(id){
+    return axios.get("http://localhost:8080/api/jobadvertisements/getbyid?id="+id)
+}
 
-  getActiveJobs() {
-    return axios.get("http://localhost:8080/api/jobadvertisements/getallbyisactivetrue")
-  }
+add(values){
+    return axios.post("http://localhost:8080/api/jobadvertisements/add",values)
+}
 
-  getConfirmStatusFalse() {
-    return axios.get("http://localhost:8080/api/jobadvertisements/getbyconfirmstatusfalse")
-  }
-
-  updateConfirmStatus(jobAdvertisementId) {
-    return axios.post("http://localhost:8080/api/jobadvertisements/updateconfirmStatus?jobAdvertisementId=" + jobAdvertisementId)
-  }
-
-  getisActiveAndConfirmed() {
-    return axios.get("http://localhost:8080/api/jobadvertisements/getbyisactivetrueandconfirmstatustrue")
-  }
-
-  deleteJobAdvertisement(jobAdvertisementId) {
-    return axios.post("http://localhost:8080/api/jobadvertisements/delete?jobAdvertisementId=" + jobAdvertisementId)
-  }
-
-  getByJobAdvertisementId(id) {
-    return axios.get("http://localhost:8080/api/jobadvertisements/getById?id=" + id)
-  }
-
-  getisActiveAndConfirmedPageAble(pageNo, pageSize) {
-    return axios.get("http://localhost:8080/api/jobadvertisements/getByPage?pageNo=" + pageNo + "&pageSize=" + pageSize)
-  }
-
-  getByisActiveTrueAndConfirmStatusTrueAndFilter(pageNo, pageSize, filter) {
-    return axios.post(`http://localhost:8080/api/jobadvertisements/getbyisactivetrueandconfirmstatustrueandfilter?pageNo=${pageNo}&pageSize=${pageSize}`, filter)
-  }
-  getByEmployerId(id) {
-    return axios.get("http://localhost:8080/api/jobadvertisements/getByEmployer_Id?employerid=" + id)
-  }
+confirm(id){
+    return axios.post("http://localhost:8080/api/jobadvertisements/updateisconfirm?isConfirm=true&id="+id)
+}
 }
