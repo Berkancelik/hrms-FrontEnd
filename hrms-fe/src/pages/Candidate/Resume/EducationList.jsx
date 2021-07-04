@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import EducationService from "../../services/educationService";
+import EducationService from "../../../services/educationService";
 import {
   Segment,
   Container,

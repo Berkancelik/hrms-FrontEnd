@@ -1,62 +1,62 @@
-import React,{useState,useEffect} from 'react'
-import { Button,Modal,Icon,Form,Input,Label,Segment,Container,Grid,Dropdown,Card} from 'semantic-ui-react'
+import React, { useState, useEffect } from "react";
+import {Button,Modal,Icon,Label,Form,Input,Segment,Container,Card,Grid,Dropdown,} from "semantic-ui-react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
-import JobExperienceService from '../../../services/jobExperienceService';
-import CandidateService from '../../../services/candidateService';
+import CandidateService from "../../../../services/candidateService";
 
-export default function JobExperienceUpdate({jobExperience}) {
+export default function UpdateResume({ candidate }) {
+  const UpdateResumeSchema = Yup.object().shape({
+    email: Yup.string().required("Mail boş bırakılamaz!"),
+    dateOfBirth: Yup.date().required("Doğum tarihi boş bırakılamaz!"),
+  });
+  const history = useHistory();
+  const formik = useFormik({
+    initialValues: {
+      password: candidate.password,
+      firstName: candidate.firstName,
+      nationalId: candidate.nationalId,
+      lastName: candidate.lastName,
+      id: candidate.id,
+      email: candidate.email,
+      dateOfBirth: candidate.dateOfBirth,
+      candidate: candidate.firstName,
+      createdDate: candidate.createdDate,
+    },
+    validationSchema: UpdateResumeSchema,
+    onSubmit: (values) => {
+      let candidateService = new CandidateService();
+      candidateService
+        .update(values)
+        .then((result) => console.log(result.data.data));
+      swal("Başarılı!", "İletişim bilgisi güncellendi!", "success");
+      history.push("/resume/1");
+    },
+  });
 
-    const JobExperienceUpdateSchema = Yup.object().shape({
-        companyName: Yup.string().required("Okul adı boş bırakılamaz!"),
-        jobTitle:Yup.string().required("Bölüm adı boş bırakılamaz!"),
-        startedDate:Yup.date().required("Başlangıç yılı boş bırakılamaz!"),
-        endedDate:Yup.date().required("Bitiş yılı boş bırakılamaz!")
-      });
-      const history = useHistory();
-      const formik = useFormik({
-        initialValues: {
-          id: jobExperience.id,
-          companyName: jobExperience.companyName,
-          jobTitle:jobExperience.jobTitle,
-          startedDate:jobExperience.startedDate,
-          endedDate:jobExperience.endedDate,
-          candidate: "",
-        },
-        validationSchema: JobExperienceUpdateSchema,
-        onSubmit: (values) => {
-          let jobExperienceService = new JobExperienceService();
-          jobExperienceService.update(values).then((result) => console.log(result.data.data));
-          swal("Başarılı!", "İş deneyimi güncellendi!", "success");
-          history.push("/resume/1");
-        },
-      });
+  const [candidates, setcandidates] = useState([]);
+  useEffect(() => {
+    let candidateService = new CandidateService();
+    candidateService
+      .getCandidates()
+      .then((result) => setcandidates(result.data.data));
+  }, []);
 
-      const [candidates, setcandidates] = useState([]);
-      useEffect(() => {
-        let candidateService = new CandidateService();
-        candidateService
-          .getCandidates()
-          .then((result) => setcandidates(result.data.data));
-      }, []);
-    
-      const getCandidates = candidates.map((candidate, index) => ({
-        key: index,
-        text: candidate.firstName,
-        value: candidate,
-      }));
-    
-      const handleChangeSemantic = (value, fieldName) => {
-        formik.setFieldValue(fieldName, value);
-      };
-    
+  const getCandidates = candidates.map((candidate, index) => ({
+    key: index,
+    text: candidate.firstName,
+    value: candidate,
+  }));
 
-    const[open,setOpen]=React.useState(false)
-    return (
-        <div>
-             <Modal
+  const handleChangeSemantic = (value, fieldName) => {
+    formik.setFieldValue(fieldName, value);
+  };
+
+  const [open, setOpen] = React.useState(false);
+  return (
+    <div>
+      <Modal
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
@@ -67,7 +67,7 @@ export default function JobExperienceUpdate({jobExperience}) {
             basic
             color="violet"
             size="large"
-            style={{ marginBottom: "2em" }}
+            style={{ marginLeft: "60em" }}
           >
             <Button.Content visible>Güncelle</Button.Content>
             <Button.Content hidden>
@@ -76,9 +76,9 @@ export default function JobExperienceUpdate({jobExperience}) {
           </Button>
         }
       >
-        <Modal.Header>İş Deneyimi Güncelleme</Modal.Header>
+        <Modal.Header>İletişim Bilgisi Güncelleme</Modal.Header>
         <Modal.Description>
-        <Container>
+          <Container>
             <Segment circle="true" vertical style={{ padding: "3em 0em" }}>
               <Grid>
                 <Grid.Column width={1}></Grid.Column>
@@ -117,78 +117,101 @@ export default function JobExperienceUpdate({jobExperience}) {
                             )}
                         </Form.Field>
                         <Form.Field style={{ marginBottom: "1rem" }}>
-                        <Label basic color="blue">
-                            <Icon name="building" />Şirket Adı:
+                          <Label basic color="blue">
+                            <Icon name="user" /> Soyisim:
                           </Label>
                           <Input
                             style={{ marginRight: "1em", marginTop: "1em" }}
-                            placeholder="Şirket Adı..."
-                            value={formik.values.companyName}
-                            name="companyName"
+                            placeholder="Soyisim..."
+                            value={formik.values.lastName}
+                            name="lastName"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                           ></Input>
-                          {formik.errors.companyName && formik.touched.companyName && (
+                          {formik.errors.lastName &&
+                            formik.touched.lastName && (
+                              <div className={"ui pointing red basic label"}>
+                                {formik.errors.lastName}
+                              </div>
+                            )}
+                        </Form.Field>
+
+                        <Form.Field style={{ marginBottom: "1rem" }}>
+                          <Label basic color="blue">
+                            <Icon name="mail" /> Email:
+                          </Label>
+                          <Input
+                            style={{ marginRight: "1em", marginTop: "1em" }}
+                            placeholder="Mail..."
+                            value={formik.values.email}
+                            name="email"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                          ></Input>
+                          {formik.errors.email && formik.touched.email && (
                             <div className={"ui pointing red basic label"}>
-                              {formik.errors.companyName}
+                              {formik.errors.email}
                             </div>
                           )}
                         </Form.Field>
                         <Form.Field style={{ marginBottom: "1rem" }}>
-                        <Label basic color="blue">
-                            <Icon name="user" /> Pozisyon Adı:
+                          <Label basic color="blue">
+                            <Icon name="key" /> Şifre:
                           </Label>
                           <Input
                             style={{ marginRight: "1em", marginTop: "1em" }}
-                            placeholder="Pozisyon Adı..."
-                            value={formik.values.jobTitle}
-                            name="jobTitle"
+                            placeholder="Şifre..."
+                            value={formik.values.password}
+                            name="password"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                           ></Input>
-                          {formik.errors.jobTitle && formik.touched.jobTitle && (
-                            <div className={"ui pointing red basic label"}>
-                              {formik.errors.jobTitle}
-                            </div>
-                          )}
+                          {formik.errors.password &&
+                            formik.touched.password && (
+                              <div className={"ui pointing red basic label"}>
+                                {formik.errors.password}
+                              </div>
+                            )}
                         </Form.Field>
                         <Form.Field style={{ marginBottom: "1rem" }}>
-                        <Label basic color="blue">
-                            <Icon name="calendar alternate outline" /> Başlangıç Tarihi:
+                          <Label basic color="blue">
+                            <Icon name="circle" /> Tc:
                           </Label>
                           <Input
-                          type="date"
                             style={{ marginRight: "1em", marginTop: "1em" }}
-                            placeholder="Başlangıç Tarihi..."
-                            value={formik.values.startedDate}
-                            name="startedDate"
+                            placeholder="Tc..."
+                            value={formik.values.nationalId}
+                            name="nationalId"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                           ></Input>
-                          {formik.errors.startedDate && formik.touched.startedDate && (
-                            <div className={"ui pointing red basic label"}>
-                              {formik.errors.startedDate}
-                            </div>
-                          )}
+                          {formik.errors.nationalId &&
+                            formik.touched.nationalId && (
+                              <div className={"ui pointing red basic label"}>
+                                {formik.errors.nationalId}
+                              </div>
+                            )}
                         </Form.Field>
                         <Form.Field style={{ marginBottom: "1rem" }}>
-                        <Label basic color="blue">
-                            <Icon name="calendar alternate outline" /> Mezuniyet Tarihi:
+                          <Label basic color="blue">
+                            <Icon name="calendar alternate outline" /> Doğum
+                            Tarihi:
                           </Label>
                           <Input
-                          type="date"
+                            type="date"
                             style={{ marginRight: "1em", marginTop: "1em" }}
-                            placeholder="Bitiş Tarihi..."
-                            value={formik.values.endedDate}
-                            name="endedDate"
+                            placeholder="Tarih..."
+                            value={formik.values.dateOfBirth}
+                            name="dateOfBirth"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                           ></Input>
-                          {formik.errors.endedDate && formik.touched.endedDate && (
-                            <div className={"ui pointing red basic label"}>
-                              {formik.errors.endedDate}
-                            </div>
-                          )}
+                          {formik.errors.dateOfBirth &&
+                            formik.touched.dateOfBirth && (
+                              <div className={"ui pointing red basic label"}>
+                                {formik.errors.dateOfBirth}
+                              </div>
+                            )}
                         </Form.Field>
 
                         <Modal.Actions>
@@ -232,9 +255,8 @@ export default function JobExperienceUpdate({jobExperience}) {
               </Grid>
             </Segment>
           </Container>
-
         </Modal.Description>
-        </Modal>
-        </div>
-    )
+      </Modal>
+    </div>
+  );
 }

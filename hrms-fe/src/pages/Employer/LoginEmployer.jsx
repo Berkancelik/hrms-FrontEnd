@@ -1,5 +1,4 @@
-  
-import React from 'react'
+  import React from 'react'
 import { NavLink } from "react-router-dom";
 import {
   Button,Form, Grid,Header,Image,Message,Segment,} from "semantic-ui-react";

@@ -4,8 +4,8 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
-import EducationService from "../../../services/educationService";
-import CandidateService from "../../../services/candidateService";
+import EducationService from "../../../../services/educationService";
+import CandidateService from "../../../../services/candidateService";
 export default function UpdaEducation({ education }) {
 
     const EducationUpdateSchema = Yup.object().shape({

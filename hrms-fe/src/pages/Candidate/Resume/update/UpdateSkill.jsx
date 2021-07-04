@@ -1,63 +1,56 @@
-import {
-  Modal,
-  Button,
-  Icon,
-  Label,
-  Form,
-  Segment,
-  Container,
-  Card,
-  Grid,
-  Dropdown,
-  Input,
-} from "semantic-ui-react";
-import React, { useEffect, useState } from "react";
-import LinkService from "../../../services/linkService";
+import React,{useEffect,useState} from 'react'
+import { Button,Modal,Icon,Container,Segment,Card,Dropdown,Input,Label,Form,Grid} from 'semantic-ui-react'
+import CandidateService from '../../../../services/candidateService';
+import SkillService from '../../../../services/skillService';
+import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
-import CandidateService from "../../../services/candidateService";
-export default function SocialMediaUpdate({ resumeLink }) {
-  const history = useHistory();
-  const formik = useFormik({
-    initialValues: {
-      id: resumeLink.id,
-      github: resumeLink.github,
-      linkledin: resumeLink.linkledin,
-      candidate: "",
-    },
-    onSubmit: (values) => {
-      let linkService = new LinkService();
-      linkService
-        .update(values)
-        .then((result) => console.log(result.data.data));
-      swal("Başarılı!", "Sosyal medya bilgisi güncellendi!", "success");
-      history.push("/resume/1");
-    },
-  });
 
-  const [candidates, setcandidates] = useState([]);
-  useEffect(() => {
-    let candidateService = new CandidateService();
-    candidateService
-      .getCandidates()
-      .then((result) => setcandidates(result.data.data));
-  }, []);
+export default function UpdateSkill({resumeSkill}) {
 
-  const getCandidates = candidates.map((candidate, index) => ({
-    key: index,
-    text: candidate.firstName,
-    value: candidate,
-  }));
+    const UpdateSkill = Yup.object().shape({
+        skillName: Yup.string().required("Yetenek adı boş bırakılamaz!"),
+      });
+      const history = useHistory();
+      const formik = useFormik({
+        initialValues: {
+          id: resumeSkill.id,
+          skillName: resumeSkill.skillName,
+          candidate: "",
+        },
+        validationSchema: UpdateSkill,
+        onSubmit: (values) => {
+          let skillService = new SkillService();
+          skillService.update(values).then((result) => console.log(result.data.data));
+          swal("Başarılı!", "Yetenek bilgisi güncellendi!", "success");
+          history.push("/resume/1");
+        },
+      });
 
-  const handleChangeSemantic = (value, fieldName) => {
-    formik.setFieldValue(fieldName, value);
-  };
+      const [candidates, setcandidates] = useState([]);
+      useEffect(() => {
+        let candidateService = new CandidateService();
+        candidateService
+          .getCandidates()
+          .then((result) => setcandidates(result.data.data));
+      }, []);
+    
+      const getCandidates = candidates.map((candidate, index) => ({
+        key: index,
+        text: candidate.firstName,
+        value: candidate,
+      }));
+    
+      const handleChangeSemantic = (value, fieldName) => {
+        formik.setFieldValue(fieldName, value);
+      };
+    
 
-  const [open, setOpen] = React.useState(false);
-  return (
-    <div>
-      <Modal
+    const [open, setOpen] = React.useState(false)
+    return (
+        <div>
+             <Modal
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
@@ -77,9 +70,9 @@ export default function SocialMediaUpdate({ resumeLink }) {
           </Button>
         }
       >
-        <Modal.Header>Sosyal Medya Güncelleme</Modal.Header>
+        <Modal.Header>Yetenek Güncelleme</Modal.Header>
         <Modal.Description>
-          <Container>
+        <Container>
             <Segment circle="true" vertical style={{ padding: "3em 0em" }}>
               <Grid>
                 <Grid.Column width={1}></Grid.Column>
@@ -119,39 +112,20 @@ export default function SocialMediaUpdate({ resumeLink }) {
                         </Form.Field>
                         <Form.Field style={{ marginBottom: "1rem" }}>
                           <Label basic color="blue">
-                            <Icon name="linkify" /> Github Link:
+                            <Icon name="code" /> Yetenek Adı:
                           </Label>
                           <Input
                             style={{ marginRight: "1em", marginTop: "1em" }}
-                            placeholder="Github..."
-                            value={formik.values.github}
-                            name="github"
+                            placeholder="Yetenek Adı..."
+                            value={formik.values.skillName}
+                            name="skillName"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                           ></Input>
-                          {formik.errors.github &&
-                            formik.touched.github && (
+                          {formik.errors.skillName &&
+                            formik.touched.skillName && (
                               <div className={"ui pointing red basic label"}>
-                                {formik.errors.github}
-                              </div>
-                            )}
-                        </Form.Field>
-                        <Form.Field style={{ marginBottom: "1rem" }}>
-                          <Label basic color="blue">
-                            <Icon name="linkify" /> Linkledin Link:
-                          </Label>
-                          <Input
-                            style={{ marginRight: "1em", marginTop: "1em" }}
-                            placeholder="Linkledin..."
-                            value={formik.values.linkledin}
-                            name="linkledin"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                          ></Input>
-                          {formik.errors.linkledin &&
-                            formik.touched.linkledin && (
-                              <div className={"ui pointing red basic label"}>
-                                {formik.errors.linkledin}
+                                {formik.errors.skillName}
                               </div>
                             )}
                         </Form.Field>
@@ -189,15 +163,16 @@ export default function SocialMediaUpdate({ resumeLink }) {
                             </Button.Content>
                           </Button>
                         </Modal.Actions>
-                      </Form>
+                     </Form>
                     </Card.Content>
                   </Card>
                 </Grid.Column>
               </Grid>
             </Segment>
           </Container>
+
         </Modal.Description>
-      </Modal>
-    </div>
-  );
+        </Modal>
+        </div>
+    )
 }

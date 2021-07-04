@@ -7,7 +7,7 @@ import SkillList from "./SkillList";
 import AddCoverLetter from "./AddCoverLetter";
 import { useParams } from "react-router-dom";
 import * as moment from 'moment';
-import CandidateService from "../../services/candidateService";
+import CandidateService from "../../../services/candidateService";
 import {Icon,Card,Segment,Container,Grid,Message,Table,Label} from "semantic-ui-react";
 import ImageList from "./ImageList";
 import UpdateResume from "./update/UpdateResume";

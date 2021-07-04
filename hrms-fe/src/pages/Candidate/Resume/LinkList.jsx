@@ -1,38 +1,35 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import LinkService from "../../../services/linkService";
 import {
-  Card,
-  Icon,
+  Table,
   Segment,
   Container,
-  Table,
   Message,
+  Icon,
   Label,
+  Card,
+  Button,
 } from "semantic-ui-react";
-import LanguageService from "../../services/languageService";
-import { useParams } from "react-router-dom";
-import UpdateLanguage from "./update/UpdateLanguage";
-import AddLanguage from "./AddLanguage";
+import UpdateLink from "./update/UpdateLink";
 
-export default function LanguageList() {
+export default function LinkList() {
   let { candidateId } = useParams();
-
-  const [languages, setLanguages] = useState([]);
+  const [socialLinks, setLinks] = useState([]);
   useEffect(() => {
-    let languageService = new LanguageService();
-    languageService
-      .getLanguages(candidateId)
-      .then((result) => setLanguages(result.data.data));
+    let linkService = new LinkService();
+    linkService
+      .getLinks(candidateId)
+      .then((result) => setLinks(result.data.data));
   }, [candidateId]);
 
   return (
     <div>
       <Segment circle="true" vertical>
         <Container>
-          {languages.map((language) => (
-            <Message color="olive" key={language.id} >
-              
+          {socialLinks.map((resumeLnk) => (
+            <Message color="olive" key={resumeLnk.id}>
               <Message.Header
-              
                 textalign="left"
                 style={{
                   textalign: "left",
@@ -42,13 +39,24 @@ export default function LanguageList() {
                 }}
               >
                 {" "}
-                <Icon name="language" color="violet" /> Dil Bilgisi{" "}
-               
+                <Icon name="comment alternate" color="violet" /> Sosyal Medya{" "}
+                <Button
+                  type="submit"
+                  floated="right"
+                  animated
+                  basic
+                  color="violet"
+                  size="large"
+                  style={{ marginBottom: "1em" }}
+                >
+                  <Button.Content visible>Ekle</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="check" />
+                  </Button.Content>
+                </Button>
               </Message.Header>
-              <AddLanguage language={language.id} />
 
-     
-              <Card fluid color="violet"  >
+              <Card fluid color="violet">
                 <Card.Content>
                   <Card.Meta>
                     <Table
@@ -67,7 +75,7 @@ export default function LanguageList() {
                                 fontSize: "1.2em",
                               }}
                             >
-                              Dil adı:
+                              <Icon name="github" size="large" color="black" />{" "}
                             </Label>
                           </Table.Cell>
                           <Table.Cell
@@ -77,7 +85,7 @@ export default function LanguageList() {
                             textAlign="center"
                           >
                             {" "}
-                            {language.language?.languageName}
+                            {resumeLnk.github}
                           </Table.Cell>
                         </Table.Row>
                         <Table.Row textAlign="center">
@@ -91,7 +99,11 @@ export default function LanguageList() {
                                 fontSize: "1.2em",
                               }}
                             >
-                              Dil Seviyesi:
+                              <Icon
+                                name="linkedin"
+                                size="large"
+                                color="black"
+                              />{" "}
                             </Label>
                           </Table.Cell>
                           <Table.Cell
@@ -99,7 +111,7 @@ export default function LanguageList() {
                               fontSize: "1.4em",
                             }}
                           >
-                            {language.level}
+                            {resumeLnk.linkledin}
                           </Table.Cell>
                         </Table.Row>
                       </Table.Body>
@@ -109,11 +121,11 @@ export default function LanguageList() {
 
                 <Card.Description>
                   {" "}
-                  <UpdateLanguage language={language} />
+                  <UpdateLink resumeLnk={resumeLnk} />
                 </Card.Description>
-              </Card> 
+              </Card>
             </Message>
-         ))}
+          ))}
         </Container>
       </Segment>
     </div>

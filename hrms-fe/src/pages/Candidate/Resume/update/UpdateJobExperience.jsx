@@ -1,29 +1,35 @@
-import React,{useEffect,useState} from 'react'
-import { Button,Modal,Icon,Container,Segment,Card,Dropdown,Input,Label,Form,Grid} from 'semantic-ui-react'
-import CandidateService from '../../../services/candidateService';
-import SkillService from '../../../services/skillService';
+import React,{useState,useEffect} from 'react'
+import { Button,Modal,Icon,Form,Input,Label,Segment,Container,Grid,Dropdown,Card} from 'semantic-ui-react'
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
+import JobExperienceService from '../../../../services/jobExperienceService';
+import CandidateService from '../../../../services/candidateService';
 
-export default function UpdateSkill({resumeSkill}) {
+export default function JobExperienceUpdate({jobExperience}) {
 
-    const UpdateSkill = Yup.object().shape({
-        skillName: Yup.string().required("Yetenek adı boş bırakılamaz!"),
+    const JobExperienceUpdateSchema = Yup.object().shape({
+        companyName: Yup.string().required("Okul adı boş bırakılamaz!"),
+        jobTitle:Yup.string().required("Bölüm adı boş bırakılamaz!"),
+        startedDate:Yup.date().required("Başlangıç yılı boş bırakılamaz!"),
+        endedDate:Yup.date().required("Bitiş yılı boş bırakılamaz!")
       });
       const history = useHistory();
       const formik = useFormik({
         initialValues: {
-          id: resumeSkill.id,
-          skillName: resumeSkill.skillName,
+          id: jobExperience.id,
+          companyName: jobExperience.companyName,
+          jobTitle:jobExperience.jobTitle,
+          startedDate:jobExperience.startedDate,
+          endedDate:jobExperience.endedDate,
           candidate: "",
         },
-        validationSchema: UpdateSkill,
+        validationSchema: JobExperienceUpdateSchema,
         onSubmit: (values) => {
-          let skillService = new SkillService();
-          skillService.update(values).then((result) => console.log(result.data.data));
-          swal("Başarılı!", "Yetenek bilgisi güncellendi!", "success");
+          let jobExperienceService = new JobExperienceService();
+          jobExperienceService.update(values).then((result) => console.log(result.data.data));
+          swal("Başarılı!", "İş deneyimi güncellendi!", "success");
           history.push("/resume/1");
         },
       });
@@ -47,7 +53,7 @@ export default function UpdateSkill({resumeSkill}) {
       };
     
 
-    const [open, setOpen] = React.useState(false)
+    const[open,setOpen]=React.useState(false)
     return (
         <div>
              <Modal
@@ -70,7 +76,7 @@ export default function UpdateSkill({resumeSkill}) {
           </Button>
         }
       >
-        <Modal.Header>Yetenek Güncelleme</Modal.Header>
+        <Modal.Header>İş Deneyimi Güncelleme</Modal.Header>
         <Modal.Description>
         <Container>
             <Segment circle="true" vertical style={{ padding: "3em 0em" }}>
@@ -111,24 +117,80 @@ export default function UpdateSkill({resumeSkill}) {
                             )}
                         </Form.Field>
                         <Form.Field style={{ marginBottom: "1rem" }}>
-                          <Label basic color="blue">
-                            <Icon name="code" /> Yetenek Adı:
+                        <Label basic color="blue">
+                            <Icon name="building" />Şirket Adı:
                           </Label>
                           <Input
                             style={{ marginRight: "1em", marginTop: "1em" }}
-                            placeholder="Yetenek Adı..."
-                            value={formik.values.skillName}
-                            name="skillName"
+                            placeholder="Şirket Adı..."
+                            value={formik.values.companyName}
+                            name="companyName"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                           ></Input>
-                          {formik.errors.skillName &&
-                            formik.touched.skillName && (
-                              <div className={"ui pointing red basic label"}>
-                                {formik.errors.skillName}
-                              </div>
-                            )}
+                          {formik.errors.companyName && formik.touched.companyName && (
+                            <div className={"ui pointing red basic label"}>
+                              {formik.errors.companyName}
+                            </div>
+                          )}
                         </Form.Field>
+                        <Form.Field style={{ marginBottom: "1rem" }}>
+                        <Label basic color="blue">
+                            <Icon name="user" /> Pozisyon Adı:
+                          </Label>
+                          <Input
+                            style={{ marginRight: "1em", marginTop: "1em" }}
+                            placeholder="Pozisyon Adı..."
+                            value={formik.values.jobTitle}
+                            name="jobTitle"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                          ></Input>
+                          {formik.errors.jobTitle && formik.touched.jobTitle && (
+                            <div className={"ui pointing red basic label"}>
+                              {formik.errors.jobTitle}
+                            </div>
+                          )}
+                        </Form.Field>
+                        <Form.Field style={{ marginBottom: "1rem" }}>
+                        <Label basic color="blue">
+                            <Icon name="calendar alternate outline" /> Başlangıç Tarihi:
+                          </Label>
+                          <Input
+                          type="date"
+                            style={{ marginRight: "1em", marginTop: "1em" }}
+                            placeholder="Başlangıç Tarihi..."
+                            value={formik.values.startedDate}
+                            name="startedDate"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                          ></Input>
+                          {formik.errors.startedDate && formik.touched.startedDate && (
+                            <div className={"ui pointing red basic label"}>
+                              {formik.errors.startedDate}
+                            </div>
+                          )}
+                        </Form.Field>
+                        <Form.Field style={{ marginBottom: "1rem" }}>
+                        <Label basic color="blue">
+                            <Icon name="calendar alternate outline" /> Mezuniyet Tarihi:
+                          </Label>
+                          <Input
+                          type="date"
+                            style={{ marginRight: "1em", marginTop: "1em" }}
+                            placeholder="Bitiş Tarihi..."
+                            value={formik.values.endedDate}
+                            name="endedDate"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                          ></Input>
+                          {formik.errors.endedDate && formik.touched.endedDate && (
+                            <div className={"ui pointing red basic label"}>
+                              {formik.errors.endedDate}
+                            </div>
+                          )}
+                        </Form.Field>
+
                         <Modal.Actions>
                           <Button
                             onClick={() => setOpen(false)}
@@ -163,7 +225,7 @@ export default function UpdateSkill({resumeSkill}) {
                             </Button.Content>
                           </Button>
                         </Modal.Actions>
-                     </Form>
+                      </Form>
                     </Card.Content>
                   </Card>
                 </Grid.Column>

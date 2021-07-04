@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { useParams } from 'react-router-dom'
-import JobExperienceService from '../../services/jobExperienceService'
+import JobExperienceService from '../../../services/jobExperienceService'
 import { Label,Button,Table,Card,Container,Segment,Icon,Message } from 'semantic-ui-react'
 import * as moment from 'moment'
 import UpdateJobExperience from './update/UpdateJobExperience'

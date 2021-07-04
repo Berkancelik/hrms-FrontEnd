@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import {Modal,Button,Icon,Label,Dropdown,Card,Grid,Segment,Container,Form, TextArea,} from "semantic-ui-react";
-import CoverLetterService from "../../../services/coverLetterService";
+import CoverLetterService from "../../../../services/coverLetterService";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
-import CandidateService from "../../../services/candidateService";
+import CandidateService from "../../../../services/candidateService";
 
 export default function UpdateCoverLetter({ coverLetter }) {
   const CoverLetterUpdateSchema = Yup.object().shape({

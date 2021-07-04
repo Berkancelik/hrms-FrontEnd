@@ -13,7 +13,7 @@ export default function JobAdvertisementDetail() {
     jobAdvertisementService
       .getById(id)
       .then(result => setJobAdvertisements([result.data.data]));
-  }, [id]);
+  }, []);
 
   return (
     <div className="card">
