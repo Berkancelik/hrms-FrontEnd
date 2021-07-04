@@ -1,26 +1,28 @@
 import React from "react";
-import SkillService from "../../../../services/skillService";
 import { Formik, Form } from "formik";
 import { FormGroup, Button, Segment } from "semantic-ui-react";
 import { toast } from "react-toastify";
 import HrmsInput from "../../../../utilities/customFormControls/HrmsInput";
+import LinkService from "../../../../services/linkService";
 
-export default function AddSkill({id}) {
-  let skillService = new SkillService();
+export default function AddLink({ resumeId }) {
+  let linkervice = new LinkService;
   const initialValues = {
-    skillName: "",
+    linkedin: "",
+    github: "",
   };
   const onSubmit = (values) => {
-    values.id = id;
+    values.resumeId = resumeId;
     console.log(values);
-    skillService
+    linkervice
       .add(values)
       .then(
         (result) => console.log(result.data.data),
-        toast.success("Teknoloji Eklendi!"),
+        toast.success("Hesaplar Eklendi"),
         window.location.reload()
       );
   };
+
   return (
     <div>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
@@ -28,10 +30,22 @@ export default function AddSkill({id}) {
           <Form className="ui form">
             <FormGroup widths="equal">
               <HrmsInput
-                name="skillName"
+                icon="linkedin"
+                iconPosition="left"
+                name="linkedin"
                 type="text"
-                label="Yetenek"
-                placeholder="Yetenek"
+                label="LinkedIn Hesabı"
+                placeholder="LinkedIn hesabı"
+              ></HrmsInput>
+            </FormGroup>
+            <FormGroup widths="equal">
+              <HrmsInput
+                icon="github"
+                iconPosition="left"
+                name="github"
+                type="text"
+                label="GitHub Hesabı"
+                placeholder="GitHub hesabı"
               ></HrmsInput>
             </FormGroup>
             <Button style={{marginLeft:"295pt"}} type="submit" color="green">

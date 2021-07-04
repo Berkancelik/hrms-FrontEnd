@@ -1,56 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Segment, Container, Icon, Message, Card } from "semantic-ui-react";
-import CoverLetterService from "../../../services/coverLetterService";
-import UpdateCoverLetter from "../update/UpdateCoverLetter";
+import React from "react";
+import CoverLetterService from "../../../../services/coverLetterService";
+import { Formik, Form } from "formik";
+import { FormGroup, Button, Segment } from "semantic-ui-react";
+import { toast } from "react-toastify";
+import HrmsTextInput from "../../../../utilities/customFormControls/HrmsTextInput";
 
-export default function CoverLetter() {
-  let { candidateId } = useParams();
-  const [coverLetters, setcoverLetters] = useState([]);
-
-  useEffect(() => {
-    let coverletterService = new CoverLetterService();
-    coverletterService
-      .getCoverLetter(candidateId)
-      .then((result) => setcoverLetters(result.data.data));
-  }, [candidateId]);
+export default function AddCoverLetter({resumeId}) {
+  let coverLetterService = new CoverLetterService();
+  const initialValues = {
+    content: "",
+  };
+  const onSubmit = (values) => {
+    values.resumeId = resumeId;
+    console.log(values);
+    coverLetterService
+      .add(values)
+      .then(
+        (result) => console.log(result.data.data),
+        toast.success("Ön Yazı Eklendi"),
+        window.location.reload()
+      );
+  };
   return (
     <div>
-      <Segment circle="true" vertical>
-        <Container>
-          {" "}
-          {coverLetters.map((coverLetter) => (
-            <Message color="olive" key={coverLetter.id}>
-              <Message.Header
-                textalign="left"
-                style={{
-                  textalign: "left",
-                  fontSize: "2em",
-                  color: "purple",
-                  marginTop: "0.75em",
-                }}
-              >
-                {" "}
-                <Icon name="edit" color="violet" /> Ön Yazı{" "}
-              </Message.Header>
-              <UpdateCoverLetter coverLetter={coverLetter} />
-
-              <Card fluid color="purple">
-                <Card.Content
-                  style={{
-                    textalign: "left",
-                    fontSize: "1.5em",
-                    color: "black",
-                    marginTop: "0.75em",
-                  }}
-                >
-                  {coverLetter.coverLetter}
-                </Card.Content>
-              </Card>
-            </Message>
-          ))}
-        </Container>
-      </Segment>
+      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+        <Segment color="green">
+          <Form className="ui form">
+            <FormGroup widths="equal">
+              <HrmsTextInput
+                name="content"
+                type="text"
+                label="Ön Yazı"
+                placeholder="Ön Yazıyı Buraya Giriniz.."
+              ></HrmsTextInput>
+            </FormGroup>
+            <Button style={{marginLeft:"295pt"}} type="submit" color="green">
+              EKLE
+            </Button>
+          </Form>
+        </Segment>
+      </Formik>
     </div>
   );
 }
