@@ -21,6 +21,7 @@ export default function AddCoverLetterModal({ resumeId }) {
           Ön Yazı Ekle
         </Button>
       }
+   
     >
       <Modal.Header>Ön Yazı Ekleme</Modal.Header>
       <Modal.Content>
